@@ -37,26 +37,33 @@ if (!empty($errors)) {
     exit();
 }
 
-// Fetch user from DB using prepared statements
-$stmt = $pdo->prepare("SELECT id, email, username, password FROM users WHERE email = ?");
+// ✅ Securely fetch user with role
+$stmt = $pdo->prepare("SELECT id, email, username, password, role FROM users WHERE email = ?");
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 
 if ($user && password_verify($password, $user['password'])) {
-    // Login successful
+    // ✅ Successful login
     session_regenerate_id(true);
     $_SESSION['user'] = [
         'id' => $user['id'],
         'email' => $user['email'],
-        'username' => $user['username']
+        'username' => $user['username'],
+        'role' => $user['role'] // ✅ Store role in session
     ];
     $_SESSION['flash_success'] = "Login successful!";
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // regenerate token
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Optional: CSRF token regeneration
+
     header("Location: dashboard.php");
     exit();
 } else {
+    // ❌ Login failed
     $_SESSION['login_errors'] = ["Invalid email or password"];
     $_SESSION['old_email'] = $email;
     header("Location: login.php");
     exit();
 }
+
+
+
+

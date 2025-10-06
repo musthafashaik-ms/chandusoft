@@ -1,0 +1,121 @@
+<?php
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS'])); // Use true if HTTPS is always enforced
+ini_set('session.use_strict_mode', 1);
+session_start();
+?>
+
+<?php
+require '../app/config.php';
+
+// Generate CSRF token
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// Save old input
+$old_email = $_SESSION['old_email'] ?? '';
+unset($_SESSION['old_email']);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+       .container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 350px;
+    min-height: 100px; /* 👈 Adjust this value as needed */
+}
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #1E90FF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0077cc;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Admin Login</h2>
+
+    <!-- ✅ Display Login Errors -->
+    <?php
+    if (!empty($_SESSION['login_errors'])) {
+        foreach ($_SESSION['login_errors'] as $error) {
+            echo "<p class='message error'>".htmlspecialchars($error)."</p>";
+        }
+        unset($_SESSION['login_errors']);
+    }
+
+    if (isset($_SESSION['flash_error'])) {
+        echo "<p class='message error'>".htmlspecialchars($_SESSION['flash_error'])."</p>";
+        unset($_SESSION['flash_error']);
+    }
+    ?>
+
+    <form action="../app/authenticate.php" method="POST">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="<?= htmlspecialchars($old_email) ?>" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+</body>
+</html>
+

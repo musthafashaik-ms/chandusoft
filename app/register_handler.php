@@ -54,5 +54,5 @@ $stmt = $pdo->prepare("INSERT INTO users (email, username, password) VALUES (?, 
 $stmt->execute([$email, $username, $hashedPassword]);
 
 $_SESSION['flash_success'] = "✅ Registration successful! You can now log in.";
-header("Location: login.php");
+header("Location: ../admin/login.php");  // <- Fix path here
 exit();

@@ -53,7 +53,7 @@ if (isset($_SESSION['flash_success'])) {
     <button type="submit">Register</button>
 </form>
 
-<p>Already have an account? <a href="login.php">Login here</a></p>
+<p>Already have an account? <a href="../admin/login.php">Login here</a></p>
 
 </body>
 </html>
