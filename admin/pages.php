@@ -70,7 +70,7 @@ if ($search !== '') {
         }
 
         .navbar .links a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
 
         .container {
@@ -92,13 +92,21 @@ if ($search !== '') {
         .top-bar .filters a {
             margin-right: 15px;
             text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
+            color: #000000ff;
+             
         }
 
-        .top-bar .filters a:hover {
-            text-decoration: underline;
+        .filters a {
+         color: black; /* Default text color */
+         text-decoration: none; /* No underline by default */
+         transition: text-decoration 0.3s ease, color 0.3s ease; /* Smooth transition for underline and color */
         }
+
+        .filters a:hover {
+         color: #3498db;/* Change text color to blue on hover */
+         text-decoration: underline; /* Underline the text on hover */
+        }
+
 
         .top-bar input[type="text"] {
             padding: 8px;
@@ -204,11 +212,14 @@ if ($search !== '') {
 .btn-archive {
     background-color: #f39c12; /* Orange */
 }
-
 .btn-delete {
     background-color: #e74c3c; /* Red */
+    color: white;
 }
 
+.btn-delete:hover {
+    cursor: not-allowed; /* 🚫 Shows block symbol on hover */
+}
 .btn:hover {
     opacity: 0.9;
 }
@@ -232,6 +243,7 @@ if ($search !== '') {
 
 <!-- ✅ Main container -->
 <div class="container">
+    <h1>Pages</h1>
     <div class="top-bar" style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <div class="filters" style="gap: 15px; display: flex;">
             <a href="pages.php">All (<?= $allCount ?>)</a>
@@ -274,9 +286,10 @@ if ($search !== '') {
 
             <!-- Admin-only buttons -->
             <?php if (strtolower($role) === 'admin'): ?>
-                <a href="archive.php?id=<?= $page['id'] ?>" class="btn btn-archive">Archive</a>
-                <a href="delete.php?id=<?= $page['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this page?')">Delete</a>
-            <?php endif; ?>
+    <a href="archive.php?id=<?= $page['id'] ?>" class="btn btn-archive">Archive</a>
+    <a href="delete.php?id=<?= $page['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this page?')">Delete</a>
+<?php endif; ?>
+
         </td>
     </tr>
 <?php endwhile; ?>
