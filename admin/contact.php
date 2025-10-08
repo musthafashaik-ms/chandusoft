@@ -1,61 +1,79 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require '../vendor/autoload.php';  // Make sure this path is correct
-
+require '../vendor/autoload.php'; // Ensure correct path to autoload
+ 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // --- DB CONNECTION ---
     $conn = new mysqli("127.0.0.1", "root", "", "chandusoft");
-
     if ($conn->connect_error) {
         echo "error";
         exit;
     }
-
-    $name = $conn->real_escape_string($_POST['name'] ?? '');
-    $email = $conn->real_escape_string($_POST['email'] ?? '');
-    $message = $conn->real_escape_string($_POST['message'] ?? '');
-
-    if (!empty($name) && !empty($email) && !empty($message) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $sql = "INSERT INTO leads (name, email, message) VALUES ('$name', '$email', '$message')";
-        if ($conn->query($sql) === TRUE) {
-            $mail = new PHPMailer(true);
-            try {
-                // SMTP config
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'cstltest4@gmail.com';  // ✅ your Gmail
-                $mail->Password = 'vwrs cubq qpqg wfcg';  // ✅ app password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
-
-                // Email content
-                $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact Form');
-                $mail->addAddress('musthafa.shaik@chandusoft.com', 'Musthafa');
-                $mail->addReplyTo($email, $name);
-
-                $mail->isHTML(true);
-                $mail->Subject = 'New Contact Form Submission';
-                $mail->Body = "
-                    <h3>New Contact Submission</h3>
-                    <p><strong>Name:</strong> {$name}</p>
-                    <p><strong>Email:</strong> {$email}</p>
-                    <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
-                ";
-
-                $mail->send();
-                echo "success";
-                exit;
-            } catch (Exception $e) {
-                echo "Mailer Error: " . $mail->ErrorInfo;
-                exit;
+ 
+    // --- SANITIZE INPUT ---
+    $name = trim($conn->real_escape_string($_POST['name'] ?? ''));
+    $email = trim($conn->real_escape_string($_POST['email'] ?? ''));
+    $message = trim($conn->real_escape_string($_POST['message'] ?? ''));
+ 
+    // --- VALIDATE INPUT ---
+    if (empty($name) || empty($email) || empty($message) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid input.";
+        exit;
+    }
+ 
+    // --- INSERT INTO DB ---
+    $sql = "INSERT INTO leads (name, email, message) VALUES ('$name', '$email', '$message')";
+    if ($conn->query($sql) === TRUE) {
+ 
+        // --- SEND EMAIL ---
+        $mail = new PHPMailer(true);
+        try {
+            // SMTP config
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'cstltest8@gmail.com'; // your Gmail
+            $mail->Password = 'vwrs cubq qpqg wfcg'; // Gmail App password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+ 
+            // Email headers
+            $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact Form');
+            $mail->addAddress('musthafa.shaik@chandusoft.com', 'Musthafa');
+            $mail->addReplyTo($email, $name);
+ 
+            // Email content
+            $mail->isHTML(true);
+            $mail->Subject = 'New Lead Submission';
+            $mail->Body = "
+                <h3>New Lead Submission</h3>
+                <p><strong>Name:</strong> {$name}</p>
+                <p><strong>Email:</strong> {$email}</p>
+                <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
+            ";
+ 
+            $mail->send();
+            echo "success";
+            exit;
+ 
+        } catch (Exception $e) {
+            // --- LOG FAILURE ---
+            $logDir = __DIR__ . '/../storage/logs';
+            if (!is_dir($logDir)) {
+                mkdir($logDir, 0777, true);
             }
-        } else {
-            echo "Database insert error.";
+ 
+            $logFile = $logDir . '/mail-fail.log';
+            $timestamp = date('Y-m-d H:i:s');
+            $errorMessage = "[$timestamp] Mail send failed for {$email} ({$name}). Error: {$mail->ErrorInfo}\nMessage: {$message}\n\n";
+            file_put_contents($logFile, $errorMessage, FILE_APPEND);
+ 
+            echo "Mailer Error";
             exit;
         }
     } else {
-        echo "Invalid input.";
+        echo "Database insert error.";
         exit;
     }
 }
