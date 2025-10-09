@@ -13,24 +13,39 @@ $username = $_SESSION['user']['username'] ?? 'User';
 $error = '';
 $success = '';
 
+// Initialize variables to avoid undefined variable issues
+$title = '';
+$slug = '';
+$status = 'draft';
+$content_html = '';
+
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Capture and sanitize form inputs
     $title = trim($_POST['title'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $status = $_POST['status'] ?? 'draft';
+    $content_html = $_POST['content_html'] ?? ''; // This is raw HTML, no escaping here
+
+    // Escape title and slug for safety
+    $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+    $slug = htmlspecialchars($slug, ENT_QUOTES, 'UTF-8');
 
     if (empty($title)) {
         $error = "Title is required.";
     } else {
         if (empty($slug)) {
-            // Auto-generate slug from title
+            // Auto-generate slug from title if empty (ensure the generated slug is URL-safe)
             $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title), '-'));
         }
 
         try {
-            $stmt = $pdo->prepare("INSERT INTO pages (title, slug, status, updated_at) VALUES (?, ?, ?, NOW())");
-            $stmt->execute([$title, $slug, $status]);
+            // Insert page into the database, including content_html
+            $stmt = $pdo->prepare("INSERT INTO pages (title, slug, status, content_html, updated_at) VALUES (?, ?, ?, ?, NOW())");
+            $stmt->execute([$title, $slug, $status, $content_html]);
 
-            header("Location: pages.php"); // Redirect after successful insert
+            // Success: Redirect to pages list
+            header("Location: pages.php");
             exit();
         } catch (PDOException $e) {
             $error = "Database error: " . $e->getMessage(); // Show error during development only
@@ -91,7 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         form input[type="text"],
-        form select {
+        form select,
+        form textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -136,11 +152,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="navbar">
     <div><strong>Chandusoft Admin</strong></div>
    <div class="links">
-        Welcome <?= $role ?>!
+        Welcome <?= htmlspecialchars($role) ?>!
         <a href="../app/dashboard.php">Dashboard</a>
         <a href="../admin/admin-leads.php">Leads</a>
         <a href="../admin/pages.php">Pages</a>
-        <a href="../admin/logout.php">Logout</a> <!-- Assuming you have this script -->
+        <a href="../admin/logout.php">Logout</a>
     </div>
 </div>
 
@@ -156,17 +172,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form method="POST">
         <label for="title">Page Title *</label>
-        <input type="text" name="title" id="title" required>
+        <input type="text" name="title" id="title" value="<?= htmlspecialchars($title) ?>" required>
 
         <label for="slug">Slug (optional)</label>
-        <input type="text" name="slug" id="slug" placeholder="auto-generated-if-empty">
+        <input type="text" name="slug" id="slug" value="<?= htmlspecialchars($slug) ?>" placeholder="auto-generated-if-empty">
 
         <label for="status">Status</label>
         <select name="status" id="status">
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
-            <option value="archived">Archived</option>
+            <option value="published" <?= $status == 'published' ? 'selected' : '' ?>>Published</option>
+            <option value="draft" <?= $status == 'draft' ? 'selected' : '' ?>>Draft</option>
+            <option value="archived" <?= $status == 'archived' ? 'selected' : '' ?>>Archived</option>
         </select>
+
+        <label for="content_html">Content (HTML allowed)</label>
+        <textarea name="content_html" id="content_html" rows="10" placeholder="Enter the page content..."><?= htmlspecialchars($content_html) ?></textarea>
 
         <button type="submit">Create Page</button>
     </form>

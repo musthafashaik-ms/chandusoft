@@ -17,14 +17,48 @@ main {
     padding: 20px;
     text-align: center;
 }
-/* Header Styles */
+/* General styles for the navigation bar */
 header {
-    display: flex;
-    justify-content: space-between; /* Align logo and nav items */
-    background-color: #007BFF; /* Blue background */
-    padding: 5px 10px;
-    align-items: center; /* Vertically center the content */
+    background-color: #f8f9fa; /* Light gray background for header */
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
 }
+
+/* Styling the logo */
+.logo img {
+    width: 400px; /* Adjust logo size */
+    height: 70px;
+}
+
+/* Styles for the navigation container */
+nav {
+    display: flex; /* Use flexbox to align the items horizontally */
+    gap: 15px; /* Space between navigation items */
+    align-items: center; /* Vertically center the items */
+}
+
+/* Style for the links */
+nav a {
+    text-decoration: none; /* Remove underline */
+    color: #007BFF; /* Blue color for links */
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the links */
+nav a:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
+    color: #0056b3; /* Darker blue text on hover */
+}
+
+/* Style for active link */
+nav a.active {
+    background-color: #007BFF;
+    color: white;
+}
+
 
 #back-to-top {
     position: fixed;
@@ -57,34 +91,6 @@ header {
 /* Change background color when hovered */
 #back-to-top:hover {
     background-color: #0056b3;
-}
-
-.logo img {
-    width: 400px; /* Adjust logo size */
-    height: 70px; /* Adjust logo size */
-}
-nav {
-    display: flex;
-    gap: 15px; /* Space between buttons */
-}
-nav a {
-    text-decoration: none; /* Remove underline from links */
-}
-
-nav button {
-    background-color:#007BFF ;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid #007BFF;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-nav button:hover {
-    background-color: rgb(239, 245, 245);
-    color:#007BFF ;
 }
 
 /* Main Content */

@@ -16,12 +16,11 @@ $success = '';
 
 $id = $_GET['id'] ?? null;
 if (!$id || !is_numeric($id)) {
-    // Invalid ID, redirect to pages list
     header("Location: pages.php");
     exit();
 }
 
-// Fetch the existing page data
+// ✅ Fetch existing page data
 try {
     $stmt = $pdo->prepare("SELECT * FROM pages WHERE id = ?");
     $stmt->execute([$id]);
@@ -32,6 +31,10 @@ try {
         header("Location: pages.php");
         exit();
     }
+
+    // ✅ Initialize content_html to existing DB value
+    $content_html = $page['content_html'] ?? '';
+
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
@@ -40,20 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $status = $_POST['status'] ?? 'draft';
+    $content_html = $_POST['content_html'] ?? ''; // Raw HTML allowed (not escaped)
 
     if (empty($title)) {
         $error = "Title is required.";
     } else {
         if (empty($slug)) {
-            // Auto-generate slug from title
             $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title), '-'));
         }
 
         try {
-            $stmt = $pdo->prepare("UPDATE pages SET title = ?, slug = ?, status = ?, updated_at = NOW() WHERE id = ?");
-            $stmt->execute([$title, $slug, $status, $id]);
+            $stmt = $pdo->prepare("UPDATE pages SET title = ?, slug = ?, content_html = ?, status = ?, updated_at = NOW() WHERE id = ?");
+            $stmt->execute([$title, $slug, $content_html, $status, $id]);
 
-            // Redirect on success
             header("Location: pages.php");
             exit();
         } catch (PDOException $e) {
@@ -74,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0;
             padding: 0;
         }
-
         .navbar {
             background-color: #2c3e50;
             color: white;
@@ -83,18 +84,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: space-between;
             align-items: center;
         }
-
         .navbar .links a {
             color: white;
             text-decoration: none;
             margin-left: 15px;
             font-weight: bold;
         }
-
         .navbar .links a:hover {
             text-decoration: underline;
         }
-
         .container {
             max-width: 800px;
             margin: 30px auto;
@@ -103,26 +101,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
         h2 {
             margin-top: 0;
         }
-
         form label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
         }
-
         form input[type="text"],
-        form select {
+        form select,
+        form textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-
         form button {
             background-color: #3498db;
             color: white;
@@ -132,22 +127,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
             cursor: pointer;
         }
-
         form button:hover {
             background-color: #2980b9;
         }
-
         .message {
             margin-bottom: 15px;
             padding: 10px;
             border-radius: 5px;
         }
-
         .error {
             background-color: #f8d7da;
             color: #721c24;
         }
-
         .success {
             background-color: #d4edda;
             color: #155724;
@@ -160,11 +151,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="navbar">
     <div><strong>Chandusoft Admin</strong></div>
     <div class="links">
-       Welcome <?= htmlspecialchars($role) ?>!
-        <a href="dashboard.php">Dashboard</a>
-        <a href="leads.php">Leads</a>
-        <a href="pages.php">Pages</a>
-        <a href="logout.php">Logout</a>
+        Welcome <?= htmlspecialchars($role) ?>!
+        <a href="../app/dashboard.php">Dashboard</a>
+        <a href="../admin/admin-leads.php">Leads</a>
+        <a href="../admin/pages.php">Pages</a>
+        <a href="../admin/logout.php">Logout</a>
     </div>
 </div>
 
@@ -185,6 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="slug">Slug (optional)</label>
         <input type="text" name="slug" id="slug" placeholder="auto-generated-if-empty" value="<?= htmlspecialchars($page['slug']) ?>">
 
+        <label for="content_html">Content (HTML allowed)</label>
+        <textarea name="content_html" id="content_html" rows="10"><?= htmlspecialchars($content_html) ?></textarea>
+
         <label for="status">Status</label>
         <select name="status" id="status">
             <option value="published" <?= $page['status'] === 'published' ? 'selected' : '' ?>>Published</option>
@@ -198,3 +192,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
+

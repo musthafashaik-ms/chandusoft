@@ -27,9 +27,16 @@ $allCount = $conn->query("SELECT COUNT(*) as count FROM pages")->fetch_assoc()['
 $search = $_GET['search'] ?? '';
 $search = trim($search);
 
+// Determine if there's a filter by status
+$status = $_GET['status'] ?? '';
+$whereClause = '';
+if ($status) {
+    $whereClause = "WHERE status = '" . $conn->real_escape_string($status) . "'";
+}
+
 if ($search !== '') {
     // Search by title or slug
-    $stmt = $conn->prepare("SELECT * FROM pages WHERE title LIKE ? OR slug LIKE ? ORDER BY updated_at DESC");
+    $stmt = $conn->prepare("SELECT * FROM pages $whereClause AND (title LIKE ? OR slug LIKE ?) ORDER BY updated_at DESC");
     $likeSearch = "%$search%";
     $stmt->bind_param("ss", $likeSearch, $likeSearch);
     $stmt->execute();
@@ -37,7 +44,7 @@ if ($search !== '') {
     $stmt->close();
 } else {
     // No search, show all
-    $pages = $conn->query("SELECT * FROM pages ORDER BY updated_at DESC");
+    $pages = $conn->query("SELECT * FROM pages $whereClause ORDER BY updated_at DESC");
 }
 ?>
 
@@ -93,20 +100,18 @@ if ($search !== '') {
             margin-right: 15px;
             text-decoration: none;
             color: #000000ff;
-             
         }
 
         .filters a {
-         color: black; /* Default text color */
-         text-decoration: none; /* No underline by default */
-         transition: text-decoration 0.3s ease, color 0.3s ease; /* Smooth transition for underline and color */
+            color: black;
+            text-decoration: none;
+            transition: text-decoration 0.3s ease, color 0.3s ease;
         }
 
         .filters a:hover {
-         color: #3498db;/* Change text color to blue on hover */
-         text-decoration: underline; /* Underline the text on hover */
+            color: #3498db;
+            text-decoration: underline;
         }
-
 
         .top-bar input[type="text"] {
             padding: 8px;
@@ -185,46 +190,46 @@ if ($search !== '') {
             text-decoration: underline;
         }
 
-        /* New style for Edit button */
         .actions a.edit-btn {
-            background-color: #27ae60; /* green */
+            background-color: #27ae60;
             color: white;
         }
 
         .actions a.edit-btn:hover {
-            background-color: #219150; /* darker green on hover */
+            background-color: #219150;
         }
-.actions .btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-right: 6px;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    color: white;
-}
 
-.btn-edit {
-    background-color: #2ecc71; /* Green */
-}
+        .actions .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-right: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 4px;
+            color: white;
+        }
 
-.btn-archive {
-    background-color: #f39c12; /* Orange */
-}
-.btn-delete {
-    background-color: #e74c3c; /* Red */
-    color: white;
-}
+        .btn-edit {
+            background-color: #2ecc71;
+        }
 
-.btn-delete:hover {
-    cursor: not-allowed; /* 🚫 Shows block symbol on hover */
-}
-.btn:hover {
-    opacity: 0.9;
-}
+        .btn-archive {
+            background-color: #f39c12;
+        }
 
-        /* Optional: style Archive and Delete links differently if needed */
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            cursor: not-allowed;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -237,7 +242,7 @@ if ($search !== '') {
         <a href="../app/dashboard.php">Dashboard</a>
         <a href="../admin/admin-leads.php">Leads</a>
         <a href="../admin/pages.php">Pages</a>
-        <a href="../admin/logout.php">Logout</a> <!-- Assuming you have this script -->
+        <a href="../admin/logout.php">Logout</a>
     </div>
 </div>
 
@@ -252,14 +257,13 @@ if ($search !== '') {
             <a href="pages.php?status=archived">Archived (<?= $archivedCount ?>)</a>
         </div>
 
-        <!-- 🔍 Search -->
         <form method="get" class="search-form" style="display:flex; gap: 5px;">
             <input type="text" name="search" placeholder="Search title or slug" value="<?= htmlspecialchars($search) ?>">
             <input type="submit" value="Search">
         </form>
 
         <div>
-            <a class="create-btn" href="create.php" style="padding: 8px 15px; background-color:#27ae60; color:#fff; text-decoration:none; border-radius:4px; font-weight:bold;">
+            <a class="create-btn" href="create.php">
                 + Create New Page
             </a>
         </div>
@@ -274,28 +278,21 @@ if ($search !== '') {
             <th>Actions</th>
         </tr>
 
-       <?php while ($page = $pages->fetch_assoc()): ?>
-    <tr>
-        <td><?= htmlspecialchars($page['title']) ?></td>
-        <td><?= htmlspecialchars($page['slug']) ?></td>
-        <td><?= ucfirst($page['status']) ?></td>
-        <td><?= htmlspecialchars($page['updated_at']) ?></td>
-        <td class="actions">
-            <!-- Edit button -->
-            <a href="edit.php?id=<?= $page['id'] ?>" class="btn btn-edit">Edit</a>
+        <?php while ($page = $pages->fetch_assoc()): ?>
+<tr>
+    <td><?= htmlspecialchars($page['title']) ?></td>
+    <td><?= htmlspecialchars($page['slug']) ?></td>
+    <td><?= ucfirst($page['status']) ?></td>
+    <td><?= htmlspecialchars($page['updated_at']) ?></td>
+    <td class="actions">
+        <!-- Edit button -->
+        <a href="edit.php?id=<?= $page['id'] ?>" class="btn btn-edit">Edit</a>
 
-            <!-- Admin-only buttons -->
-            <?php if (strtolower($role) === 'admin'): ?>
-    <a href="archive.php?id=<?= $page['id'] ?>" class="btn btn-archive">Archive</a>
-    <a href="delete.php?id=<?= $page['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this page?')">Delete</a>
-<?php endif; ?>
-
-        </td>
-    </tr>
+        <!-- Admin-only buttons -->
+        <?php if (strtolower($role) === 'admin'): ?>
+            <a href="archive.php?id=<?= $page['id'] ?>" class="btn btn-archive">Archive</a>
+            <a href="delete.php?id=<?= $page['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this page?')">Delete</a>
+        <?php endif; ?>
+    </td>
+</tr>
 <?php endwhile; ?>
-
-    </table>
-</div>
-
-</body>
-</html>
