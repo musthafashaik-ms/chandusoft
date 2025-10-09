@@ -3,19 +3,15 @@ ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', isset($_SERVER['HTTPS'])); // Use true if HTTPS is always enforced
 ini_set('session.use_strict_mode', 1);
 session_start();
-?>
 
-<?php
-require '../app/config.php';
-
-// Generate CSRF token
+// Generate CSRF token if not already set
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Save old input
+// Save the old email input in case of failure
 $old_email = $_SESSION['old_email'] ?? '';
-unset($_SESSION['old_email']);
+unset($_SESSION['old_email']); // Clear old email after it's used
 ?>
 
 <!DOCTYPE html>
@@ -32,15 +28,14 @@ unset($_SESSION['old_email']);
             align-items: center;
             height: 100vh;
         }
-       .container {
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 350px;
-    min-height: 100px; /* 👈 Adjust this value as needed */
-}
-
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 350px;
+            min-height: 100px;
+        }
         h2 {
             text-align: center;
             margin-bottom: 20px;
@@ -88,18 +83,18 @@ unset($_SESSION['old_email']);
 <div class="container">
     <h2>Admin Login</h2>
 
-    <!-- ✅ Display Login Errors -->
+    <!-- Display any login errors -->
     <?php
     if (!empty($_SESSION['login_errors'])) {
         foreach ($_SESSION['login_errors'] as $error) {
-            echo "<p class='message error'>".htmlspecialchars($error)."</p>";
+            echo "<p class='message error'>" . htmlspecialchars($error) . "</p>";
         }
-        unset($_SESSION['login_errors']);
+        unset($_SESSION['login_errors']); // Clear errors after displaying
     }
 
-    if (isset($_SESSION['flash_error'])) {
-        echo "<p class='message error'>".htmlspecialchars($_SESSION['flash_error'])."</p>";
-        unset($_SESSION['flash_error']);
+    if (isset($_SESSION['flash_success'])) {
+        echo "<p class='message success'>" . htmlspecialchars($_SESSION['flash_success']) . "</p>";
+        unset($_SESSION['flash_success']);
     }
     ?>
 
@@ -118,4 +113,3 @@ unset($_SESSION['old_email']);
 
 </body>
 </html>
-

@@ -1,25 +1,29 @@
 <?php
-// --- DEBUGGING FOR DEVELOPMENT ONLY ---
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Set the environment (change to 'production' for live server)
+$environment = 'development';  // Change to 'production' when in live environment
 
-// Secure session setup
-if (session_status() === PHP_SESSION_NONE) {
-    ini_set('session.cookie_httponly', '1');
-    ini_set('session.cookie_secure', (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? '1' : '0');
-    ini_set('session.use_strict_mode', '1');
-    session_start();
+// Set error reporting based on environment
+if ($environment === 'development') {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);  // Hide errors in production
+    error_reporting(0);
+    // Log errors to file
+    ini_set('log_errors', 1);
+    ini_set('error_log', __DIR__ . '/../storage/logs/app.log');
 }
 
-// Database connection
+// Database connection settings (adjust as necessary for your environment)
 try {
-   $pdo = new PDO("mysql:host=localhost;dbname=chandusoft;charset=utf8mb4", "root", "", [
-
+    $pdo = new PDO("mysql:host=localhost;dbname=chandusoft;charset=utf8mb4", "root", "", [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
 } catch (PDOException $e) {
-    error_log("Database connection failed: " . $e->getMessage());
+    // Log the error and show a generic message
+    log_error("Database connection failed: " . $e->getMessage());
     die("Internal Server Error");
 }
+?>
