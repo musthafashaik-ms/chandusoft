@@ -7,6 +7,8 @@
     <nav>
         <a href="index.php"><b>Home</b></a>
         <a href="about.php"><b>About</b></a>
+        <a href="services.php"><b>Service</b></a>
+         <a href="contact.php"><b>Contact</b></a>
        
 
         <?php
@@ -26,8 +28,5 @@
             echo '<a href="index.php?page=' . htmlspecialchars($p['slug']) . '">' . htmlspecialchars($p['title']) . '</a>';
         }
         ?>
-         <a href="services.php"><b>Services</b></a>
-        <a href="contact.php"><b>Contact</b></a>
-    </nav>
 </header>
 

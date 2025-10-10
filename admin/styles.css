@@ -9,57 +9,63 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    
 }
 
 main {
-    flex: 1; /* Take up available space between header and footer */
+    flex: 1;
     padding: 20px;
     text-align: center;
 }
-/* General styles for the navigation bar */
+
+/* Header Styles */
 header {
-    background-color: #f8f9fa; /* Light gray background for header */
-    padding: 20px;
+    background-color: #007BFF;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #ccc;
 }
 
-/* Styling the logo */
 .logo img {
-    width: 400px; /* Adjust logo size */
-    height: 70px;
+    width: 400px;
+    height: auto;
 }
 
-/* Styles for the navigation container */
 nav {
-    display: flex; /* Use flexbox to align the items horizontally */
-    gap: 15px; /* Space between navigation items */
-    align-items: center; /* Vertically center the items */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
 }
 
-/* Style for the links */
-nav a {
-    text-decoration: none; /* Remove underline */
-    color: #007BFF; /* Blue color for links */
-    font-size: 18px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Hover effect for the links */
-nav a:hover {
-    background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
-    color: #0056b3; /* Darker blue text on hover */
-}
-
-/* Style for active link */
-nav a.active {
+/* Navigation Links */
+nav a,
+nav button {
+    display: inline-block;
+    padding: 10px 20px;
     background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid #007BFF;
+}
+
+nav a:hover,
+nav button:hover {
+    background-color: white;
+    color: #007BFF;
+}
+
+nav a.active {
+    background-color: white;
     color: white;
 }
 
-
+/* Back to Top Button */
+/* Back to Top Button */
 #back-to-top {
     position: fixed;
     bottom: 50px;
@@ -82,255 +88,65 @@ nav a.active {
     align-items: center; /* Center content (the arrow) inside the button */
 }
 
-/* Add an arrow inside the button */
-#back-to-top:before {
-    font-size: 24px; /* Adjust the size of the arrow */
-    font-weight: bold;
-}
+
 
 /* Change background color when hovered */
 #back-to-top:hover {
     background-color: #0056b3;
 }
 
-/* Main Content */
-main {
-    padding: 20px;
-    text-align: center;
-}
-
-/* Footer */
+/* Footer Styles */
 footer {
     text-align: center;
     background-color: #333;
     color: white;
     padding: 10px 0;
-    margin-top: auto; /* Push footer to bottom */
+    margin-top: auto;
     font-size: 14px;
 }
 
-.services-list {
-  text-align: left;
-  margin-left: 40px; /* Adjust as needed */
-  list-style-type: disc;
-  padding-left: 20px;
-}
- 
- 
-/* Navigation Bar */
-nav {
+footer {
+    background: #333;
+    color: #fff;
+    padding: 15px 30px;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    background-color: #007BFF; /* Blue background */
-    padding: 1px 0;
-    gap: 15px; /* Space between buttons */
+    justify-content: space-between;
+    align-items: center;
 }
- 
-/* Nav Buttons */
-nav button {
-    display: inline-block;
-    background-color: #007BFF;
-    color: rgb(244, 244, 247);
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 1px solid #007BFF;
-    transition: all 0.3s ease;
-}
- /* Footer */
-footer {
-    text-align: center;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    margin-top: auto; /* Push footer to bottom */
+
+footer p {
+    margin: 0;
     font-size: 14px;
 }
-/* Navigation buttons */
-nav a {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: #007BFF;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
- /* Unique background for contact page */
-.contact-page {
-  background: linear-gradient(to right, #e0f7fa, #ffffff);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 40px 0;
-}
- /* Navigation buttons */
-nav a {
-  display: inline-block;
-  padding: 10px 18px;
-  margin: 5px;
-  background-color: #007BFF;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: weight;
-  transition: background-color 0.3s ease;
-}
- /* Contact form container */
-.contact-form {
-  max-width: 280px;
-  margin: 0 auto;
-  padding: 25px;
-  background-color: #b9cde2;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
- /* Form elements */
-.contact-form label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
-  color: #333;
-}
- .contact-form input,
-.contact-form textarea {
-  width:80%;
-  padding: 8px 10px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
- .contact-form textarea {
-  resize: vertical;
-}
- /* Submit button */
-.contact-form button {
-  width: 200px;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #0d83ff;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.3s ease, transform 0.2s ease;
-  margin-top: 10px;
-}
- .contact-form button:hover {
-  background: #0b6edc;
-}
- .section-title {
-  font-weight: bold;
-  font-size: 1.5em;
-  color: #2d5be3; /* Accent color */
-}
- .highlight {
-  font-weight: bold;
-  color: #000000;
-  background-color: #f2f3f5; /* Light blue highlight */
-  padding: 4px 4px;
-  border-radius: 4px;
-}
-.contact-form {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-input, textarea, button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+footer p b {
+    font-weight: bold;
 }
 
-button {
-    background-color: #007BFF;
-    color: rgb(67, 182, 228);
-    border: none;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #007BFF;
-}
-
-input:invalid, textarea:invalid {
-    border: 1px solid rgb(14, 13, 13);  /* Red border on invalid input */
-}
-
-input:invalid:focus, textarea:invalid:focus {
-    border-color: rgb(12, 12, 12);
-}
-
-input:required:valid, textarea:required:valid {
-    border-color: #1a1818; /* Green border when valid */
-}
-input:invalid + label::after,
-textarea:invalid + label::after {
-    content: attr(title); /* Display the custom title from the HTML attribute */
-    color: rgb(5, 5, 5);
-    font-size: 12px;
-    margin-top: 5px;
-    display: block;
-}
-/* Custom styling for the form labels */
-label {
+.social-icons a {
+    color: #fff;
+    margin-left: 15px;
     font-size: 16px;
-    margin-top: 10px;
-    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-button[type="submit"]:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.social-icons a:hover {
+    color: #1da1f2; /* Hover color */
 }
-footer {
-    text-align: center;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    margin-top: auto; /* Push footer to bottom */
-    font-size: 14px;
-}
- footer {
-      background: #333;
-      color: #fff;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    footer p {
-      margin: 0;
-      font-size: 14px;
-    }
-    footer p b {
-      font-weight: bold;
-    }
-    .social-icons a {
-      color: #fff;
-      margin-left: 15px;
-      font-size: 16px;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .social-icons a:hover {
-      color: #1da1f2; /* Hover color */
-    }
-   .services-section {
+
+/* Services Section */
+.services-section {
     text-align: center;
     padding: 50px 20px;
 }
+
 .services-section h2 {
-    color: #2d5be3;  /* Blue color for the title */
+    color: #2d5be3; /* Blue color for the title */
     font-size: 28px;
     margin-bottom: 40px;
 }
+
 .services-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -338,6 +154,7 @@ footer {
     max-width: 1100px;
     margin: auto;
 }
+
 .service-card {
     background: #fff;
     padding: 25px;
@@ -346,178 +163,220 @@ footer {
     text-align: left;
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
 .service-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
+
 .service-card i {
     font-size: 32px;
     margin-bottom: 15px;
     display: block;
 }
+
 /* Update the color of each service card's icon */
 .icon-blue {
     color: #63b3cc; /* Blue */
 }
+
 .icon-green {
     color: #575a91; /* Green */
 }
+
 .icon-black {
     color: #333; /* Dark black */
 }
+
 .icon-yellow {
     color: #fbc02d; /* Yellow */
 }
+
 .icon-purple {
     color: #27b092; /* Purple */
 }
+
 .icon-red {
     color: #eb1b0c; /* Red */
 }
+
 .service-card h3 {
     font-size: 18px;
     font-weight: bold;
     margin: 0 0 10px;
 }
+
 .service-card p {
     font-size: 14px;
     color: #555;
     margin: 0;
 }
+
+.highlight {
+    font-weight: bold;
+    color: #000000;
+    background-color: #f2f3f5; /* Light blue highlight */
+    padding: 4px 4px;
+    border-radius: 4px;
+}
+
+/* Hero Section */
 .hero {
-      height: 80vh;
-      background: url('images/cs.jpg') no-repeat center center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      position: relative;
-    }
- 
-    /* Dark overlay */
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 90%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1;
-    }
- 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
-      padding: 20px;
-    }
- 
-    .hero h1 {
-  font-size: 30px;
-  margin-bottom: 20px;
-  background: linear-gradient(90deg, #f2f3f5, #f1f1f1, #f5f8f5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
- 
-    .hero p {
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
- 
-    .hero .btn-hero {
-      background: royalblue;
-      color: white;
-      padding: 14px 30px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
- 
-    .hero .btn-hero:hover {
-      background: #0056b3;
-    }
-     /* Testimonials Section */
-    .testimonials {
-      background: #f8f8f8;
-      padding: 60px 20px;
-      text-align: center;
-    }
- 
-    .testimonials h2 {
-      font-size: 32px;
-      margin-bottom: 40px;
-      color: #333;
-    }
- 
-    .testimonial-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
- 
-    .testimonial {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: left;
-      position: relative;
-    }
- 
-    .testimonial p {
-      font-style: italic;
-      margin-bottom: 15px;
-      color: #555;
-    }
- 
-    .testimonial h4 {
-      font-size: 16px;
-      margin-top: 10px;
-      color: rgb(3, 3, 3);
-    }
- 
-    .testimonial span {
-      font-size: 14px;
-      color: #777;
-    }
-
-/* Success message styling */
-#successMessage {
-    color: green;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-/* Button Styling */
-button[type="submit"] {
-    background-color: #007BFF;
+    height: 80vh;
+    background: url('images/cs.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 200px;
+    height: 90%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #f2f3f5, #f1f1f1, #f5f8f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.hero .btn-hero {
+    background: royalblue;
+    color: white;
+    padding: 14px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.hero .btn-hero:hover {
+    background: #0056b3;
+}
+
+/* Testimonials Section */
+.testimonials {
+    background: #f8f8f8;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.testimonial {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+}
+
+.testimonial p {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.testimonial h4 {
+    font-size: 16px;
+    margin-top: 10px;
+    color: rgb(3, 3, 3);
+}
+
+.testimonial span {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 280px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 80%;
+    padding: 8px 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    width: 200px;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #0d83ff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
     margin-top: 10px;
 }
 
-/* Disabled Button Styling */
-button[type="submit"]:disabled {
-    background-color: #cccccc; /* Light gray when disabled */
-    cursor: not-allowed;
+.contact-form button:hover {
+    background: #0b6edc;
 }
 
-/* Error message styling */
+/* Error and Success Messages */
 .error-message {
     color: red;
     font-size: 12px;
@@ -525,24 +384,29 @@ button[type="submit"]:disabled {
     display: block;
 }
 
-/* Styling for form inputs and labels */
-input, textarea {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+#successMessage {
+    color: green;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
-input:focus, textarea:focus {
+/* Form input focus */
+input:focus,
+textarea:focus {
     border-color: #007BFF;
 }
 
-textarea {
-    resize: vertical; /* Allow the user to resize */
+input:invalid,
+textarea:invalid {
+    border: 1px solid rgb(14, 13, 13);
 }
 
-/* Hide default validation tooltips in some browsers */
-input:invalid, textarea:invalid {
-  box-shadow: none;
+input:invalid:focus,
+textarea:invalid:focus {
+    border-color: rgb(12, 12, 12);
+}
+
+input:required:valid,
+textarea:required:valid {
+    border-color: #1a1818;
 }

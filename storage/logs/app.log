@@ -10,3 +10,5 @@
 [2025-10-09 11:00:12] ❌ FAILED login | Email: user25@gmail.com | IP: 127.0.0.1
 [2025-10-09 11:22:24] ❌ FAILED login | Email: user25@gmail.com | IP: 127.0.0.1
 [2025-10-09 11:22:31] ❌ FAILED login | Email: user25@gmail.com | IP: 127.0.0.1
+[2025-10-09 11:35:54] ❌ FAILED login | Email: user8@gmail.com | IP: 127.0.0.1
+[2025-10-10 06:02:16] CSRF token invalid for email: admin@example.com | IP: 127.0.0.1

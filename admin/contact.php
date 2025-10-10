@@ -2,30 +2,30 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php'; // Ensure correct path to autoload
- 
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // --- DB CONNECTION ---
     $conn = new mysqli("127.0.0.1", "root", "", "chandusoft");
     if ($conn->connect_error) {
-        echo "error";
+        echo "❌ Something went wrong with the database connection.";
         exit;
     }
- 
+
     // --- SANITIZE INPUT ---
     $name = trim($conn->real_escape_string($_POST['name'] ?? ''));
     $email = trim($conn->real_escape_string($_POST['email'] ?? ''));
     $message = trim($conn->real_escape_string($_POST['message'] ?? ''));
- 
+
     // --- VALIDATE INPUT ---
     if (empty($name) || empty($email) || empty($message) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid input.";
+        echo "❌ Invalid input.";
         exit;
     }
- 
+
     // --- INSERT INTO DB ---
     $sql = "INSERT INTO leads (name, email, message) VALUES ('$name', '$email', '$message')";
     if ($conn->query($sql) === TRUE) {
- 
+
         // --- SEND EMAIL ---
         $mail = new PHPMailer(true);
         try {
@@ -33,16 +33,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'cstltest8@gmail.com'; // your Gmail
+            $mail->Username = 'cstltest4@gmail.com'; // your Gmail
             $mail->Password = 'vwrs cubq qpqg wfcg'; // Gmail App password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
- 
+
             // Email headers
             $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact Form');
             $mail->addAddress('musthafa.shaik@chandusoft.com', 'Musthafa');
             $mail->addReplyTo($email, $name);
- 
+
             // Email content
             $mail->isHTML(true);
             $mail->Subject = 'New Lead Submission';
@@ -52,40 +52,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <p><strong>Email:</strong> {$email}</p>
                 <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
             ";
- 
+
             $mail->send();
-            echo "success";
+            echo "success";  // Send back success response
             exit;
- 
+
         } catch (Exception $e) {
             // --- LOG FAILURE ---
             $logDir = __DIR__ . '/../storage/logs';
             if (!is_dir($logDir)) {
                 mkdir($logDir, 0777, true);
             }
- 
+
             $logFile = $logDir . '/mail-fail.log';
             $timestamp = date('Y-m-d H:i:s');
             $errorMessage = "[$timestamp] Mail send failed for {$email} ({$name}). Error: {$mail->ErrorInfo}\nMessage: {$message}\n\n";
             file_put_contents($logFile, $errorMessage, FILE_APPEND);
- 
-            echo "Mailer Error";
+
+            echo "❌ Mailer Error: {$mail->ErrorInfo}";  // Provide more details in error response
             exit;
         }
     } else {
-        echo "Database insert error.";
+        echo "❌ Database insert error.";
         exit;
     }
 }
 ?>
 
 
-<!-- Your HTML form code goes here (unchanged) -->
-
 
 <!-- Your HTML form code goes here (unchanged) -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             successMessage.style.fontWeight = "bold";
             successMessage.style.marginTop = "15px";
             successMessage.style.display = "none";
-            successMessage.textContent = "✅ Successfully!";
+            successMessage.textContent = "✅ Successfully submitted!";
             form.insertAdjacentElement("afterend", successMessage);
 
             // ❌ Error message element
@@ -258,3 +254,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </script>
 </body>
 </html>
+

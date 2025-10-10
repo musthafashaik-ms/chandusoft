@@ -1,5 +1,5 @@
 <?php
-require_once '../app/config.php'; // Loads $pdo and session
+session_start(); // Ensure session starts at the top of the file
 
 // ✅ Redirect if not logged in
 if (!isset($_SESSION['user'])) {
@@ -8,8 +8,8 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$role = $_SESSION['user']['role'] ?? 'Editor';
-$username = $_SESSION['user']['username'] ?? 'User';
+$user = $_SESSION['user'];
+$role = htmlspecialchars($user['role'] ?? 'Editor');
 $error = '';
 $success = '';
 
@@ -41,7 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             // Insert page into the database, including content_html
-            $stmt = $pdo->prepare("INSERT INTO pages (title, slug, status, content_html, updated_at) VALUES (?, ?, ?, ?, NOW())");
+            $conn = new mysqli('localhost', 'root', '', 'chandusoft');
+            if ($conn->connect_error) {
+                die("❌ DB connection failed: " . $conn->connect_error);
+            }
+
+            $stmt = $conn->prepare("INSERT INTO pages (title, slug, status, content_html, updated_at) VALUES (?, ?, ?, ?, NOW())");
             $stmt->execute([$title, $slug, $status, $content_html]);
 
             // Success: Redirect to pages list
@@ -144,6 +149,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #d4edda;
             color: #155724;
         }
+    .back-button {
+    position: absolute;        /* Positioning the button absolutely */
+    bottom: -30px;                 /* Distance from the top */
+    left: 900px;                /* Distance from the left */
+    padding: 10px 20px;
+    background-color: #3498db;  /* Blue background */
+    color: white;
+    border-radius: 8px;         /* Rounded corners */
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+.back-button:hover {
+    background-color: #2980b9;  /* Darker blue on hover */
+}
+
+
     </style>
 </head>
 <body>
@@ -188,6 +212,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <textarea name="content_html" id="content_html" rows="10" placeholder="Enter the page content..."><?= htmlspecialchars($content_html) ?></textarea>
 
         <button type="submit">Create Page</button>
+          <!-- Back to Pages Button -->
+    <a href="pages.php" class="back-button">← Back to Pages</a>
     </form>
 </div>
 

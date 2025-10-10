@@ -1,4 +1,6 @@
 <?php
+session_start(); // Ensure session starts at the top of the file
+
 require_once '../app/config.php'; // Loads $pdo and session
 
 // ✅ Redirect if not logged in
@@ -56,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("UPDATE pages SET title = ?, slug = ?, content_html = ?, status = ?, updated_at = NOW() WHERE id = ?");
             $stmt->execute([$title, $slug, $content_html, $status, $id]);
 
+            // ✅ Redirect to pages.php after successful update
             header("Location: pages.php");
             exit();
         } catch (PDOException $e) {
@@ -143,6 +146,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #d4edda;
             color: #155724;
         }
+         .back-button {
+    position: absolute;        /* Positioning the button absolutely */
+    bottom: -30px;                 /* Distance from the top */
+    left: 900px;                /* Distance from the left */
+    padding: 10px 20px;
+    background-color: #3498db;  /* Blue background */
+    color: white;
+    border-radius: 8px;         /* Rounded corners */
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+.back-button:hover {
+    background-color: #2980b9;  /* Darker blue on hover */
+}
+
     </style>
 </head>
 <body>
@@ -187,6 +208,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
 
         <button type="submit">Update Page</button>
+          <!-- Back to Pages Button -->
+    <a href="pages.php" class="back-button">← Back to Pages</a>
     </form>
 </div>
 
