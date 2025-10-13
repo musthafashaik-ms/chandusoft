@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /admin/
+ 
+# Skip existing files/folders
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+ 
+# Rewrite /admin/slug → index.php?page=slug
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?page=$1 [QSA,L]
+ 

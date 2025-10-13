@@ -12,3 +12,12 @@
 [2025-10-09 11:22:31] ❌ FAILED login | Email: user25@gmail.com | IP: 127.0.0.1
 [2025-10-09 11:35:54] ❌ FAILED login | Email: user8@gmail.com | IP: 127.0.0.1
 [2025-10-10 06:02:16] CSRF token invalid for email: admin@example.com | IP: 127.0.0.1
+[2025-10-13 07:58:15] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-13 08:34:07] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-13 08:34:08] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-13 08:34:08] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-13 08:34:08] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-13 08:34:13] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-13 08:34:21] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-13 08:34:25] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-13 08:34:55] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42

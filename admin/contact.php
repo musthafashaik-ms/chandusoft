@@ -40,14 +40,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Email headers
             $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact Form');
-            $mail->addAddress('musthafa.shaik@chandusoft.com', 'Musthafa');
+            $mail->addAddress('musthafa.shaik033@gmail.com', 'Musthafa');
             $mail->addReplyTo($email, $name);
 
             // Email content
             $mail->isHTML(true);
-            $mail->Subject = 'New Lead Submission';
+        $subject = "New Contact Form Submission"; // ✅ Define subject here
+         $mail->Subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
+ 
             $mail->Body = "
-                <h3>New Lead Submission</h3>
+                <h3>🚀New Lead Submission</h3>
                 <p><strong>Name:</strong> {$name}</p>
                 <p><strong>Email:</strong> {$email}</p>
                 <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
@@ -78,6 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
+
 
 
 
@@ -128,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <!-- Include JS (header, footer, back to top, etc.) -->
     <script src="include.js"></script>
 
-    <!-- Form Validation Script -->
+    <!-- Form Validation and Handling Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('contactForm');
@@ -226,16 +230,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     })
                     .then(response => response.text())
                     .then(result => {
+                        // If the result is "success", display the success message
                         if (result === "success") {
                             errorMessage.style.display = "none";
                             successMessage.style.display = "block";
                             form.reset();
                             submitBtn.disabled = true;
 
+                            // Hide success message after 10 seconds
                             setTimeout(() => {
                                 successMessage.style.display = "none";
                             }, 10000);
                         } else {
+                            // If there's an error message, show the error message
                             successMessage.style.display = "none";
                             errorMessage.style.display = "block";
                             setTimeout(() => {
@@ -254,4 +261,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </script>
 </body>
 </html>
-

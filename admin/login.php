@@ -1,6 +1,6 @@
 <?php
 ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', isset($_SERVER['HTTPS'])); // Use true if HTTPS is always enforced
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
 ini_set('session.use_strict_mode', 1);
 session_start();
 
@@ -76,20 +76,30 @@ unset($_SESSION['old_email']); // Clear old email after it's used
             background: #f8d7da;
             color: #721c24;
         }
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .register-link button {
+            background-color: #28a745;
+        }
+        .register-link button:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Admin Login</h2>
+    <h2>Login Form</h2>
 
-    <!-- Display any login errors -->
+    <!-- Display login errors -->
     <?php
     if (!empty($_SESSION['login_errors'])) {
         foreach ($_SESSION['login_errors'] as $error) {
             echo "<p class='message error'>" . htmlspecialchars($error) . "</p>";
         }
-        unset($_SESSION['login_errors']); // Clear errors after displaying
+        unset($_SESSION['login_errors']);
     }
 
     if (isset($_SESSION['flash_success'])) {
@@ -109,6 +119,14 @@ unset($_SESSION['old_email']); // Clear old email after it's used
 
         <button type="submit">Login</button>
     </form>
+
+    <!-- Register Button -->
+    <div class="register-link">
+        <p>Don't have an account?</p>
+        <a href="../app/register.php">
+            <button type="button">Register</button>
+        </a>
+    </div>
 </div>
 
 </body>
