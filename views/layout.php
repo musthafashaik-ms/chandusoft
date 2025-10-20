@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($page['title'] ?? 'Untitled Page') ?></title>
+    <title><?= htmlspecialchars($pageData['title'] ?? 'Untitled Page') ?></title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>

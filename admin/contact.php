@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Email headers
             $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact Form');
-            $mail->addAddress('musthafa.shaik033@gmail.com', 'Musthafa');
+            $mail->addAddress('musthafa.shaik@chandusoft.com', 'Musthafa');
             $mail->addReplyTo($email, $name);
 
             // Email content

@@ -1,29 +1,27 @@
 <?php
-require __DIR__ . '/app/config.php'; // DB connection
+require_once __DIR__ . '/../app/config.php'; // Include the database connection
 
-// -----------------------
-// Fetch pages for navbar
-// -----------------------
-$navStmt = $pdo->query("SELECT title, slug FROM pages WHERE status = 'published'");
-$navPages = $navStmt->fetchAll(PDO::FETCH_ASSOC);
+// Default page slug is 'home' if no page is specified
+$page = isset($_GET['page']) ? $_GET['page'] : 'home'; // Default page is home
 
-// -----------------------
-// Determine which page to show
-// -----------------------
-$pageSlug = $_GET['page'] ?? 'home';
+// Fetch page content based on the 'page' slug
+$stmt = $pdo->prepare("SELECT title, content_html FROM pages WHERE slug = ? AND status = 'published'");
+$stmt->execute([$page]);
+$pageData = $stmt->fetch();
 
-if ($pageSlug === 'home') {
-    $page = null; // Home page doesn't need DB content
-    include __DIR__ . '/views/home.php';
+// If the page is found, display the content; otherwise, show a 404 error
+if ($pageData) {
+    ob_start();  // Start output buffering
+    echo "<h1>" . htmlspecialchars($pageData['title']) . "</h1>";
+    echo "<div>" . (!empty($pageData['content_html']) ? $pageData['content_html'] : '<p>No content available.</p>') . "</div>";
+    $content = ob_get_clean(); // Capture the content and assign it to $content
 } else {
-    $stmt = $pdo->prepare("SELECT * FROM pages WHERE slug = ? AND status = 'published'");
-    $stmt->execute([$pageSlug]);
-    $page = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($page) {
-        include __DIR__ . '/views/page.php';
-    } else {
-        include __DIR__ . '/views/404.php';
-    }
+    // Page not found
+    header("HTTP/1.0 404 Not Found");
+    include __DIR__ . '/404.php';
+    exit;
 }
+
+// Include the layout (header, footer, etc.)
+include __DIR__ . '/layout.php';
 ?>
