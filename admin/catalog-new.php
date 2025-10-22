@@ -7,13 +7,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']);
     $price = (float) $_POST['price'];
     $short_desc = trim($_POST['short_desc']);
-    $status = in_array($_POST['status'], ['published', 'archived']) ? $_POST['status'] : 'published';
+    
+    // Add 'draft' as valid status
+    $validStatuses = ['published', 'archived', 'draft'];
+    $status = in_array($_POST['status'], $validStatuses) ? $_POST['status'] : 'published';
 
-    // ✅ Generate base slug from title
+    // Generate base slug from title
     $slug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', trim($title)));
     $slug = trim($slug, '-');
 
-    // ✅ Ensure unique slug
+    // Ensure unique slug
     $originalSlug = $slug;
     $counter = 1;
     $checkSlug = $pdo->prepare("SELECT COUNT(*) FROM catalog WHERE slug = ?");
@@ -27,37 +30,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $imagePath = null;
 
-    // ✅ Image Upload
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        $uniqueName = 'catalog_' . time() . '.' . $ext;
+    // Image Upload with max 2MB limit
+    if (isset($_FILES['image']) && $_FILES['image']['error'] !== UPLOAD_ERR_NO_FILE) {
+        if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            if ($_FILES['image']['size'] <= 2 * 1024 * 1024) { // 2MB in bytes
+                $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $uniqueName = 'catalog_' . time() . '.' . $ext;
 
-        $uploadDir = __DIR__ . '/../uploads/';
-        if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+                $uploadDir = __DIR__ . '/../uploads/';
+                if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 
-        $target = $uploadDir . $uniqueName;
-        $publicPath = 'uploads/' . $uniqueName;
+                $target = $uploadDir . $uniqueName;
+                $publicPath = 'uploads/' . $uniqueName;
 
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            $imagePath = $publicPath;
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+                    $imagePath = $publicPath;
+                } else {
+                    $message = "❌ Failed to move uploaded file.";
+                }
+            } else {
+                $message = "❌ Image size must be 2MB or less.";
+            }
+        } else {
+            $message = "❌ Error uploading image. Code: " . $_FILES['image']['error'];
         }
     }
 
-    try {
-        // ✅ Insert into DB
-        $stmt = $pdo->prepare("
-            INSERT INTO catalog (title, slug, price, image, short_desc, status)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ");
-        $stmt->execute([$title, $slug, $price, $imagePath, $short_desc, $status]);
+    if (!$message) {
+        try {
+            $stmt = $pdo->prepare("
+                INSERT INTO catalog (title, slug, price, image, short_desc, status)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->execute([$title, $slug, $price, $imagePath, $short_desc, $status]);
 
-        header("Location: catalog.php");
-        exit;
-    } catch (PDOException $e) {
-        if ($e->getCode() == 23000) {
-            $message = "❌ A catalog item with this title already exists.";
-        } else {
-            $message = "❌ Error: " . $e->getMessage();
+            header("Location: catalog.php");
+            exit;
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                $message = "❌ A catalog item with this title already exists.";
+            } else {
+                $message = "❌ Error: " . $e->getMessage();
+            }
         }
     }
 }
@@ -85,11 +99,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .message { margin-bottom: 15px; font-weight: bold; }
         .success { color: green; }
         .error { color: red; }
+      .back-btn {
+    position: absolute;
+    bottom: 40px;   /* Move up a little */
+    right: 380px;    /* Move left a little */
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body>
 
-<!-- ✅ Simple Navbar -->
+<!-- Simple Navbar -->
 <div class="navbar">
     <div>
         <a href="catalog.php">📦 Catalog</a>
@@ -117,17 +148,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label>Short Description:</label>
         <textarea name="short_desc" rows="4"></textarea>
 
-        <label>Image:</label>
+        <label>Image (Max 2MB):</label>
         <input type="file" name="image" accept="image/*">
 
         <label>Status:</label>
         <select name="status">
             <option value="published" selected>Published</option>
+            <option value="draft">Draft</option>
             <option value="archived">Archived</option>
         </select>
 
         <button type="submit">Save</button>
     </form>
+
+ <!-- Back to Catalog Button -->
+<a href="catalog.php" class="back-btn">← Back to Catalog</a>
 </div>
 
 </body>

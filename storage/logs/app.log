@@ -70,3 +70,8 @@
 [2025-10-18 09:13:50] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
 [2025-10-18 09:13:50] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
 [2025-10-18 09:13:50] Uncaught Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' in C:\laragon\www\chandusoft\admin\index.php at line 42
+[2025-10-22 05:15:06] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
+[2025-10-22 05:15:09] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
+[2025-10-22 05:16:21] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
+[2025-10-22 05:16:50] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
+[2025-10-22 05:18:37] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
