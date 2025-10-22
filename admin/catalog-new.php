@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']);
     $price = (float) $_POST['price'];
     $short_desc = trim($_POST['short_desc']);
-    
+
     // Add 'draft' as valid status
     $validStatuses = ['published', 'archived', 'draft'];
     $status = in_array($_POST['status'], $validStatuses) ? $_POST['status'] : 'published';
@@ -43,8 +43,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $target = $uploadDir . $uniqueName;
                 $publicPath = 'uploads/' . $uniqueName;
 
+                // Move the uploaded file
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+                    // Check if image is too wide (larger than 1600px)
+                    $image = imagecreatefromstring(file_get_contents($target));
+                    $width = imagesx($image);
+                    $height = imagesy($image);
+
+                    if ($width > 1600) {
+                        // Resize the image to max width 1600px
+                        $newWidth = 1600;
+                        $newHeight = ($height / $width) * $newWidth;
+
+                        $resizedImage = imagescale($image, $newWidth, $newHeight);
+                        imagejpeg($resizedImage, $target, 90); // Save resized image
+                        imagedestroy($resizedImage);
+                    }
+
+                    // Generate WebP version (but don't save it to database)
+                    $webpName = pathinfo($uniqueName, PATHINFO_FILENAME) . '.webp';
+                    $webpPath = 'uploads/' . $webpName;
+                    $webpTarget = $uploadDir . $webpName;
+
+                    // Resize WebP image to the same size as the resized image (if resized)
+                    if ($width > 1600) {
+                        // If the image was resized, resize the WebP version too
+                        $resizedWebP = imagecreatefromstring(file_get_contents($target));
+                        imagewebp($resizedWebP, $webpTarget, 80); // Save resized WebP
+                        imagedestroy($resizedWebP);
+                    } else {
+                        // If the original image was not resized, just create the WebP version at original size
+                        imagewebp($image, $webpTarget, 80); // Save WebP image
+                    }
+
                     $imagePath = $publicPath;
+
+                    imagedestroy($image);
                 } else {
                     $message = "❌ Failed to move uploaded file.";
                 }
@@ -58,12 +92,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$message) {
         try {
+            // Insert the catalog item into the database but don't update the `image_webp` column
             $stmt = $pdo->prepare("
                 INSERT INTO catalog (title, slug, price, image, short_desc, status)
                 VALUES (?, ?, ?, ?, ?, ?)
             ");
             $stmt->execute([$title, $slug, $price, $imagePath, $short_desc, $status]);
 
+            // Redirect to catalog after successful upload
             header("Location: catalog.php");
             exit;
         } catch (PDOException $e) {
@@ -76,47 +112,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>New Catalog Item</title>
-    <style>
-        body { font-family: Arial, sans-serif; background:#f4f4f4; padding:20px; }
-        .navbar { background:#007BFF; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; color:#fff; }
-        .navbar a { color:#fff; text-decoration:none; margin-right:15px; }
-        .navbar a:hover { text-decoration:underline; }
-
-        .container { max-width:600px; margin:auto; background:#fff; padding:20px; border-radius:8px; }
-        h1 { text-align:center; color:#007BFF; }
-        label { display:block; margin-top:10px; font-weight:bold; }
-        input[type="text"], input[type="number"], textarea, select {
-            width:100%; padding:10px; margin-top:5px; box-sizing:border-box;
-        }
-        input[type="file"] { margin-top:5px; }
-        button { background:#007BFF; color:#fff; border:none; padding:10px 15px; margin-top:15px; cursor:pointer; }
-        button:hover { background:#0056b3; }
-        .message { margin-bottom: 15px; font-weight: bold; }
-        .success { color: green; }
-        .error { color: red; }
-      .back-btn {
-    position: absolute;
-    bottom: 40px;   /* Move up a little */
-    right: 380px;    /* Move left a little */
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-}
-
-.back-btn:hover {
-    background-color: #0056b3;
-}
-
-    </style>
+    <style> body { font-family: Arial, sans-serif; background:#f4f4f4; padding:20px; } .navbar { background:#007BFF; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; color:#fff; } .navbar a { color:#fff; text-decoration:none; margin-right:15px; } .navbar a:hover { text-decoration:underline; } .container { max-width:600px; margin:auto; background:#fff; padding:20px; border-radius:8px; } h1 { text-align:center; color:#007BFF; } label { display:block; margin-top:10px; font-weight:bold; } input[type="text"], input[type="number"], textarea, select { width:100%; padding:10px; margin-top:5px; box-sizing:border-box; } input[type="file"] { margin-top:5px; } button { background:#007BFF; color:#fff; border:none; padding:10px 15px; margin-top:15px; cursor:pointer; } button:hover { background:#0056b3; } .message { margin-bottom: 15px; font-weight: bold; } .success { color: green; } .error { color: red; } .back-btn { position: absolute; bottom: 40px; /* Move up a little */ right: 380px; /* Move left a little */ background-color: #007BFF; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; text-align: center; } .back-btn:hover { background-color: #0056b3; } </style>
 </head>
 <body>
 
