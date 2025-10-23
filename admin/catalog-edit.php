@@ -48,14 +48,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
                 $uniqueName = 'catalog_' . time() . '.' . $ext;
 
-                $uploadDir = __DIR__ . '/../uploads/';
-                if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+                // Generate the directory path based on current year/month
+                $year = date('Y');
+                $month = date('m');
+                $uploadDir = __DIR__ . '/../uploads/' . $year . '/' . $month . '/';
+
+                // Create the directory if it doesn't exist
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
 
                 $target = $uploadDir . $uniqueName;
-                $publicPath = 'uploads/' . $uniqueName;
+                $publicPath = 'uploads/' . $year . '/' . $month . '/' . $uniqueName;
 
+                // Move the uploaded file
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+                    // Check if image is too wide (larger than 1600px)
+                    $image = imagecreatefromstring(file_get_contents($target));
+                    $width = imagesx($image);
+                    $height = imagesy($image);
+
+                    if ($width > 1600) {
+                        // Resize the image to max width 1600px
+                        $newWidth = 1600;
+                        $newHeight = ($height / $width) * $newWidth;
+
+                        $resizedImage = imagescale($image, $newWidth, $newHeight);
+                        imagejpeg($resizedImage, $target, 90); // Save resized image
+                        imagedestroy($resizedImage);
+                    }
+
+                    // Generate WebP version (but don't save it to database)
+                    $webpName = pathinfo($uniqueName, PATHINFO_FILENAME) . '.webp';
+                    $webpPath = 'uploads/' . $year . '/' . $month . '/' . $webpName;
+                    $webpTarget = $uploadDir . $webpName;
+
+                    // Resize WebP image to the same size as the resized image (if resized)
+                    if ($width > 1600) {
+                        // If the image was resized, resize the WebP version too
+                        $resizedWebP = imagecreatefromstring(file_get_contents($target));
+                        imagewebp($resizedWebP, $webpTarget, 80); // Save resized WebP
+                        imagedestroy($resizedWebP);
+                    } else {
+                        // If the original image was not resized, just create the WebP version at original size
+                        imagewebp($image, $webpTarget, 80); // Save WebP image
+                    }
+
                     $imagePath = $publicPath;
+
+                    imagedestroy($image);
 
                     // Delete old image if exists
                     if (!empty($item['image']) && file_exists(__DIR__ . '/../' . $item['image'])) {

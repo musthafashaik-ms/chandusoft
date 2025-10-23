@@ -1,18 +1,22 @@
 <?php
-require_once __DIR__ . '/../app/functions.php';
+require_once __DIR__ . '/../app/functions.php'; // Ensure this is included only once
 
+// Fetch site name and logo path from the database
 $siteName = get_setting('site_name') ?: '';
 $logoPath = get_setting('logo_path') ?: '';
 $message = '';
 
+// Handle the POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Handle site name update
     $newSiteName = trim($_POST['site_name']);
     if (!empty($newSiteName)) {
-        set_setting('site_name', $newSiteName);
+        set_setting('site_name', $newSiteName); // Call function from functions.php
         $siteName = $newSiteName;
         $message .= "✅ Site name updated.<br>";
     }
 
+    // Handle logo upload
     if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         if (!in_array($_FILES['logo']['type'], $allowedTypes)) {
@@ -29,8 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $publicPath = 'uploads/' . $uniqueName;
 
             if (move_uploaded_file($_FILES['logo']['tmp_name'], $targetPath)) {
+                // Update the logo path in the database
                 set_setting('logo_path', $publicPath);
-                $logoPath = $publicPath;
+                $logoPath = $publicPath; // Update logo path
                 $message .= "✅ Logo uploaded successfully.<br>";
             } else {
                 $message .= "❌ Error uploading logo.<br>";
@@ -39,13 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($siteName); ?> - Admin Settings</title>
-    
-    <!-- ✅ Embedded CSS directly in the PHP file -->
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;

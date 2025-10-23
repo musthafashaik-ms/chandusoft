@@ -7,6 +7,7 @@ require_once __DIR__ . '/../app/functions.php';
 
 
 $siteName = get_setting('site_name') ?: 'Chandusoft';
+$logoPath = get_setting('logo_path') ?: 'uploads/default-logo.png';
 $metaDescription = get_setting('meta_description') ?: 'Chandusoft provides IT & BPO services.';
 $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusoft';
 ?>

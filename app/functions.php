@@ -12,9 +12,8 @@ function get_setting($key) {
     try {
         $stmt = $pdo->prepare("SELECT value FROM site_settings WHERE `key` = ?");
         $stmt->execute([$key]);
-        return $stmt->fetchColumn() ?: '';  // Return value or an empty string if not found
+        return $stmt->fetchColumn() ?: '';
     } catch (PDOException $e) {
-        // Log the error and return an empty string
         error_log("Error fetching setting '$key': " . $e->getMessage());
         return '';
     }
@@ -30,19 +29,18 @@ function get_setting($key) {
 function set_setting($key, $value) {
     global $pdo;
     try {
-        // Insert or update the setting value
         $stmt = $pdo->prepare("
-            INSERT INTO site_settings (`key`, `value`)
-            VALUES (?, ?)
-            ON DUPLICATE KEY UPDATE value = VALUES(value)
+            INSERT INTO site_settings (`key`, `value`, created_at, updated_at)
+            VALUES (?, ?, NOW(), NOW())
+            ON DUPLICATE KEY UPDATE `value` = VALUES(`value`), updated_at = NOW()
         ");
         return $stmt->execute([$key, $value]);
     } catch (PDOException $e) {
-        // Log the error and return false
-        error_log("Error setting key '$key': " . $e->getMessage());
+        error_log("Error saving setting '$key': " . $e->getMessage());
         return false;
     }
 }
+
 
 /**
  * Ensure the `site_settings` table exists with necessary columns and constraints.
@@ -53,8 +51,11 @@ function ensure_site_settings_table() {
         // Create the table if it doesn't exist
         $stmt = $pdo->prepare("
             CREATE TABLE IF NOT EXISTS site_settings (
-                `key` VARCHAR(255) PRIMARY KEY,  -- Ensure 'key' is unique
-                `value` TEXT NOT NULL            -- The value associated with the setting
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                `key` VARCHAR(255) NOT NULL UNIQUE,  -- Ensure 'key' is unique
+                `value` TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )
         ");
         $stmt->execute();
@@ -63,6 +64,58 @@ function ensure_site_settings_table() {
         error_log("Error ensuring site_settings table: " . $e->getMessage());
     }
 }
+
+/**
+ * Update a setting value by its key.
+ *
+ * @param string $key The setting key.
+ * @param string $value The setting value.
+ * @return bool Returns true on success, false on failure.
+ */
+// Update this part in the functions.php file
+
+function update_site_setting($key, $value) {
+    global $pdo;
+
+    // Make sure the $key is a valid column name in the table
+    $validKeys = ['site_name', 'logo_path']; // List all valid columns
+
+    if (!in_array($key, $validKeys)) {
+        throw new Exception("Invalid setting key: $key");
+    }
+
+    // Check if the setting exists in the database
+    $stmt = $pdo->prepare("SELECT * FROM site_settings WHERE id = 1");
+    $stmt->execute();
+    $existingSetting = $stmt->fetch();
+
+    if ($existingSetting) {
+        // Update the setting
+        $updateStmt = $pdo->prepare("UPDATE site_settings SET $key = ?, updated_at = NOW() WHERE id = 1");
+        $updateStmt->execute([$value]);
+    } else {
+        // Insert the new setting (first-time setup)
+        if ($key === 'site_name') {
+            $insertStmt = $pdo->prepare("INSERT INTO site_settings (site_name, logo_path, created_at, updated_at) VALUES (?, '', NOW(), NOW())");
+            $insertStmt->execute([$value]);
+        } else if ($key === 'logo_path') {
+            $insertStmt = $pdo->prepare("INSERT INTO site_settings (site_name, logo_path, created_at, updated_at) VALUES ('', ?, NOW(), NOW())");
+            $insertStmt->execute([$value]);
+        }
+    }
+}
+
+
+/**
+ * Ensure the uploads directory exists.
+ */
+function ensure_uploads_directory() {
+    $uploadDir = __DIR__ . '/../uploads/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+}
+
 
 /**
  * Check if GD and WebP support are available for image manipulation.

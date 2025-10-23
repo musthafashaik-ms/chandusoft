@@ -37,11 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
                 $uniqueName = 'catalog_' . time() . '.' . $ext;
 
-                $uploadDir = __DIR__ . '/../uploads/';
-                if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+                // Generate the directory path based on current year/month
+                $year = date('Y');
+                $month = date('m');
+                $uploadDir = __DIR__ . '/../uploads/' . $year . '/' . $month . '/';
+
+                // Create the directory if it doesn't exist
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
 
                 $target = $uploadDir . $uniqueName;
-                $publicPath = 'uploads/' . $uniqueName;
+                $publicPath = 'uploads/' . $year . '/' . $month . '/' . $uniqueName;
 
                 // Move the uploaded file
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
@@ -62,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     // Generate WebP version (but don't save it to database)
                     $webpName = pathinfo($uniqueName, PATHINFO_FILENAME) . '.webp';
-                    $webpPath = 'uploads/' . $webpName;
+                    $webpPath = 'uploads/' . $year . '/' . $month . '/' . $webpName;
                     $webpTarget = $uploadDir . $webpName;
 
                     // Resize WebP image to the same size as the resized image (if resized)
@@ -112,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
