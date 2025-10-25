@@ -75,3 +75,12 @@
 [2025-10-22 05:16:21] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
 [2025-10-22 05:16:50] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
 [2025-10-22 05:18:37] DB insert failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'submitted_at' in 'field list'
+[2025-10-24 09:50:50] CSRF token invalid for email: admin@example.com | IP: 127.0.0.1
+[2025-10-24 11:01:24] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-24 11:01:28] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-24 11:01:33] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-24 11:01:38] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-24 11:01:43] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-24 11:02:02] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-24 11:02:24] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-24 11:03:49] CSRF token invalid for email:  | IP: 127.0.0.1

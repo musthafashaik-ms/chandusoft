@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-     <div id="header"></div>
-     <?php include("header.php"); ?>
+     <!-- Correct file path to header.php in the admin folder -->
+    <?php include __DIR__ . '/admin/header.php'; ?>
     <main>
 <section id="Services">
     <h2 style="color: #2d5be3;">Our Services</h2>
@@ -55,8 +55,8 @@
     </div>
 </section>
 </main>
-    <div id="footer"></div>
-    <?php include("footer.php"); ?>
+     <?php include __DIR__ . '/admin/footer.php'; ?>
+
  <script src="include.js"></script>
    
 </body>

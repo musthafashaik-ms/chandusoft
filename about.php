@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <!-- Placeholder for dynamic header -->
-    <div id="header"></div>
-    <?php include("header.php"); ?>
+
+    <!-- Correct file path to header.php in the admin folder -->
+    <?php include __DIR__ . '/admin/header.php'; ?>
 
     <main>
         <h4><span class="section-title">About Us</span></h4>
@@ -27,8 +27,8 @@
         </p>
     </main>
 
-    <!-- Placeholder for dynamic footer -->
-    <div id="footer"></div>
-     <?php include("footer.php"); ?>
+    <!-- Correct file path to footer.php in the admin folder -->
+    <?php include __DIR__ . '/admin/footer.php'; ?>
+
 </body>
 </html>

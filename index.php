@@ -2,8 +2,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/../app/config.php';
-require_once __DIR__ . '/../app/functions.php';
+require_once __DIR__ . '/app/config.php';
+require_once __DIR__ . '/app/functions.php';
 
 
 $siteName = get_setting('site_name') ?: 'Chandusoft';
@@ -14,7 +14,7 @@ $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusof
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,8 +25,9 @@ $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusof
 </head>
 <body>
 
-    <!-- Header -->
-    <?php include("header.php"); ?>
+      <!-- Include the header.php from the admin folder -->
+    <?php include __DIR__ . '/admin/header.php'; ?>
+
 
     <main>
         <?php
@@ -78,7 +79,7 @@ $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusof
         ?>
     </main>
 
-    <?php include("footer.php"); ?>
+   <?php include __DIR__ . '/admin/footer.php'; ?>
 
     <button id="back-to-top" title="Back to Top">↑</button>
     <script src="include.js"></script>

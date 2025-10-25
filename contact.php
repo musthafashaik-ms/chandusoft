@@ -1,7 +1,8 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require '../vendor/autoload.php'; // Ensure correct path to autoload
+
+require 'vendor/autoload.php';  // Correct path to autoload
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // --- DB CONNECTION ---
@@ -25,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // --- INSERT INTO DB ---
     $sql = "INSERT INTO leads (name, email, message) VALUES ('$name', '$email', '$message')";
     if ($conn->query($sql) === TRUE) {
-
         // --- SEND EMAIL ---
         $mail = new PHPMailer(true);
         try {
@@ -45,9 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Email content
             $mail->isHTML(true);
-        $subject = "New Contact Form Submission"; // ✅ Define subject here
-         $mail->Subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
- 
+            $subject = "New Contact Form Submission"; // ✅ Define subject here
+            $mail->Subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
+
             $mail->Body = "
                 <h3>🚀New Lead Submission</h3>
                 <p><strong>Name:</strong> {$name}</p>
@@ -98,10 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-    <!-- Header (loaded dynamically) -->
-    <div id="header"></div>
-    <?php include("header.php"); ?>
-
+    <!-- Correct file path to header.php in the admin folder -->
+    <?php include __DIR__ . '/admin/header.php'; ?>
     <main>
         <h2>Contact Us</h2>
         <form id="contactForm" class="contact-form" action="contact.php" method="post" novalidate>
@@ -125,9 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </main>
 
-    <!-- Footer (loaded dynamically) -->
-    <div id="footer"></div>
-    <?php include("footer.php"); ?>
+    <?php include __DIR__ . '/admin/footer.php'; ?>
+
 
     <!-- Include JS (header, footer, back to top, etc.) -->
     <script src="include.js"></script>

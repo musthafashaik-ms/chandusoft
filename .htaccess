@@ -1,0 +1,87 @@
+# ======================================================
+# Chandusoft - Unified .htaccess
+# Clean URLs for Frontend, Admin, App, and Public folders
+# ======================================================
+
+RewriteEngine On
+RewriteBase /
+
+# ------------------------------------------------------
+# 1️⃣ Serve existing files and directories directly
+# ------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ------------------------------------------------------
+# 2️⃣ FRONTEND ROUTES (Root level)
+# ------------------------------------------------------
+
+# --- Clean URLs (no .php) ---
+RewriteRule ^about/?$ about.php [L,QSA]
+RewriteRule ^services/?$ services.php [L,QSA]
+RewriteRule ^contact/?$ contact.php [L,QSA]
+RewriteRule ^(index)?/?$ index.php [L,QSA]
+
+# Dynamic pages from DB (e.g. /some-page)
+RewriteRule ^([^/]+)$ index.php?page=$1 [L,QSA]
+
+# --- Redirect .php → clean URL (frontend) ---
+RewriteCond %{THE_REQUEST} \s/+((about|services|contact|index)\.php)[\s?]
+RewriteRule ^(about|services|contact|index)\.php$ /$1 [R=301,L]
+
+# ------------------------------------------------------
+# 3️⃣ ADMIN ROUTES
+# ------------------------------------------------------
+
+# --- Custom explicit admin routes ---
+RewriteRule ^admin/catalog-list$ admin/catalog-list.php [L,QSA]
+RewriteRule ^admin/catalog-create$ admin/catalog-create.php [L,QSA]
+RewriteRule ^admin/catalog-edit/([0-9]+)$ admin/catalog-edit.php?id=$1 [L,QSA]
+RewriteRule ^admin/catalog-archive$ admin/catalog-archive.php [L,QSA]
+RewriteRule ^admin/catalog-store$ admin/catalog-store.php [L,QSA]
+RewriteRule ^admin/catalog-new$ admin/catalog-new.php [L,QSA]
+RewriteRule ^admin/login$ admin/login.php [L,QSA]
+
+# --- Generic admin routing (catch-all) ---
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^admin/([^/]+)/?$ admin/$1.php [L,QSA]
+
+# --- Redirect .php → clean URL (admin) ---
+RewriteCond %{THE_REQUEST} \s/+admin/([^/]+)\.php[\s?]
+RewriteRule ^admin/%1\.php$ admin/%1 [R=301,L]
+
+# ------------------------------------------------------
+# 4️⃣ APP ROUTES
+# ------------------------------------------------------
+
+RewriteRule ^app/dashboard$ app/dashboard.php [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^app/([^/]+)/?$ app/$1.php [L,QSA]
+
+# --- Redirect .php → clean URL (app) ---
+RewriteCond %{THE_REQUEST} \s/+app/([^/]+)\.php[\s?]
+RewriteRule ^app/%1\.php$ app/%1 [R=301,L]
+
+# ------------------------------------------------------
+# 5️⃣ PUBLIC ROUTES
+# ------------------------------------------------------
+
+# --- Clean URLs ---
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^public/([^/]+)/?$ public/$1.php [L,QSA]
+
+# --- Catalog item with slug ---
+RewriteRule ^public/catalog-item/?$ public/catalog-item.php [L,QSA]
+RewriteCond %{QUERY_STRING} ^slug=([^\&]+)$
+RewriteRule ^public/catalog-item$ public/catalog-item.php?slug=%1 [L,QSA]
+
+# --- Redirect .php → clean URL (public) ---
+RewriteCond %{THE_REQUEST} \s/+public/([^/]+)\.php[\s?]
+RewriteRule ^public/%1\.php$ public/%1 [R=301,L]
+
+# ------------------------------------------------------
+# 6️⃣ 404 ERROR PAGE
+# ------------------------------------------------------
+ErrorDocument 404 /404.php

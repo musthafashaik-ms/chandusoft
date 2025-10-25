@@ -30,8 +30,8 @@ if ($logoPath) {
     <nav>
         <a href="index.php"><b>Home</b></a>
         <a href="about.php"><b>About</b></a>
-        <a href="services"><b>Services</b></a>
-        <a href="contact"><b>Contact</b></a>
+        <a href="services.php"><b>Services</b></a>
+        <a href="contact.php"><b>Contact</b></a>
 
         <?php
         try {
@@ -39,7 +39,7 @@ if ($logoPath) {
             $navStmt = $pdo->query("SELECT title, slug FROM pages WHERE status = 'published'");
             foreach ($navStmt->fetchAll(PDO::FETCH_ASSOC) as $p) {
                 // Output link with slug, make sure to sanitize it
-                echo '<a href="' . htmlspecialchars($p['slug']) . '">' . htmlspecialchars($p['title']) . '</a>';
+echo '<a href="/' . htmlspecialchars($p['slug']) . '">' . htmlspecialchars($p['title']) . '</a>';
             }
         } catch (PDOException $e) {
             // In case of any errors, we can log them or display a comment
