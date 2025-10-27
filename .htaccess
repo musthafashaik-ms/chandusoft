@@ -39,17 +39,23 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^public/catalog/?$ public/catalog.php [L,QSA]
 RewriteRule ^public/catalog/page/([0-9]+)/?$ public/catalog.php?page=$1 [L,QSA]
 RewriteRule ^public/catalog-item/?$ public/catalog-item.php [L,QSA]
+RewriteRule ^public/send-enquiry/?$ public/send-enquiry.php [L,QSA]
 
-# Generic page routes (about, contact, etc.)
+
+# ------------------------------------------------------------
+# ⚙️ Generic Page Routes (index, about, services, contact)
+# ------------------------------------------------------------
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L,QSA]
+RewriteRule ^(index|about|services|contact)$ $1.php [L,QSA]
 
-# Dynamic pages (from DB via slug)
+# ------------------------------------------------------------
+# ⚡ Dynamic Pages via Slug (from DB via slug)
+# ------------------------------------------------------------
+# All other slugs go to layout.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9_-]+)$ views/page.php?slug=$1 [L,QSA]
-
+RewriteRule ^([a-zA-Z0-9_-]+)$ views/layout.php?page=$1 [L,QSA]
 
 # Admin routes
 RewriteRule ^admin/login/?$ admin/login.php [L,QSA]

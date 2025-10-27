@@ -9,6 +9,7 @@ error_log('Product received: ' . ($_POST['product'] ?? 'NOT SET'));
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    error_log("Request method: " . $_SERVER['REQUEST_METHOD']);  // Log the request method
     http_response_code(405);
     exit("Method Not Allowed");
 }
@@ -22,19 +23,20 @@ $token   = $_POST['cf-turnstile-response'] ?? '';
 
 // Validate token presence
 if (!$token) {
+    error_log("Turnstile token is missing");
     http_response_code(400);
     exit("Turnstile verification failed: no token.");
 }
 
 // Validate other form data
 if (!$name || !$email || !$message || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    error_log("Invalid form data: Name: $name, Email: $email, Message: $message");
     http_response_code(400);
     exit("Invalid form data.");
 }
 
 // Verify Turnstile token using cURL
 $ch = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
-
 $postFields = http_build_query([
     'secret' => $TURNSTILE_SECRET,
     'response' => $token,
@@ -65,6 +67,7 @@ if ($httpCode !== 200) {
 $captchaResult = json_decode($response, true);
 
 if (empty($captchaResult['success'])) {
+    error_log("Turnstile verification failed");
     http_response_code(403);
     exit("Turnstile verification failed.");
 }
@@ -80,7 +83,7 @@ try {
 }
 
 // Send notification email
-$to = "musthafa.shaik@chandusoft.com";
+$to = "musthafa.shaik@chandusoft.com"; // Change this to your desired email address
 $subject = "New product enquiry: $product";
 $body = <<<EMAIL
 You received a new enquiry.
@@ -94,12 +97,15 @@ $message
 EMAIL;
 
 $headers = [
-    'From' => 'no-reply@yourdomain.com',
+    'From' => 'no-reply@yourdomain.com', // Change this to your sender's email
     'Reply-To' => $email,
     'Content-Type' => 'text/plain; charset=UTF-8'
 ];
 
-mail($to, $subject, $body, implode("\r\n", $headers));
+if (!mail($to, $subject, $body, implode("\r\n", $headers))) {
+    error_log("Failed to send email notification.");
+}
 
 // Success response
 echo "✅ Thank you! Your enquiry has been sent.";
+?>

@@ -110,10 +110,16 @@ $draftPages = $draftPagesResult->fetch_assoc()['count'];
     <div><strong>Chandusoft Admin</strong></div>
     <div class="links">
         Welcome <?= $role ?>!
-        <a href="/app/dashboard">Dashboard</a>
-        <a href="/admin/admin-leads">Leads</a>
-        <a href="/admin/pages">Pages</a>
-        <a href="/admin/logout">Logout</a>
+        <a href="/app/dashboard.php">Dashboard</a>
+         <!-- Dynamic catalog link based on user role -->
+    <?php if ($role === 'Admin'): ?>
+        <a href="/admin/catalog.php">Admin Catalog</a>
+    <?php elseif ($role === 'Editor'): ?>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php endif; ?>
+        <a href="/admin/admin-leads.php">Leads</a>
+        <a href="/admin/pages.php">Pages</a>
+        <a href="/admin/logout.php">Logout</a>
 
     </div>
 </div>

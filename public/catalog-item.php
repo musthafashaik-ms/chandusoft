@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
 
-// 🔍 For debug: show sitekey value in HTML comment
+// 🔍 For debugging: display sitekey in HTML comment
 echo "<!-- SITEKEY: " . htmlspecialchars(getenv('TURNSTILE_SITE')) . " -->";
 
-$slug = $_GET['slug'] ?? '';
+$slug = $_GET['slug'] ?? '';  // Slug is the unique identifier for the product
 $stmt = $pdo->prepare("SELECT * FROM catalog WHERE slug = ? AND status = 'published' LIMIT 1");
 $stmt->execute([$slug]);
 $item = $stmt->fetch();
@@ -15,7 +15,7 @@ if (!$item) {
     exit;
 }
 
-// Turnstile site key fallback for dev
+// Turnstile site key fallback for development
 $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
 ?>
 <!DOCTYPE html>
@@ -80,47 +80,46 @@ $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
 
         form {
          background: #f8f8f8;
-         padding: 12px; /* Reduced padding */
+         padding: 12px;
          border-radius: 8px;
          margin-top: 30px;
          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-         position: relative; /* Needed for positioning the button */
-         width: 80%; /* Reduce the width to make the form smaller */
-         max-width: 600px; /* Set a max width for larger screens */
-         margin-left: auto; /* Center the form horizontally */
-         margin-right: auto; /* Center the form horizontally */
+         position: relative;
+         width: 80%;
+         max-width: 600px;
+         margin-left: auto;
+         margin-right: auto;
         }
 
        form input,
           form textarea {
          width: 100%;
-         padding: 8px 0px; /* Reduced padding for a smaller input field */
-         margin: 8px 0; /* Reduced margin for a tighter layout */
+         padding: 8px 0px;
+         margin: 8px 0;
          border: 1px solid #ccc;
          border-radius: 4px;
-         font-size: 0.9em; /* Smaller font size */
+         font-size: 0.9em;
        }
 
- /* Smaller Send Enquiry button */
         form button {
         background: #007BFF;
         color: white;
-        padding: 6px 12px; /* Smaller padding */
+        padding: 6px 12px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        width: auto; /* Set width to auto for smaller size */
-        font-size: 0.9em; /* Smaller font size */
-        position: absolute; /* Absolute position to move it to the left corner */
-        bottom: 10px; /* Reduced distance from the bottom */
-        left: 10px; /* Position it at the left side */
+        width: auto;
+        font-size: 0.9em;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
         display: inline-block;
        }
 
- /* Hover effect for Send Enquiry button */
        form button:hover {
         background: #0056b3;
        }
+       
        .cf-turnstile {
         margin: 30px 0;
         }
@@ -162,11 +161,11 @@ $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
 
 <!-- ✅ Enquiry Form -->
 <h2>Enquire about this product</h2>
-<form id="enquiry-form" method="post" action="send-enquiry.php">
+<form id="enquiry-form" method="POST" action="/public/send-enquiry.php">
     <input type="hidden" name="product" value="<?= htmlspecialchars($item['title']) ?>">
-    <input type="text" name="name" placeholder=" Your name" required>
-    <input type="email" name="email" placeholder=" Your email" required>
-    <textarea name="message" placeholder=" Your message" rows="4" required></textarea>
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your email" required>
+    <textarea name="message" placeholder="Your message" rows="4" required></textarea>
 
     <!-- ✅ Turnstile Widget -->
     <div class="cf-turnstile"
@@ -174,12 +173,11 @@ $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
          data-theme="light">
     </div>
 
-    <!-- Smaller Send Enquiry Button -->
     <button type="submit">Send Enquiry</button>
 </form>
 
 <!-- ✅ Back to Catalog Button -->
-<a href="catalog.php" class="back-to-catalog">Back to Catalog</a>
+<a href="/public/catalog.php" class="back-to-catalog">Back to Catalog</a>
 
 </body>
 </html>

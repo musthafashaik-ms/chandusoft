@@ -178,3 +178,9 @@
 [2025-10-27 04:12:39] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
 [2025-10-27 04:14:12] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
 [2025-10-27 04:16:24] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 07:28:04][ERROR] CSRF token invalid for email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 07:28:04][ERROR] Session CSRF token: 319cf714134044cb56e4f3fb5a09917d874ea5d7b3607536df4e4e562ba177bc | IP: 127.0.0.1
+[2025-10-27 07:28:04][ERROR] Form CSRF token: 9f8f2b0bd8cb23f0f45171638426ad9e6dc5560b89c6965f297d12f593b25992 | IP: 127.0.0.1
+[2025-10-27 10:20:10][ERROR] CSRF token invalid for email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 10:20:10][ERROR] Session CSRF token: 1c4474e6629493571a20f56417f71074690c5c0a81251c9e6e50ff9b6c82107b | IP: 127.0.0.1
+[2025-10-27 10:20:10][ERROR] Form CSRF token: 6814ed109eac8e9036ca4cd359b51cac7e6d8f750f6d8c1e87cd60315d629990 | IP: 127.0.0.1

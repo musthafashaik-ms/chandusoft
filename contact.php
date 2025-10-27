@@ -45,18 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Email content
             $mail->isHTML(true);
-            $subject = "New Contact Form Submission"; // ✅ Define subject here
+            $subject = "New Contact Form Submission";
             $mail->Subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
 
             $mail->Body = "
-                <h3>🚀New Lead Submission</h3>
+                <h3>🚀 New Lead Submission</h3>
                 <p><strong>Name:</strong> {$name}</p>
                 <p><strong>Email:</strong> {$email}</p>
                 <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
             ";
 
             $mail->send();
-            echo "success";  // Send back success response
+            echo "success";  // Email sent, return success message
             exit;
 
         } catch (Exception $e) {
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
     } else {
-        echo "❌ Database insert error.";
+        echo "❌ Database insert error.";  // Provide more details if DB insert fails
         exit;
     }
 }
@@ -132,129 +132,73 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <!-- Form Validation and Handling Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('contactForm');
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const messageInput = document.getElementById('message');
-            const submitBtn = document.getElementById('submitBtn');
+    const form = document.getElementById('contactForm');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
 
-            const nameError = document.getElementById('nameError');
-            const emailError = document.getElementById('emailError');
-            const messageError = document.getElementById('messageError');
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
 
-            // ✅ Success message element
-            const successMessage = document.createElement("div");
-            successMessage.id = "successMessage";
-            successMessage.style.color = "green";
-            successMessage.style.fontWeight = "bold";
-            successMessage.style.marginTop = "15px";
+    // Success message element
+    const successMessage = document.createElement("div");
+    successMessage.id = "successMessage";
+    successMessage.style.color = "green";
+    successMessage.style.fontWeight = "bold";
+    successMessage.style.marginTop = "15px";
+    successMessage.style.display = "none";
+    successMessage.textContent = "✅ Successfully submitted!";
+    form.insertAdjacentElement("afterend", successMessage);
+
+    // Error message element
+    const errorMessage = document.createElement("div");
+    errorMessage.id = "errorMessage";
+    errorMessage.style.color = "red";
+    errorMessage.style.fontWeight = "bold";
+    errorMessage.style.marginTop = "15px";
+    errorMessage.style.display = "none";
+    errorMessage.textContent = "❌ Something went wrong. Please check your input.";
+    form.insertAdjacentElement("afterend", errorMessage);
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch("contact.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+            if (result === "success") {
+                errorMessage.style.display = "none";
+                successMessage.style.display = "block";
+                form.reset();
+                submitBtn.disabled = true;
+
+                // Hide success message after 10 seconds
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 10000);
+            } else {
+                successMessage.style.display = "none";
+                errorMessage.style.display = "block";
+                setTimeout(() => {
+                    errorMessage.style.display = "none";
+                }, 10000);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
             successMessage.style.display = "none";
-            successMessage.textContent = "✅ Successfully submitted!";
-            form.insertAdjacentElement("afterend", successMessage);
-
-            // ❌ Error message element
-            const errorMessage = document.createElement("div");
-            errorMessage.id = "errorMessage";
-            errorMessage.style.color = "red";
-            errorMessage.style.fontWeight = "bold";
-            errorMessage.style.marginTop = "15px";
-            errorMessage.style.display = "none";
-            errorMessage.textContent = "❌ Something went wrong. Please check your input.";
-            form.insertAdjacentElement("afterend", errorMessage);
-
-            function validateName() {
-                const name = nameInput.value.trim();
-                if (name === "") {
-                    nameError.textContent = "Name is required.";
-                    return false;
-                } else if (!/^[A-Za-z\s]+$/.test(name)) {
-                    nameError.textContent = "Only letters and spaces allowed.";
-                    return false;
-                } else {
-                    nameError.textContent = "";
-                    return true;
-                }
-            }
-
-            function validateEmail() {
-                const email = emailInput.value.trim();
-                const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,6}$/i;
-                if (email === "") {
-                    emailError.textContent = "Email is required.";
-                    return false;
-                } else if (!emailPattern.test(email)) {
-                    emailError.textContent = "Invalid email format.";
-                    return false;
-                } else {
-                    emailError.textContent = "";
-                    return true;
-                }
-            }
-
-            function validateMessage() {
-                const message = messageInput.value.trim();
-                if (message === "") {
-                    messageError.textContent = "Message cannot be empty.";
-                    return false;
-                } else {
-                    messageError.textContent = "";
-                    return true;
-                }
-            }
-
-            function validateForm() {
-                const isNameValid = validateName();
-                const isEmailValid = validateEmail();
-                const isMessageValid = validateMessage();
-                submitBtn.disabled = !(isNameValid && isEmailValid && isMessageValid);
-            }
-
-            // Attach real-time validation
-            nameInput.addEventListener('input', () => { validateName(); validateForm(); });
-            emailInput.addEventListener('input', () => { validateEmail(); validateForm(); });
-            messageInput.addEventListener('input', () => { validateMessage(); validateForm(); });
-
-            // Submit handler
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                if (!submitBtn.disabled) {
-                    const formData = new FormData(form);
-
-                    fetch("contact.php", {
-                        method: "POST",
-                        body: formData
-                    })
-                    .then(response => response.text())
-                    .then(result => {
-                        // If the result is "success", display the success message
-                        if (result === "success") {
-                            errorMessage.style.display = "none";
-                            successMessage.style.display = "block";
-                            form.reset();
-                            submitBtn.disabled = true;
-
-                            // Hide success message after 10 seconds
-                            setTimeout(() => {
-                                successMessage.style.display = "none";
-                            }, 10000);
-                        } else {
-                            // If there's an error message, show the error message
-                            successMessage.style.display = "none";
-                            errorMessage.style.display = "block";
-                            setTimeout(() => {
-                                errorMessage.style.display = "none";
-                            }, 10000);
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        successMessage.style.display = "none";
-                        errorMessage.style.display = "block";
-                    });
-                }
-            });
+            errorMessage.style.display = "block";
         });
+    });
+});
+
     </script>
 </body>
 </html>
