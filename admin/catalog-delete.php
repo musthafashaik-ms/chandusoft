@@ -1,26 +1,19 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
-
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: catalog.php");
-    exit;
+require_once __DIR__ . '/../app/logger.php';
+ 
+$id = $_GET['id'] ?? 0;
+$stmt = $pdo->prepare("UPDATE catalog SET status='archived', updated_at=NOW() WHERE id=?");
+$success = $stmt->execute([$id]);
+ 
+if ($success) {
+    log_catalog("🗃️ Archived catalog item #$id", 'ARCHIVE');
+} else {
+    log_catalog("❌ Failed to archive item #$id", 'ERROR');
 }
-
-$id = (int)$_GET['id'];
-
-// Check if item exists
-$check = $pdo->prepare("SELECT * FROM catalog WHERE id = ?");
-$check->execute([$id]);
-$item = $check->fetch();
-
-if (!$item) {
-    die("Item not found.");
-}
-
-// Archive the item instead of deleting
-$stmt = $pdo->prepare("UPDATE catalog SET status = 'archived' WHERE id = ?");
-$stmt->execute([$id]);
-
-// ✅ Redirect to archived page
-header("Location: catalog-archived.php");
+ 
+header("Location: catalog.php");
 exit;
+?>
+ 
+ 

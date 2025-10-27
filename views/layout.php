@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($pageData['title'] ?? 'Untitled Page') ?></title>
+    <title><?= htmlspecialchars($page['title'] ?? 'Untitled Page') ?></title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Your navigation and header section -->
+    <!-- Navigation and header -->
     <?php include __DIR__ . '/header.php'; ?>
 
     <!-- Main content -->
     <main>
-        <?= $content; ?>
+        <h1><?= htmlspecialchars($page['title']) ?></h1>
+        <div>
+            <?= $page['content_html'] ?>
+        </div>
     </main>
 
-    <!-- Your footer section (if applicable) -->
+    <!-- Footer -->
     <?php include __DIR__ . '/footer.php'; ?>
 
 </body>

@@ -1,30 +1,39 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
 
-// ✅ Public Catalog List (only published items)
 $search = trim($_GET['search'] ?? '');
-$page = max(1, intval($_GET['page'] ?? 1));
-$limit = 9;
-$offset = ($page - 1) * $limit;
 
-$where = "WHERE status = 'published'";
-$params = [];
+// Check for problematic inputs (e.g., 1=1 or %)
+if (in_array($search, ['1=1', '%'])) {
+    $items = [];  // No items will be returned
+    $total = 0;   // Total count will be 0
+    $totalPages = 1;  // Ensure pagination still works, even if no items
+} else {
+    // Basic input validation (e.g., no SQL characters)
+    $search = preg_replace('/[^a-zA-Z0-9\s]/', '', $search);  // Allow only alphanumeric and spaces
+    $page = max(1, intval($_GET['page'] ?? 1));
+    $limit = 9;
+    $offset = ($page - 1) * $limit;
 
-if ($search) {
-    $where .= " AND title LIKE ?";
-    $params[] = "%$search%";
+    $where = "WHERE status = 'published'";
+    $params = [];
+
+    if ($search) {
+        $where .= " AND title LIKE ?";
+        $params[] = "%$search%";
+    }
+
+    // Count total
+    $countStmt = $pdo->prepare("SELECT COUNT(*) FROM catalog $where");
+    $countStmt->execute($params);
+    $total = $countStmt->fetchColumn();
+    $totalPages = ceil($total / $limit);
+
+    // Fetch paginated items
+    $stmt = $pdo->prepare("SELECT * FROM catalog $where ORDER BY created_at DESC LIMIT $offset, $limit");
+    $stmt->execute($params);
+    $items = $stmt->fetchAll();
 }
-
-// Count total
-$countStmt = $pdo->prepare("SELECT COUNT(*) FROM catalog $where");
-$countStmt->execute($params);
-$total = $countStmt->fetchColumn();
-$totalPages = ceil($total / $limit);
-
-// Fetch paginated items
-$stmt = $pdo->prepare("SELECT * FROM catalog $where ORDER BY created_at DESC LIMIT $offset, $limit");
-$stmt->execute($params);
-$items = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">

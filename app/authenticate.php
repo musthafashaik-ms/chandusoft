@@ -1,4 +1,12 @@
 <?php
+session_set_cookie_params([
+    'path' => '/',
+    'secure' => isset($_SERVER['HTTPS']),
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+session_start();
+
 // Include the logger
 require_once '../app/logger.php';
 
@@ -12,6 +20,9 @@ session_start();
 if (empty($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
     $_SESSION['login_errors'] = ['⛔ Security token invalid.'];
     log_error("CSRF token invalid for email: " . $_POST['email']);  // Log CSRF error
+    log_error("Session CSRF token: " . $_SESSION['csrf_token']);
+    log_error("Form CSRF token: " . $_POST['csrf_token']);
+
     header("Location: ../admin/login.php");
     exit();
 }
@@ -58,7 +69,7 @@ try {
             'role' => $user['role']
         ];
         $_SESSION['flash_success'] = "Login successful!";
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));  // Regenerate CSRF token
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));  // Reset the CSRF token
         header("Location: ../app/dashboard.php");
         exit();
     } else {

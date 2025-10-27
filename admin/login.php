@@ -1,23 +1,50 @@
 <?php
-ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
-ini_set('session.use_strict_mode', 1);
-session_start();
+// ============================================================
+// Chandusoft Admin Login (fixed session init)
+// ============================================================
 
-// Generate CSRF token if not already set
+// 1️⃣ Configure session *before* starting it
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_strict_mode', 1);
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
+session_set_cookie_params([
+    'path' => '/',
+    'secure' => isset($_SERVER['HTTPS']),
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
+// 2️⃣ Start the session (only once)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// 3️⃣ CSRF Token
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Save the old email input in case of failure
+// 4️⃣ Session timeout (30 minutes)
+$timeout_duration = 1800; // 30 minutes
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    header("Location: /admin/login");
+    exit();
+}
+$_SESSION['LAST_ACTIVITY'] = time();
+
+// 5️⃣ Retrieve old form data (if any)
 $old_email = $_SESSION['old_email'] ?? '';
-unset($_SESSION['old_email']); // Clear old email after it's used
+unset($_SESSION['old_email']);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     <style>
         body {
@@ -27,6 +54,7 @@ unset($_SESSION['old_email']); // Clear old email after it's used
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
         .container {
             background: #fff;
@@ -99,23 +127,27 @@ unset($_SESSION['old_email']); // Clear old email after it's used
         foreach ($_SESSION['login_errors'] as $error) {
             echo "<p class='message error'>" . htmlspecialchars($error) . "</p>";
         }
-        unset($_SESSION['login_errors']);
+        unset($_SESSION['login_errors']);  // Clear errors after displaying
     }
 
     if (isset($_SESSION['flash_success'])) {
         echo "<p class='message success'>" . htmlspecialchars($_SESSION['flash_success']) . "</p>";
-        unset($_SESSION['flash_success']);
+        unset($_SESSION['flash_success']);  // Clear after displaying
     }
     ?>
 
-    <form action="../app/authenticate.php" method="POST">
+    <!-- Login form -->
+    <form action="/app/authenticate" method="POST">
+
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?= htmlspecialchars($old_email) ?>" required>
 
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
 
+        <!-- CSRF token -->
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+
 
         <button type="submit">Login</button>
     </form>

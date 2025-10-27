@@ -1,87 +1,133 @@
-# ======================================================
-# Chandusoft - Unified .htaccess
-# Clean URLs for Frontend, Admin, App, and Public folders
-# ======================================================
+# ============================================================
+# Chandusoft Optimized .htaccess
+# Clean URLs + SEO + Performance (Mobile & Desktop)
+# ============================================================
 
+# Enable URL rewriting
 RewriteEngine On
 RewriteBase /
 
-# ------------------------------------------------------
-# 1️⃣ Serve existing files and directories directly
-# ------------------------------------------------------
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+# ------------------------------------------------------------
+# 🔒 1. SECURITY & ACCESS CONTROL
+# ------------------------------------------------------------
+# Hide sensitive files
+<FilesMatch "(^\.|config\.php|db\.php|logger\.php|helpers\.php|auth\.php)$">
+  Require all denied
+</FilesMatch>
 
-# ------------------------------------------------------
-# 2️⃣ FRONTEND ROUTES (Root level)
-# ------------------------------------------------------
+# Disable directory browsing
+Options -Indexes
 
-# --- Clean URLs (no .php) ---
-RewriteRule ^about/?$ about.php [L,QSA]
-RewriteRule ^services/?$ services.php [L,QSA]
-RewriteRule ^contact/?$ contact.php [L,QSA]
-RewriteRule ^(index)?/?$ index.php [L,QSA]
+# Protect .env or hidden files
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
 
-# Dynamic pages from DB (e.g. /some-page)
-RewriteRule ^([^/]+)$ index.php?page=$1 [L,QSA]
+# ------------------------------------------------------------
+# 🧭 2. CLEAN URL REWRITES (.php removal)
+# ------------------------------------------------------------
+# Redirect any .php requests to clean URL
+# (Skip critical endpoints like authenticate.php — prevents CSRF/session loss)
+RewriteCond %{REQUEST_URI} !^/app/authenticate\.php$
+RewriteCond %{REQUEST_URI} !^/app/register\.php$
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.php[\s?]
+RewriteRule ^ %1 [R=301,L]
 
-# --- Redirect .php → clean URL (frontend) ---
-RewriteCond %{THE_REQUEST} \s/+((about|services|contact|index)\.php)[\s?]
-RewriteRule ^(about|services|contact|index)\.php$ /$1 [R=301,L]
-
-# ------------------------------------------------------
-# 3️⃣ ADMIN ROUTES
-# ------------------------------------------------------
-
-# --- Custom explicit admin routes ---
-RewriteRule ^admin/catalog-list$ admin/catalog-list.php [L,QSA]
-RewriteRule ^admin/catalog-create$ admin/catalog-create.php [L,QSA]
-RewriteRule ^admin/catalog-edit/([0-9]+)$ admin/catalog-edit.php?id=$1 [L,QSA]
-RewriteRule ^admin/catalog-archive$ admin/catalog-archive.php [L,QSA]
-RewriteRule ^admin/catalog-store$ admin/catalog-store.php [L,QSA]
-RewriteRule ^admin/catalog-new$ admin/catalog-new.php [L,QSA]
-RewriteRule ^admin/login$ admin/login.php [L,QSA]
-
-# --- Generic admin routing (catch-all) ---
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^admin/([^/]+)/?$ admin/$1.php [L,QSA]
-
-# --- Redirect .php → clean URL (admin) ---
-RewriteCond %{THE_REQUEST} \s/+admin/([^/]+)\.php[\s?]
-RewriteRule ^admin/%1\.php$ admin/%1 [R=301,L]
-
-# ------------------------------------------------------
-# 4️⃣ APP ROUTES
-# ------------------------------------------------------
-
-RewriteRule ^app/dashboard$ app/dashboard.php [L,QSA]
-
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^app/([^/]+)/?$ app/$1.php [L,QSA]
-
-# --- Redirect .php → clean URL (app) ---
-RewriteCond %{THE_REQUEST} \s/+app/([^/]+)\.php[\s?]
-RewriteRule ^app/%1\.php$ app/%1 [R=301,L]
-
-# ------------------------------------------------------
-# 5️⃣ PUBLIC ROUTES
-# ------------------------------------------------------
-
-# --- Clean URLs ---
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^public/([^/]+)/?$ public/$1.php [L,QSA]
-
-# --- Catalog item with slug ---
+# Catalog routes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^public/catalog/?$ public/catalog.php [L,QSA]
+RewriteRule ^public/catalog/page/([0-9]+)/?$ public/catalog.php?page=$1 [L,QSA]
 RewriteRule ^public/catalog-item/?$ public/catalog-item.php [L,QSA]
-RewriteCond %{QUERY_STRING} ^slug=([^\&]+)$
-RewriteRule ^public/catalog-item$ public/catalog-item.php?slug=%1 [L,QSA]
 
-# --- Redirect .php → clean URL (public) ---
-RewriteCond %{THE_REQUEST} \s/+public/([^/]+)\.php[\s?]
-RewriteRule ^public/%1\.php$ public/%1 [R=301,L]
+# Generic page routes (about, contact, etc.)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L,QSA]
 
-# ------------------------------------------------------
-# 6️⃣ 404 ERROR PAGE
-# ------------------------------------------------------
+# Dynamic pages (from DB via slug)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)$ views/page.php?slug=$1 [L,QSA]
+
+
+# Admin routes
+RewriteRule ^admin/login/?$ admin/login.php [L,QSA]
+RewriteRule ^admin/logout/?$ admin/logout.php [L,QSA]
+RewriteRule ^admin/pages/?$ admin/pages.php [L,QSA]
+RewriteRule ^admin/admin-leads/?$ admin/admin-leads.php [L,QSA]
+RewriteRule ^admin/catalog/?$ admin/catalog.php [L,QSA]
+RewriteRule ^admin/catalog/new/?$ admin/catalog-new.php [L,QSA]
+RewriteRule ^admin/catalog/archived/?$ admin/catalog-archived.php [L,QSA]
+RewriteRule ^admin/catalog/(edit|delete|restore)/([0-9]+)/?$ admin/catalog-$1.php?id=$2 [L,QSA]
+
+# App routes (authentication and registration)
+# App routes
+RewriteRule ^app/authenticate/?$ app/authenticate.php [L,QSA]
+RewriteRule ^app/register/?$ app/register.php [L,QSA]
+RewriteRule ^app/register_handler/?$ app/register_handler.php [L,QSA]
+RewriteRule ^app/dashboard/?$ app/dashboard.php [L,QSA]
+
+# Admin fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin/([a-zA-Z0-9_-]+)$ admin/$1.php [L,QSA]
+
+# ------------------------------------------------------------
+# ⚡ 3. PERFORMANCE BOOST (CACHING + COMPRESSION)
+# ------------------------------------------------------------
+
+# Enable gzip / Brotli compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+<IfModule mod_brotli.c>
+  BrotliCompressionQuality 6
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache static assets aggressively
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Strong caching for immutable assets
+<FilesMatch "\.(js|css|png|jpg|jpeg|gif|webp|svg|woff2?)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+
+# Allow proper MIME type for WebP
+AddType image/webp .webp
+
+# Serve WebP automatically when available
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP_ACCEPT} image/webp
+  RewriteCond %{REQUEST_FILENAME} (.+)\.(jpe?g|png)$
+  RewriteCond %{DOCUMENT_ROOT}/%1.webp -f
+  RewriteRule ^(.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1,L]
+</IfModule>
+
+# ------------------------------------------------------------
+# 🚀 4. PRELOAD + SECURITY HEADERS
+# ------------------------------------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(woff2)$">
+    Header add Link "<%{REQUEST_URI}e>; rel=preload; as=font; crossorigin"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ------------------------------------------------------------
+# 🧩 5. ERROR HANDLING
+# ------------------------------------------------------------
 ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php

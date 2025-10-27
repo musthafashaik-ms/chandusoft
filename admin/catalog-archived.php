@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
-
+ 
 $stmt = $pdo->query("SELECT * FROM catalog WHERE status = 'archived' ORDER BY updated_at DESC");
 $archivedItems = $stmt->fetchAll();
 ?>
@@ -32,7 +32,7 @@ $archivedItems = $stmt->fetchAll();
     </div>
     <div><a href="/admin/logout.php">Logout</a></div>
 </div>
-
+ 
 <div class="container">
     <h1>Archived Catalog Items</h1>
     <table>
@@ -67,3 +67,4 @@ $archivedItems = $stmt->fetchAll();
 </div>
 </body>
 </html>
+ 

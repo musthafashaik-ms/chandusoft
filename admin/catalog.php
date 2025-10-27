@@ -1,34 +1,50 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
-
+require_once __DIR__ . '/../app/logger.php';
+ 
 // ✅ Pagination & Filters
 $perPage = 10;
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$statusFilter = isset($_GET['status']) && in_array($_GET['status'], ['published', 'archived', 'draft']) 
-    ? $_GET['status'] 
+$statusFilter = isset($_GET['status']) && in_array($_GET['status'], ['published', 'archived', 'draft'])
+    ? $_GET['status']
     : 'published';
-
+ 
 // ✅ Build WHERE clause
 $where = "WHERE status = ?";
 $params = [$statusFilter];
-
+ 
 if ($search) {
     $where .= " AND title LIKE ?";
     $params[] = "%$search%";
 }
-
+ 
 // ✅ Count total records
-$totalStmt = $pdo->prepare("SELECT COUNT(*) FROM catalog $where");
-$totalStmt->execute($params);
-$total = $totalStmt->fetchColumn();
+try {
+    $totalStmt = $pdo->prepare("SELECT COUNT(*) FROM catalog $where");
+    $totalStmt->execute($params);
+    $total = $totalStmt->fetchColumn();
+} catch (Exception $e) {
+    log_error("Failed to count catalog records: " . $e->getMessage(), "ERROR");
+    $total = 0;
+}
+ 
 $totalPages = max(1, ceil($total / $perPage));
-
+ 
 // ✅ Fetch paginated data
 $offset = ($page - 1) * $perPage;
-$stmt = $pdo->prepare("SELECT * FROM catalog $where ORDER BY created_at DESC LIMIT $offset, $perPage");
-$stmt->execute($params);
-$items = $stmt->fetchAll();
+try {
+    $stmt = $pdo->prepare("SELECT * FROM catalog $where ORDER BY created_at DESC LIMIT $offset, $perPage");
+    $stmt->execute($params);
+    $items = $stmt->fetchAll();
+} catch (Exception $e) {
+    log_error("Failed to fetch catalog records: " . $e->getMessage(), "ERROR");
+    $items = [];
+}
+ 
+// ✅ Log view
+log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$search'");
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +58,7 @@ $items = $stmt->fetchAll();
             margin: 0;
             padding: 20px;
         }
-
+ 
         .navbar {
             background: #007BFF;
             padding: 10px 20px;
@@ -51,17 +67,17 @@ $items = $stmt->fetchAll();
             align-items: center;
             color: #fff;
         }
-
+ 
         .navbar a {
             color: #fff;
             text-decoration: none;
             margin-right: 15px;
         }
-
+ 
         .navbar a:hover {
             text-decoration: underline;
         }
-
+ 
         .container {
             max-width: 1000px;
             margin: 20px auto;
@@ -69,13 +85,13 @@ $items = $stmt->fetchAll();
             padding: 20px;
             border-radius: 8px;
         }
-
+ 
         h1 {
             text-align: center;
             color: #007BFF;
             margin-bottom: 20px;
         }
-
+ 
         form.search {
             display: flex;
             justify-content: center;
@@ -83,13 +99,13 @@ $items = $stmt->fetchAll();
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
-
+ 
         form.search input[type=text], form.search select {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-
+ 
         form.search button {
             padding: 8px 15px;
             background: #007BFF;
@@ -98,11 +114,11 @@ $items = $stmt->fetchAll();
             cursor: pointer;
             border-radius: 4px;
         }
-
+ 
         form.search button:hover {
             background: #0056b3;
         }
-
+ 
         .new-btn {
             display: inline-block;
             background: #007BFF;
@@ -111,29 +127,29 @@ $items = $stmt->fetchAll();
             text-decoration: none;
             border-radius: 5px;
         }
-
+ 
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
         }
-
+ 
         th, td {
             padding: 10px;
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
-
+ 
         th {
             background: #007BFF;
             color: #fff;
         }
-
+ 
         img.thumb {
             max-width: 80px;
             border-radius: 4px;
         }
-
+ 
         .actions a {
             margin-right: 10px;
             text-decoration: none;
@@ -141,42 +157,39 @@ $items = $stmt->fetchAll();
             border-radius: 5px;
             transition: background-color 0.3s;
         }
-
-        /* Styling the "Edit" button */
+ 
         .actions a[href*="catalog-edit.php"] {
-            background: #28a745;  /* Green color */
+            background: #28a745;
             color: #fff;
         }
-
+ 
         .actions a[href*="catalog-edit.php"]:hover {
-            background: #218838;  /* Darker green on hover */
+            background: #218838;
         }
-
-        /* Styling the "Archive" button */
+ 
         .actions a[href*="catalog-delete.php"] {
-            background: #dc3545;  /* Red color */
+            background: #dc3545;
             color: #fff;
         }
-
+ 
         .actions a[href*="catalog-delete.php"]:hover {
-            background: #c82333;  /* Darker red on hover */
+            background: #c82333;
         }
-
-        /* Styling the "Restore" button */
+ 
         .actions a[href*="catalog-restore.php"] {
-            background: #ffc107;  /* Yellow color */
+            background: #ffc107;
             color: #000;
         }
-
+ 
         .actions a[href*="catalog-restore.php"]:hover {
-            background: #e0a800;  /* Darker yellow on hover */
+            background: #e0a800;
         }
-
+ 
         .pagination {
             text-align: center;
             margin-top: 20px;
         }
-
+ 
         .pagination a {
             padding: 5px 10px;
             margin: 0 3px;
@@ -184,7 +197,7 @@ $items = $stmt->fetchAll();
             text-decoration: none;
             border-radius: 3px;
         }
-
+ 
         .pagination a.active {
             background: #007BFF;
             color: #fff;
@@ -192,8 +205,7 @@ $items = $stmt->fetchAll();
     </style>
 </head>
 <body>
-
-<!-- ✅ Simple Navbar -->
+ 
 <div class="navbar">
     <div>
         <a href="catalog.php">📦 Catalog</a>
@@ -203,11 +215,10 @@ $items = $stmt->fetchAll();
         <a href="/admin/logout.php">Logout</a>
     </div>
 </div>
-
+ 
 <div class="container">
     <h1>Catalog Management</h1>
-
-    <!-- ✅ Search & Filter Form -->
+ 
     <form class="search" method="get">
         <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
         <select name="status">
@@ -218,8 +229,7 @@ $items = $stmt->fetchAll();
         <button type="submit">Filter</button>
         <a href="catalog-new.php" class="new-btn">+ Add New</a>
     </form>
-
-    <!-- ✅ Catalog Table -->
+ 
     <table>
         <tr>
             <th>ID</th>
@@ -255,17 +265,18 @@ $items = $stmt->fetchAll();
             <tr><td colspan="6" style="text-align:center;">No items found.</td></tr>
         <?php endif; ?>
     </table>
-
-    <!-- ✅ Pagination -->
+ 
     <div class="pagination">
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="?search=<?php echo urlencode($search); ?>&status=<?php echo urlencode($statusFilter); ?>&page=<?php echo $i; ?>" 
+            <a href="?search=<?php echo urlencode($search); ?>&status=<?php echo urlencode($statusFilter); ?>&page=<?php echo $i; ?>"
                class="<?php if ($i == $page) echo 'active'; ?>">
                 <?php echo $i; ?>
             </a>
         <?php endfor; ?>
     </div>
 </div>
-
+ 
 </body>
 </html>
+ 
+ 

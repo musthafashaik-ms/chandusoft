@@ -34,17 +34,19 @@ if ($logoPath) {
         <a href="contact.php"><b>Contact</b></a>
 
         <?php
-        try {
-            // Fetch published pages from the database
-            $navStmt = $pdo->query("SELECT title, slug FROM pages WHERE status = 'published'");
-            foreach ($navStmt->fetchAll(PDO::FETCH_ASSOC) as $p) {
-                // Output link with slug, make sure to sanitize it
-echo '<a href="/' . htmlspecialchars($p['slug']) . '">' . htmlspecialchars($p['title']) . '</a>';
-            }
-        } catch (PDOException $e) {
-            // In case of any errors, we can log them or display a comment
-            echo "<!-- Navigation fetch error: " . htmlspecialchars($e->getMessage()) . " -->";
-        }
-        ?>
+    try {
+        // Fetch published pages from the database
+$stmt = $pdo->query("SELECT title, slug FROM pages WHERE status = 'published'");
+foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $p) {
+    echo '<a href="/' . htmlspecialchars($p['slug']) . '">' . htmlspecialchars($p['title']) . '</a>';
+}
+
+    } catch (PDOException $e) {
+        // In case of any errors, we can log them or display a comment
+        echo "<!-- Navigation fetch error: " . htmlspecialchars($e->getMessage()) . " -->";
+    }
+    ?>
+</nav>
+
     </nav>
 </header>

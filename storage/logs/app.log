@@ -84,3 +84,97 @@
 [2025-10-24 11:02:02] CSRF token invalid for email:  | IP: 127.0.0.1
 [2025-10-24 11:02:24] CSRF token invalid for email:  | IP: 127.0.0.1
 [2025-10-24 11:03:49] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 05:31:45] CSRF token invalid for email: admin@example.com | IP: 127.0.0.1
+[2025-10-25 05:46:16] CSRF token invalid for email: admin@example.com | IP: 127.0.0.1
+[2025-10-25 09:45:03] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 09:45:38] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 09:54:21] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 09:57:49] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:05:35] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:05:37] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:11:45] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:14:21] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:16:45] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:26:07] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:26:07] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 10:26:07] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 10:32:21] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:32:21] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 10:32:21] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 10:38:32] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:38:32] Session CSRF token: b24b95711a9a7d3fafccee09e5906d1db46ff797cd59321b6b99f90aacaf3e24 | IP: 127.0.0.1
+[2025-10-25 10:38:32] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 10:38:35] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:38:35] Session CSRF token: b24b95711a9a7d3fafccee09e5906d1db46ff797cd59321b6b99f90aacaf3e24 | IP: 127.0.0.1
+[2025-10-25 10:38:35] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 10:38:39] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:38:39] Session CSRF token: b24b95711a9a7d3fafccee09e5906d1db46ff797cd59321b6b99f90aacaf3e24 | IP: 127.0.0.1
+[2025-10-25 10:38:39] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 10:53:45] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:53:45] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 10:53:45] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 10:53:50] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 10:53:50] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 10:53:50] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:02:20] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:02:20] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 11:02:20] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:09:42] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:09:42] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 11:09:42] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:09:46] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:09:46] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 11:09:46] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:09:52] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:09:52] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 11:09:52] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:10:09] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:10:09] Session CSRF token: c608c4d388f522e865a9282b98695a8c09e1ba9391a91258ca2fe928186a50c9 | IP: 127.0.0.1
+[2025-10-25 11:10:09] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:55:07] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:55:07] Session CSRF token: 2511fa2a3cc82cee8bd5223cf8059291492a07eed3e82665e782692d7ecfaaf1 | IP: 127.0.0.1
+[2025-10-25 11:55:07] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:55:49] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:55:49] Session CSRF token: 2511fa2a3cc82cee8bd5223cf8059291492a07eed3e82665e782692d7ecfaaf1 | IP: 127.0.0.1
+[2025-10-25 11:55:49] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:55:55] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:55:55] Session CSRF token: 2511fa2a3cc82cee8bd5223cf8059291492a07eed3e82665e782692d7ecfaaf1 | IP: 127.0.0.1
+[2025-10-25 11:55:55] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:55:58] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:55:58] Session CSRF token: 2511fa2a3cc82cee8bd5223cf8059291492a07eed3e82665e782692d7ecfaaf1 | IP: 127.0.0.1
+[2025-10-25 11:55:58] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-25 11:56:26] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-25 11:56:26] Session CSRF token: 2511fa2a3cc82cee8bd5223cf8059291492a07eed3e82665e782692d7ecfaaf1 | IP: 127.0.0.1
+[2025-10-25 11:56:26] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:18:47] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:18:47] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:18:47] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:18:54] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:18:54] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:18:54] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:19:55] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:19:55] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:19:55] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:27:55] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:27:55] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:27:55] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:29:14] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:29:14] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:29:14] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:29:22] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:29:22] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:29:22] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:34:38] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:34:38] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:34:38] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 03:34:43] CSRF token invalid for email:  | IP: 127.0.0.1
+[2025-10-27 03:34:43] Session CSRF token: 2d33e18242fddcb507550ee0a86efe9a944043b83cef341095f7dd8b2c56238f | IP: 127.0.0.1
+[2025-10-27 03:34:43] Form CSRF token:  | IP: 127.0.0.1
+[2025-10-27 04:00:28] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 04:00:43] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 04:03:07] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 04:03:14] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 04:03:21] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 04:12:39] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 04:14:12] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1
+[2025-10-27 04:16:24] ❌ FAILED login | Email: admin@example.com | IP: 127.0.0.1

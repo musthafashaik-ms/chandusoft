@@ -19,14 +19,25 @@ if ($conn->connect_error) {
 
 // Fetch latest 5 leads
 $resultLatest = $conn->query("SELECT * FROM leads ORDER BY id DESC LIMIT 5");
+
+// Query counts for the dashboard stats
+$totalLeadsResult = $conn->query("SELECT COUNT(*) AS count FROM leads");
+$totalLeads = $totalLeadsResult->fetch_assoc()['count'];
+
+$publishedPagesResult = $conn->query("SELECT COUNT(*) AS count FROM pages WHERE status='published'");
+$publishedPages = $publishedPagesResult->fetch_assoc()['count'];
+
+$draftPagesResult = $conn->query("SELECT COUNT(*) AS count FROM pages WHERE status='draft'");
+$draftPages = $draftPagesResult->fetch_assoc()['count'];
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Chandusoft Admin</title>
     <style>
-        /* your CSS styles here (same as before, or adjust as needed) */
         body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
         .navbar {
             background-color: #2c3e50;
@@ -54,25 +65,22 @@ $resultLatest = $conn->query("SELECT * FROM leads ORDER BY id DESC LIMIT 5");
             margin: 20px auto;
         }
         h2 { margin-top: 15px; }
-        ul { 
-    list-style: none; 
-    padding-left: 0; 
-}
-
-li {
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 20px;
-}
-
-li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #2c3e50; /* Optional: bullet color */
-    font-weight: bold;
-}
-
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
         table {
             border-collapse: collapse;
             width: 100%;
@@ -102,43 +110,53 @@ li::before {
     <div><strong>Chandusoft Admin</strong></div>
     <div class="links">
         Welcome <?= $role ?>!
-        <a href="../app/dashboard.php">Dashboard</a>
-        <a href="../admin/admin-leads.php">Leads</a>
-        <a href="../admin/pages.php">Pages</a>
-        <a href="../admin/logout.php">Logout</a> <!-- Assuming you have this script -->
+        <a href="/app/dashboard">Dashboard</a>
+        <a href="/admin/admin-leads">Leads</a>
+        <a href="/admin/pages">Pages</a>
+        <a href="/admin/logout">Logout</a>
+
     </div>
 </div>
+
 <div class="dashboard-box">
     <h2>Dashboard</h2>
 
     <ul>
-        <li><strong>Total leads:</strong> <?= $conn->query("SELECT COUNT(*) as count FROM leads")->fetch_assoc()['count'] ?></li>
-        <li><strong>Pages published:</strong> <?= $conn->query("SELECT COUNT(*) as count FROM pages WHERE status='published'")->fetch_assoc()['count'] ?></li>
-        <li><strong>Pages draft:</strong> <?= $conn->query("SELECT COUNT(*) as count FROM pages WHERE status='draft'")->fetch_assoc()['count'] ?></li>
+        <li><strong>Total leads:</strong> <?= number_format($totalLeads) ?></li>
+        <li><strong>Pages published:</strong> <?= number_format($publishedPages) ?></li>
+        <li><strong>Pages draft:</strong> <?= number_format($draftPages) ?></li>
     </ul>
 
-    <h3>Last 5 leads</h3>
+    <h3>Last 5 Leads</h3>
 
     <table>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Message</th>
-            <th>Created</th>
-            <th>IP</th>
-        </tr>
-        <?php while ($row = $resultLatest->fetch_assoc()): ?>
+        <thead>
             <tr>
-                <td><?= htmlspecialchars($row['name']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['message']) ?></td>
-                <td><?= htmlspecialchars($row['created_at']) ?></td>
-               <td><?= !empty($row['IP']) ? htmlspecialchars($row['IP']) : '' ?></td>
-
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Created</th>
+                <th>IP</th>
             </tr>
-        <?php endwhile; ?>
+        </thead>
+        <tbody>
+            <?php while ($row = $resultLatest->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['name']) ?></td>
+                    <td><?= htmlspecialchars($row['email']) ?></td>
+                    <td><?= htmlspecialchars($row['message']) ?></td>
+                    <td><?= htmlspecialchars($row['created_at']) ?></td>
+                    <td><?= !empty($row['IP']) ? htmlspecialchars($row['IP']) : 'N/A' ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
     </table>
 </div>
 
 </body>
 </html>
+
+<?php
+// Close the DB connection
+$conn->close();
+?>
