@@ -1,204 +1,264 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php';  // Correct path to autoload
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // --- DB CONNECTION ---
-    $conn = new mysqli("127.0.0.1", "root", "", "chandusoft");
-    if ($conn->connect_error) {
-        echo "❌ Something went wrong with the database connection.";
-        exit;
-    }
-
-    // --- SANITIZE INPUT ---
-    $name = trim($conn->real_escape_string($_POST['name'] ?? ''));
-    $email = trim($conn->real_escape_string($_POST['email'] ?? ''));
-    $message = trim($conn->real_escape_string($_POST['message'] ?? ''));
-
-    // --- VALIDATE INPUT ---
-    if (empty($name) || empty($email) || empty($message) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "❌ Invalid input.";
-        exit;
-    }
-
-    // --- INSERT INTO DB ---
-    $sql = "INSERT INTO leads (name, email, message) VALUES ('$name', '$email', '$message')";
-    if ($conn->query($sql) === TRUE) {
-        // --- SEND EMAIL ---
-        $mail = new PHPMailer(true);
+session_start();
+ 
+require_once __DIR__ . '/app/config.php';
+require_once __DIR__ . '/vendor/autoload.php';
+ 
+$pageSlug = 'contact';
+$formData = ['name' => '', 'email' => '', 'message' => ''];
+ 
+// ✅ Flash messages
+$successMessage = $_SESSION['successMessage'] ?? '';
+$errorMessage = $_SESSION['errorMessage'] ?? '';
+unset($_SESSION['successMessage'], $_SESSION['errorMessage']);
+ 
+// ✅ Handle Form Submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $message = trim($_POST['message'] ?? '');
+ 
+    $formData = ['name' => $name, 'email' => $email, 'message' => $message];
+ 
+    if ($name && $email && $message) {
         try {
-            // SMTP config
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'cstltest4@gmail.com'; // your Gmail
-            $mail->Password = 'vwrs cubq qpqg wfcg'; // Gmail App password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-
-            // Email headers
-            $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact Form');
-            $mail->addAddress('musthafa.shaik@chandusoft.com', 'Musthafa');
-            $mail->addReplyTo($email, $name);
-
-            // Email content
-            $mail->isHTML(true);
-            $subject = "New Contact Form Submission";
-            $mail->Subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
-
-            $mail->Body = "
-                <h3>🚀 New Lead Submission</h3>
-                <p><strong>Name:</strong> {$name}</p>
-                <p><strong>Email:</strong> {$email}</p>
-                <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
-            ";
-
-            $mail->send();
-            echo "success";  // Email sent, return success message
-            exit;
-
-        } catch (Exception $e) {
-            // --- LOG FAILURE ---
-            $logDir = __DIR__ . '/../storage/logs';
-            if (!is_dir($logDir)) {
-                mkdir($logDir, 0777, true);
+            // ✅ Insert into Database
+            $stmt = $pdo->prepare("INSERT INTO leads (name, email, message, created_at) VALUES (?, ?, ?, NOW())");
+            $stmt->execute([$name, $email, $message]);
+ 
+            // ✅ Send Email
+            $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'cstltest4@gmail.com';
+                $mail->Password = 'vwrs cubq qpqg wfcg'; // Gmail App Password
+                $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+ 
+                $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact');
+                $mail->addAddress('jaisai.chintala@chandusoft.com');
+                $mail->addReplyTo($email, $name);
+ 
+                $mail->isHTML(true);
+                $mail->Subject = "New Contact Form Submission";
+                $mail->Body = "
+                    <h3>New Contact Form Message</h3>
+                    <p><strong>Name:</strong> {$name}</p>
+                    <p><strong>Email:</strong> {$email}</p>
+                    <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
+                ";
+ 
+                $mail->send();
+            } catch (Exception $e) {
+                error_log("Mail Error: " . $mail->ErrorInfo);
             }
-
-            $logFile = $logDir . '/mail-fail.log';
-            $timestamp = date('Y-m-d H:i:s');
-            $errorMessage = "[$timestamp] Mail send failed for {$email} ({$name}). Error: {$mail->ErrorInfo}\nMessage: {$message}\n\n";
-            file_put_contents($logFile, $errorMessage, FILE_APPEND);
-
-            echo "❌ Mailer Error: {$mail->ErrorInfo}";  // Provide more details in error response
+ 
+            $_SESSION['successMessage'] = "Your message has been sent successfully!";
+            header("Location: /contact");
+            exit;
+        } catch (Exception $e) {
+            $_SESSION['errorMessage'] = "Something went wrong. Please try again.";
+            header("Location: /contact");
             exit;
         }
     } else {
-        echo "❌ Database insert error.";  // Provide more details if DB insert fails
+        $_SESSION['errorMessage'] = "All fields are required!";
+        header("Location: /contact");
         exit;
     }
 }
 ?>
-
-
-
-
-
-<!-- Your HTML form code goes here (unchanged) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Chandusoft - Contact</title>
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandusoft - Contact</title>
+<link rel="stylesheet" href="/styles.css">
+<style>
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef3ff, #e1ecff);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+ 
+/* ✅ Centered Layout */
+main.contact-page {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+ 
+/* ✅ Modern Form Design */
+.contact-form {
+    width: 100%;
+    max-width: 380px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 35px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    animation: fadeInUp 0.6s ease;
+}
+ 
+@keyframes fadeInUp {
+    from { transform: translateY(25px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+ 
+.contact-page h2 {
+    text-align: center;
+    color: #0078D7;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+ 
+.contact-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+ 
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.85);
+    transition: all 0.3s ease;
+}
+ 
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #0078D7;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,120,215,0.1);
+    background: #fff;
+}
+ 
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #0078D7, #1E90FF);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,120,215,0.2);
+}
+ 
+.contact-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,120,215,0.3);
+}
+ 
+/* ✅ Toast (bottom-center with iOS blur) */
+.alert {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(40px);
+    min-width: 320px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    z-index: 9999;
+    opacity: 0;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.5s ease;
+}
+ 
+.alert svg {
+    width: 20px;
+    height: 20px;
+}
+ 
+.alert.success {
+    color: #155724;
+}
+ 
+.alert.error {
+    color: #721c24;
+}
+ 
+.alert.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+</style>
 </head>
 <body>
-    <!-- Correct file path to header.php in the admin folder -->
-    <?php include __DIR__ . '/admin/header.php'; ?>
-    <main>
-        <h2>Contact Us</h2>
-        <form id="contactForm" class="contact-form" action="contact.php" method="post" novalidate>
-            <!-- Name -->
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required />
-            <span class="error-message" id="nameError"></span>
-
-            <!-- Email -->
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required />
-            <span class="error-message" id="emailError"></span>
-
-            <!-- Message -->
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
-            <span class="error-message" id="messageError"></span>
-
-            <!-- Submit Button -->
-            <button type="submit" id="submitBtn" disabled>Send Message</button>
-        </form>
-    </main>
-
-    <?php include __DIR__ . '/admin/footer.php'; ?>
-
-
-    <!-- Include JS (header, footer, back to top, etc.) -->
-    <script src="include.js"></script>
-
-    <!-- Form Validation and Handling Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contactForm');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    const submitBtn = document.getElementById('submitBtn');
-
-    const nameError = document.getElementById('nameError');
-    const emailError = document.getElementById('emailError');
-    const messageError = document.getElementById('messageError');
-
-    // Success message element
-    const successMessage = document.createElement("div");
-    successMessage.id = "successMessage";
-    successMessage.style.color = "green";
-    successMessage.style.fontWeight = "bold";
-    successMessage.style.marginTop = "15px";
-    successMessage.style.display = "none";
-    successMessage.textContent = "✅ Successfully submitted!";
-    form.insertAdjacentElement("afterend", successMessage);
-
-    // Error message element
-    const errorMessage = document.createElement("div");
-    errorMessage.id = "errorMessage";
-    errorMessage.style.color = "red";
-    errorMessage.style.fontWeight = "bold";
-    errorMessage.style.marginTop = "15px";
-    errorMessage.style.display = "none";
-    errorMessage.textContent = "❌ Something went wrong. Please check your input.";
-    form.insertAdjacentElement("afterend", errorMessage);
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        fetch("contact.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.text())
-        .then(result => {
-            if (result === "success") {
-                errorMessage.style.display = "none";
-                successMessage.style.display = "block";
-                form.reset();
-                submitBtn.disabled = true;
-
-                // Hide success message after 10 seconds
-                setTimeout(() => {
-                    successMessage.style.display = "none";
-                }, 10000);
-            } else {
-                successMessage.style.display = "none";
-                errorMessage.style.display = "block";
-                setTimeout(() => {
-                    errorMessage.style.display = "none";
-                }, 10000);
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            successMessage.style.display = "none";
-            errorMessage.style.display = "block";
-        });
-    });
+ 
+<?php include("admin/header.php"); ?>
+ 
+<main class="contact-page">
+    <form class="contact-form" action="/contact" method="post">
+        <h2>Contact Form</h2>
+ 
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" value="<?= htmlspecialchars($formData['name']) ?>" placeholder="Enter your name" required>
+ 
+        <label for="email">Email Address</label>
+        <input type="email" name="email" id="email" value="<?= htmlspecialchars($formData['email']) ?>" placeholder="Enter your email" required>
+ 
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="5" placeholder="Write your message..." required><?= htmlspecialchars($formData['message']) ?></textarea>
+ 
+        <button type="submit">Send Message</button>
+    </form>
+</main>
+ 
+<?php if ($successMessage): ?>
+    <div class="alert success" id="formMessage">
+        ✅ <?= htmlspecialchars($successMessage) ?>
+    </div>
+<?php elseif ($errorMessage): ?>
+    <div class="alert error" id="formMessage">
+        ❌ <?= htmlspecialchars($errorMessage) ?>
+    </div>
+<?php endif; ?>
+ 
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    const msg = document.getElementById('formMessage');
+    if (msg) {
+        setTimeout(() => msg.classList.add('show'), 150);
+        setTimeout(() => {
+            msg.style.transform = 'translateX(-50%) translateY(30px)';
+            msg.style.opacity = '0';
+        }, 4000);
+        setTimeout(() => msg.remove(), 4500);
+    }
 });
-
-    </script>
+</script>
+ 
+<?php include("admin/footer.php"); ?>
+<button id="back-to-top" title="Back to Top">↑</button>
+<script src="include.js"></script>
 </body>
 </html>
+ 
+ 

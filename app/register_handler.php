@@ -1,12 +1,16 @@
 <?php
+session_start();
 require 'config.php';
 
-// CSRF token check
 if (empty($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
     $_SESSION['register_errors'] = ['⛔ Invalid security token.'];
     header("Location: register.php");
     exit();
 }
+
+// Optional: unset token after successful submission to prevent reuse
+unset($_SESSION['csrf_token']);
+
 
 // Sanitize input
 $email = trim($_POST['email'] ?? '');
@@ -20,11 +24,9 @@ $errors = [];
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Enter a valid email.";
 }
-
 if (empty($username)) {
     $errors[] = "Username is required.";
 }
-
 if (strlen($password) < 6) {
     $errors[] = "Password must be at least 6 characters.";
 } elseif ($password !== $confirm_password) {
@@ -47,12 +49,11 @@ if (!empty($errors)) {
     exit();
 }
 
-// Insert new user
+// Insert user
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
 $stmt = $pdo->prepare("INSERT INTO users (email, username, password) VALUES (?, ?, ?)");
 $stmt->execute([$email, $username, $hashedPassword]);
 
 $_SESSION['flash_success'] = "✅ Registration successful! You can now log in.";
-header("Location: ../admin/login.php");  // <- Fix path here
+header("Location: ../admin/login.php");
 exit();

@@ -1,6 +1,16 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/logger.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$user = $_SESSION['user'] ?? [];
+$username = htmlspecialchars($user['username'] ?? 'User');
+$role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'));
+
+
  
 // ✅ Pagination & Filters
 $perPage = 10;
@@ -52,31 +62,25 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
     <meta charset="UTF-8">
     <title>Catalog - Admin</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
- 
+       body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
         .navbar {
-            background: #007BFF;
-            padding: 10px 20px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #fff;
         }
- 
-        .navbar a {
-            color: #fff;
+        .navbar .links a {
+            color: white;
             text-decoration: none;
-            margin-right: 15px;
+            margin-left: 15px;
+            font-weight: bold;
         }
- 
-        .navbar a:hover {
-            text-decoration: underline;
+        .navbar .links a:hover {
+            text-decoration: none;
         }
+    
  
         .container {
             max-width: 1000px;
@@ -205,14 +209,22 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
     </style>
 </head>
 <body>
- 
-<div class="navbar">
-    <div>
-        <a href="catalog.php">📦 Catalog</a>
-        <a href="catalog-new.php">➕ Add New</a>
-    </div>
-    <div>
+ <div class="navbar">
+    <div><strong>Chandusoft Admin</strong></div>
+    <div class="links">
+         Welcome <?= $role ?>!
+        <a href="/app/dashboard.php">Dashboard</a>
+         <!-- Dynamic catalog link based on user role -->
+    <?php if ($role === 'Admin'): ?>
+        <a href="/admin/catalog.php">Admin Catalog</a>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php elseif ($role === 'Editor'): ?>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php endif; ?>  
+        <a href="/admin/admin-leads.php">Leads</a>
+        <a href="/admin/pages.php">Pages</a>
         <a href="/admin/logout.php">Logout</a>
+
     </div>
 </div>
  

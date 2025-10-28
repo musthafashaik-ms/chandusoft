@@ -27,25 +27,33 @@ if ($logoPath) {
                  width="150" height="auto" style="vertical-align:middle; max-height: 80px;">
         </a>
     </div>
-    <nav>
-        <a href="index.php"><b>Home</b></a>
-        <a href="about.php"><b>About</b></a>
-        <a href="services.php"><b>Services</b></a>
-        <a href="contact.php"><b>Contact</b></a>
+ <nav>
+    <!-- Static Pages -->
+    <a href="index.php" class="<?php echo (strpos($_SERVER['REQUEST_URI'], '/index.php') !== false || $_SERVER['REQUEST_URI'] == '/') ? 'active' : ''; ?>"><b>Home</b></a>
+    <a href="about.php" class="<?php echo (strpos($_SERVER['REQUEST_URI'], '/about.php') !== false) ? 'active' : ''; ?>"><b>About</b></a>
+    <a href="services.php" class="<?php echo (strpos($_SERVER['REQUEST_URI'], '/services.php') !== false) ? 'active' : ''; ?>"><b>Services</b></a>
+    <a href="contact.php" class="<?php echo (strpos($_SERVER['REQUEST_URI'], '/contact.php') !== false) ? 'active' : ''; ?>"><b>Contact</b></a>
 
-        <?php
-        try {
-            // Fetch published pages from the database
-            $navStmt = $pdo->query("SELECT title, slug FROM pages WHERE status = 'published'");
-            foreach ($navStmt->fetchAll(PDO::FETCH_ASSOC) as $p) {
-                // Output link with slug, make sure to sanitize it
-echo '<a href="/' . htmlspecialchars($p['slug']) . '">' . htmlspecialchars($p['title']) . '</a>';
-            }
-        } catch (PDOException $e) {
-            // In case of any errors, we can log them or display a comment
-            echo "<!-- Navigation fetch error: " . htmlspecialchars($e->getMessage()) . " -->";
+    <!-- Dynamic Pages -->
+    <?php
+    try {
+        // Fetch published pages from the database
+        $navStmt = $pdo->query("SELECT title, slug FROM pages WHERE status = 'published'");
+        foreach ($navStmt->fetchAll(PDO::FETCH_ASSOC) as $p) {
+            // Check if the current dynamic page matches the URL
+            $currentPage = isset($_GET['page']) && $_GET['page'] === $p['slug'];
+            echo '<a href="/' . htmlspecialchars($p['slug']) . '" class="' . ($currentPage ? 'active' : '') . '">' . htmlspecialchars($p['title']) . '</a>';
         }
-        ?>
-         <a href="app/register.php">Register</a>
-    </nav>
+    } catch (PDOException $e) {
+        // In case of any errors, we can log them or display a comment
+        echo "<!-- Navigation fetch error: " . htmlspecialchars($e->getMessage()) . " -->";
+    }
+    
+    ?>
+   <!-- Register -->
+    <a href="app/register.php" class="<?php echo ($_SERVER['REQUEST_URI'] == '/app/register.php' ? 'active' : ''); ?>">Login/Register</a>
+</nav>
+
+
+
 </header>

@@ -7,11 +7,15 @@ if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit();
 }
+// ✅ Start session first
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-$user = $_SESSION['user'];
-$role = htmlspecialchars($user['role'] ?? 'Editor');
-$error = '';
-$success = '';
+// ✅ Retrieve user info safely
+$user = $_SESSION['user'] ?? [];
+$username = htmlspecialchars($user['username'] ?? 'User');
+$role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'));
 
 // Initialize variables to avoid undefined variable issues
 $title = '';
@@ -64,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>Create Page</title>
     <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
             margin: 0;
@@ -88,9 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .navbar .links a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
-
         .container {
             max-width: 800px;
             margin: 30px auto;
@@ -172,27 +175,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+ 
 <!-- ✅ Navbar -->
 <div class="navbar">
     <div><strong>Chandusoft Admin</strong></div>
-   <div class="links">
-        Welcome <?= htmlspecialchars($role) ?>!
-        <a href="../app/dashboard.php">Dashboard</a>
-        <a href="../admin/admin-leads.php">Leads</a>
-        <a href="../admin/pages.php">Pages</a>
-        <a href="../admin/logout.php">Logout</a>
+    <div class="links">
+        Welcome <?= $role ?>!
+        <a href="/app/dashboard.php">Dashboard</a>
+         <!-- Dynamic catalog link based on user role -->
+    <?php if ($role === 'Admin'): ?>
+        <a href="/admin/catalog.php">Admin Catalog</a>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php elseif ($role === 'Editor'): ?>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php endif; ?>
+        <a href="/admin/admin-leads.php">Leads</a>
+        <a href="/admin/pages.php">Pages</a>
+        <a href="/admin/logout.php">Logout</a>
+
     </div>
 </div>
 
 <!-- ✅ Page Form -->
 <div class="container">
     <h2>Create New Page</h2>
-
-    <?php if ($error): ?>
-        <div class="message error"><?= htmlspecialchars($error) ?></div>
-    <?php elseif ($success): ?>
-        <div class="message success"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
 
     <form method="POST">
         <label for="title">Page Title *</label>

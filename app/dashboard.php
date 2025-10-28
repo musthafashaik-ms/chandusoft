@@ -54,7 +54,7 @@ $draftPages = $draftPagesResult->fetch_assoc()['count'];
             font-weight: bold;
         }
         .navbar .links a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
         .dashboard-box {
             background: #fff;
@@ -114,6 +114,7 @@ $draftPages = $draftPagesResult->fetch_assoc()['count'];
          <!-- Dynamic catalog link based on user role -->
     <?php if ($role === 'Admin'): ?>
         <a href="/admin/catalog.php">Admin Catalog</a>
+        <a href="/public/catalog.php">Public Catalog</a>
     <?php elseif ($role === 'Editor'): ?>
         <a href="/public/catalog.php">Public Catalog</a>
     <?php endif; ?>

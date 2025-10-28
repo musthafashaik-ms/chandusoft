@@ -14,7 +14,8 @@
     <?php include __DIR__ . '/admin/header.php'; ?>
 
     <main>
-        <h4><span class="section-title">About Us</span></h4>
+        <h2><span class="section-title">About Us</span></h2>
+ 
         <p>
             <span class="highlight">Chandusoft</span> is a well-established company with over
             <span class="highlight">15 years of experience</span> in delivering IT and BPO solutions. We have a team of more than 

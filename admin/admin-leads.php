@@ -76,21 +76,23 @@ $search = $_GET['search'] ?? '';
 $search = trim($search);
 
 if ($search !== '') {
-    $stmt = $conn->prepare("SELECT * FROM leads WHERE id LIKE ? OR name LIKE ? OR email LIKE ? OR message LIKE ? ORDER BY id ASC");
+    // Modified query to fetch the leads in ascending order for storage and display latest first (DESC).
+    $stmt = $conn->prepare("SELECT * FROM leads WHERE id LIKE ? OR name LIKE ? OR email LIKE ? OR message LIKE ? ORDER BY id DESC");
     $likeSearch = "%$search%";
     $stmt->bind_param("ssss", $likeSearch, $likeSearch, $likeSearch, $likeSearch);
     $stmt->execute();
     $resultLatest = $stmt->get_result();
 } else {
-    $resultLatest = $conn->query("SELECT * FROM leads ORDER BY id ASC");
+    // Fetch all leads in ascending order for storage, but display latest first (DESC).
+    $resultLatest = $conn->query("SELECT * FROM leads ORDER BY id DESC");
 }
 
 // Get user role for navbar display
 $user = $_SESSION['user'];
 $role = htmlspecialchars(ucfirst($user['role'] ?? 'Guest'));
 $username = htmlspecialchars($user['username'] ?? 'User');
-
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -118,7 +120,7 @@ $username = htmlspecialchars($user['username'] ?? 'User');
             font-weight: bold;
         }
         .navbar .links a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
         .content {
             padding: 20px;
@@ -187,6 +189,7 @@ $username = htmlspecialchars($user['username'] ?? 'User');
          <!-- Dynamic catalog link based on user role -->
     <?php if ($role === 'Admin'): ?>
         <a href="/admin/catalog.php">Admin Catalog</a>
+        <a href="/public/catalog.php">Public Catalog</a>
     <?php elseif ($role === 'Editor'): ?>
         <a href="/public/catalog.php">Public Catalog</a>
     <?php endif; ?>

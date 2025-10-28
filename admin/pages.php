@@ -115,7 +115,7 @@ if ($search !== '') {
 
         .filters a:hover {
             color: #3498db;
-            text-decoration: underline;
+            text-decoration: none;
         }
 
         .top-bar input[type="text"] {
@@ -192,7 +192,7 @@ if ($search !== '') {
         }
 
         .actions a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
 
         .actions a.edit-btn {
@@ -248,6 +248,7 @@ if ($search !== '') {
          <!-- Dynamic catalog link based on user role -->
     <?php if ($role === 'Admin'): ?>
         <a href="/admin/catalog.php">Admin Catalog</a>
+        <a href="/public/catalog.php">Public Catalog</a>
     <?php elseif ($role === 'Editor'): ?>
         <a href="/public/catalog.php">Public Catalog</a>
     <?php endif; ?>

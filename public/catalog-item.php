@@ -1,5 +1,14 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
+// ✅ Start session first
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// ✅ Retrieve user info safely
+$user = $_SESSION['user'] ?? [];
+$username = htmlspecialchars($user['username'] ?? 'User');
+$role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'));
 
 // 🔍 For debugging: display sitekey in HTML comment
 echo "<!-- SITEKEY: " . htmlspecialchars(getenv('TURNSTILE_SITE')) . " -->";
@@ -45,10 +54,29 @@ $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
     <style>
         body {
             font-family: Arial, sans-serif;
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-            background-color: #f8f9fa;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .navbar .links a:hover {
+            text-decoration: none;
         }
         
         h1 {
@@ -123,31 +151,32 @@ $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
        .cf-turnstile {
         margin: 30px 0;
         }
-
-        .back-to-catalog {
-            position: absolute;
-            bottom: -110px;
-            right: 380px;
-            background: #007BFF;
-            color: #edf1f5ff;
-            border: 1px solid #007BFF;
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 1em;
-            cursor: pointer;
-        }
-
-        .back-to-catalog:hover {
-            background: #007BFF;
-            color: white;
-        }
     </style>
 
     <!-- ✅ Turnstile script -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
+     
+<!-- ✅ Navbar -->
+<div class="navbar">
+    <div><strong>Chandusoft Admin</strong></div>
+    <div class="links">
+        Welcome <?= $role ?>!
+        <a href="/app/dashboard.php">Dashboard</a>
+         <!-- Dynamic catalog link based on user role -->
+    <?php if ($role === 'Admin'): ?>
+        <a href="/admin/catalog.php">Admin Catalog</a>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php elseif ($role === 'Editor'): ?>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php endif; ?>
+        <a href="/admin/admin-leads.php">Leads</a>
+        <a href="/admin/pages.php">Pages</a>
+        <a href="/admin/logout.php">Logout</a>
+
+    </div>
+</div>
 
 <h1><?= htmlspecialchars($item['title']) ?></h1>
 
@@ -176,8 +205,7 @@ $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
     <button type="submit">Send Enquiry</button>
 </form>
 
-<!-- ✅ Back to Catalog Button -->
-<a href="/public/catalog.php" class="back-to-catalog">Back to Catalog</a>
+
 
 </body>
 </html>

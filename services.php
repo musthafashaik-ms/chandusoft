@@ -13,7 +13,7 @@
     <?php include __DIR__ . '/admin/header.php'; ?>
     <main>
 <section id="Services">
-    <h2 style="color: #2d5be3;">Our Services</h2>
+    <h2 style="color: #1E90FF;">Our Services</h2>
     <div class="services-container">
 
         <div class="service-card">
@@ -57,7 +57,8 @@
 </main>
      <?php include __DIR__ . '/admin/footer.php'; ?>
 
- <script src="include.js"></script>
+<button id="back-to-top" title="Back to Top">↑</button>
+<script src="include.js"></script>
    
 </body>
 </html>

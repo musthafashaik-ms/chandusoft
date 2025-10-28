@@ -61,8 +61,10 @@ nav button:hover {
 
 nav a.active {
     background-color: white;
-    color: white;
+    color: #007BFF; /* Text color when active */
+    border: 1px solid #007BFF; /* Border color to match */
 }
+
 
 /* Back to Top Button */
 /* Back to Top Button */
@@ -211,11 +213,14 @@ footer p b {
     color: #555;
     margin: 0;
 }
-
+.section-title
+ { 
+    color: blue;
+ }
 .highlight {
     font-weight: bold;
-    color: #000000;
-    background-color: #f2f3f5; /* Light blue highlight */
+    color: black;
+    background-color: white; /* Light blue highlight */
     padding: 4px 4px;
     border-radius: 4px;
 }
@@ -328,86 +333,3 @@ footer p b {
     color: #777;
 }
 
-/* Contact Form */
-.contact-form {
-    max-width: 280px;
-    margin: 0 auto;
-    padding: 25px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-    color: #333;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 80%;
-    padding: 8px 10px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.contact-form textarea {
-    resize: vertical;
-}
-
-.contact-form button {
-    width: 200px;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    background: #0d83ff;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
-}
-
-.contact-form button:hover {
-    background: #0b6edc;
-}
-
-/* Error and Success Messages */
-.error-message {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-    display: block;
-}
-
-#successMessage {
-    color: green;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-/* Form input focus */
-input:focus,
-textarea:focus {
-    border-color: #007BFF;
-}
-
-input:invalid,
-textarea:invalid {
-    border: 1px solid rgb(14, 13, 13);
-}
-
-input:invalid:focus,
-textarea:invalid:focus {
-    border-color: rgb(12, 12, 12);
-}
-
-input:required:valid,
-textarea:required:valid {
-    border-color: #1a1818;
-}

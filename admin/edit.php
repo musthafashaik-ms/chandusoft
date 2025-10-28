@@ -10,8 +10,15 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-$role = $_SESSION['user']['role'] ?? 'editor';
-$username = $_SESSION['user']['username'] ?? 'User';
+// ✅ Start session first
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// ✅ Retrieve user info safely
+$user = $_SESSION['user'] ?? [];
+$username = htmlspecialchars($user['username'] ?? 'User');
+$role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'));
 
 $error = '';
 $success = '';
@@ -168,27 +175,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
+ 
 <!-- ✅ Navbar -->
 <div class="navbar">
     <div><strong>Chandusoft Admin</strong></div>
     <div class="links">
-        Welcome <?= htmlspecialchars($role) ?>!
-        <a href="../app/dashboard.php">Dashboard</a>
-        <a href="../admin/admin-leads.php">Leads</a>
-        <a href="../admin/pages.php">Pages</a>
-        <a href="../admin/logout.php">Logout</a>
+        Welcome <?= $role ?>!
+        <a href="/app/dashboard.php">Dashboard</a>
+         <!-- Dynamic catalog link based on user role -->
+    <?php if ($role === 'Admin'): ?>
+        <a href="/admin/catalog.php">Admin Catalog</a>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php elseif ($role === 'Editor'): ?>
+        <a href="/public/catalog.php">Public Catalog</a>
+    <?php endif; ?>
+        <a href="/admin/admin-leads.php">Leads</a>
+        <a href="/admin/pages.php">Pages</a>
+        <a href="/admin/logout.php">Logout</a>
+
     </div>
 </div>
-
 <!-- ✅ Edit Form -->
 <div class="container">
     <h2>Edit Page</h2>
 
-    <?php if ($error): ?>
-        <div class="message error"><?= htmlspecialchars($error) ?></div>
-    <?php elseif ($success): ?>
-        <div class="message success"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
 
     <form method="POST">
         <label for="title">Page Title *</label>
