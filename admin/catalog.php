@@ -54,6 +54,7 @@ try {
  
 // ✅ Log view
 log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$search'");
+
  
 ?>
 <!DOCTYPE html>

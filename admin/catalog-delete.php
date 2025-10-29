@@ -9,7 +9,8 @@ $success = $stmt->execute([$id]);
 if ($success) {
     log_catalog("🗃️ Archived catalog item #$id", 'ARCHIVE');
 } else {
-    log_catalog("❌ Failed to archive item #$id", 'ERROR');
+    log_catalog("Catalog item archived: ID {$id} by {$username}");
+
 }
  
 header("Location: catalog.php");

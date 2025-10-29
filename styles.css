@@ -40,12 +40,10 @@ nav {
 }
 
 /* Navigation Links */
-nav a,
+
 nav button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
@@ -53,16 +51,16 @@ nav button {
     border: 1px solid #007BFF;
 }
 
-nav a:hover,
+
 nav button:hover {
     background-color: white;
     color: #007BFF;
 }
 
 nav a.active {
-    background-color: white;
-    color: #007BFF; /* Text color when active */
-    border: 1px solid #007BFF; /* Border color to match */
+    background-color: white !important;
+    color: #007BFF !important;
+    
 }
 
 

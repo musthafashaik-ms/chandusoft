@@ -1,19 +1,19 @@
 <?php
-// Environment: 'development' or 'production'
-$environment = 'development';
+// ============================================================
+// Chandusoft Database Connection
+// ============================================================
+
+$environment = 'development'; // change to 'production' when live
 
 if ($environment === 'development') {
     ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 } else {
     ini_set('display_errors', 0);
-    error_reporting(0);
     ini_set('log_errors', 1);
     ini_set('error_log', __DIR__ . '/../storage/logs/app.log');
 }
 
-// Database connection
 try {
     $pdo = new PDO(
         "mysql:host=localhost;dbname=chandusoft;charset=utf8mb4",

@@ -21,8 +21,8 @@ $stmt->execute([$id]);
 $item = $stmt->fetch();
  
 if (!$item) {
-    log_catalog("❌ Edit attempt failed — item #$id not found");
-    echo "<h2 style='color:red;text-align:center;'>Item not found</h2>";
+   log_catalog("Catalog item updated: ID {$id} by {$username}");
+   echo "<h2 style='color:red;text-align:center;'>Item not found</h2>";
     exit;
 }
  

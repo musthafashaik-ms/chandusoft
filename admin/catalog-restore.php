@@ -9,7 +9,8 @@ $success = $stmt->execute([$id]);
 if ($success) {
     log_catalog("♻️ Restored catalog item #$id", 'RESTORE');
 } else {
-    log_catalog("❌ Failed to restore item #$id", 'ERROR');
+    log_catalog("Catalog item restored: ID {$id} by {$username}");
+
 }
  
 header("Location: catalog.php?status=archived");

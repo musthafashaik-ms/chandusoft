@@ -1,18 +1,14 @@
 <?php
-session_start(); // Ensure session starts at the top of the file
+session_start();
 
-require_once '../app/config.php'; // Loads $pdo and session
+require_once '../app/config.php'; // Database connection ($pdo)
+require_once '../app/logger.php'; // Logger functions
 
 // ✅ Redirect if not logged in
 if (!isset($_SESSION['user'])) {
     $_SESSION['flash_error'] = "Please log in.";
     header("Location: login.php");
     exit();
-}
-
-// ✅ Start session first
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
 }
 
 // ✅ Retrieve user info safely
@@ -25,6 +21,7 @@ $success = '';
 
 $id = $_GET['id'] ?? null;
 if (!$id || !is_numeric($id)) {
+    $_SESSION['flash_error'] = "Invalid page ID.";
     header("Location: pages.php");
     exit();
 }
@@ -41,22 +38,27 @@ try {
         exit();
     }
 
-    // ✅ Initialize content_html to existing DB value
+    // Initialize form fields
+    $title = $page['title'] ?? '';
+    $slug = $page['slug'] ?? '';
+    $status = $page['status'] ?? 'draft';
     $content_html = $page['content_html'] ?? '';
 
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
 
+// ✅ Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
     $slug = trim($_POST['slug'] ?? '');
     $status = $_POST['status'] ?? 'draft';
-    $content_html = $_POST['content_html'] ?? ''; // Raw HTML allowed (not escaped)
+    $content_html = $_POST['content_html'] ?? ''; // Raw HTML allowed
 
     if (empty($title)) {
         $error = "Title is required.";
     } else {
+        // Auto-generate slug if empty
         if (empty($slug)) {
             $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title), '-'));
         }
@@ -65,7 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("UPDATE pages SET title = ?, slug = ?, content_html = ?, status = ?, updated_at = NOW() WHERE id = ?");
             $stmt->execute([$title, $slug, $content_html, $status, $id]);
 
-            // ✅ Redirect to pages.php after successful update
+            // ✅ Log the page update
+            log_page("✏️Edit Page | ID: $id | Title: $title | Slug: $slug | Status: $status | By: $username");
+
+            $_SESSION['flash_success'] = "Page updated successfully.";
             header("Location: pages.php");
             exit();
         } catch (PDOException $e) {

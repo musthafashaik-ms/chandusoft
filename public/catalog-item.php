@@ -188,23 +188,40 @@ $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
 
 <p class="product-description"><?= nl2br(htmlspecialchars($item['short_desc'])) ?></p>
 
-<!-- ✅ Enquiry Form -->
+<!-- Enquiry Form -->
 <h2>Enquire about this product</h2>
-<form id="enquiry-form" method="POST" action="/public/send-enquiry.php">
+<form id="enquiry-form" method="POST" action="send-enquiry.php">
     <input type="hidden" name="product" value="<?= htmlspecialchars($item['title']) ?>">
     <input type="text" name="name" placeholder="Your name" required>
     <input type="email" name="email" placeholder="Your email" required>
     <textarea name="message" placeholder="Your message" rows="4" required></textarea>
 
-    <!-- ✅ Turnstile Widget -->
-    <div class="cf-turnstile"
-         data-sitekey="<?= htmlspecialchars($TURNSTILE_SITE) ?>"
-         data-theme="light">
-    </div>
+    <!-- Turnstile Widget (Optional, enable in production) -->
+    <div class="cf-turnstile" data-sitekey="<?= htmlspecialchars($TURNSTILE_SITE) ?>" data-theme="light"></div>
 
     <button type="submit">Send Enquiry</button>
 </form>
 
+<!-- Optional JS for AJAX submission -->
+<script>
+document.getElementById('enquiry-form').addEventListener('submit', function(e){
+    e.preventDefault(); // prevent default page reload
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.text())
+    .then(data => {
+        alert(data); // show success/error message
+        form.reset();
+    })
+    .catch(err => alert('Error submitting form.'));
+});
+</script>
 
 
 </body>

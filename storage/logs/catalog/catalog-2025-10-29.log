@@ -1,0 +1,40 @@
+[2025-10-29 05:51:14][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 05:51:15][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 05:51:19][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 05:53:42][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 05:54:14][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 05:54:15][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 05:54:24][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 05:54:27][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 06:19:54][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 06:20:10][INFO] ✏️ Edited catalog item #30 — title: 'Milk', price: 42, status: 'published' | IP: 127.0.0.1
+[2025-10-29 06:20:10][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 06:22:50][INFO] 📸 Image uploaded for 'Z' — file: uploads/catalog_1761718970.png | IP: 127.0.0.1
+[2025-10-29 06:22:50][CREATE] 🆕 Created catalog item #32 — title: 'Z', price: 20, status: 'published' | IP: 127.0.0.1
+[2025-10-29 06:22:51][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 06:27:42][ARCHIVE] 🗃️ Archived catalog item #29 | IP: 127.0.0.1
+[2025-10-29 06:27:42][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 06:27:53][INFO] Catalog viewed | Page: 1 | Status: archived | Search: '' | IP: 127.0.0.1
+[2025-10-29 06:28:02][RESTORE] ♻️ Restored catalog item #29 | IP: 127.0.0.1
+[2025-10-29 06:28:02][INFO] Catalog viewed | Page: 1 | Status: archived | Search: '' | IP: 127.0.0.1
+[2025-10-29 07:20:28][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 07:27:27][INFO] Page updated | ID: 13 | Title: FAQ | Slug: faq | Status: published | By: admin | IP: 127.0.0.1
+[2025-10-29 07:38:57][INFO] Page updated | ID: 16 | Title: Sample | Slug: Sample | Status: draft | By: admin | IP: 127.0.0.1
+[2025-10-29 07:46:42][INFO] ✏️Edit Page | ID: 16 | Title: Sample | Slug: Sample | Status: archived | By: admin | IP: 127.0.0.1
+[2025-10-29 10:38:01][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 10:38:04][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:03:47][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:04:46][INFO] ✏️ Edited catalog item #32 — title: 'Curd', price: 20, status: 'published' | IP: 127.0.0.1
+[2025-10-29 11:04:47][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:05:13][INFO] Catalog viewed | Page: 1 | Status: published | Search: 'milk' | IP: 127.0.0.1
+[2025-10-29 11:05:27][INFO] Catalog viewed | Page: 1 | Status: published | Search: 'milk' | IP: 127.0.0.1
+[2025-10-29 11:05:34][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:05:56][ARCHIVE] 🗃️ Archived catalog item #32 | IP: 127.0.0.1
+[2025-10-29 11:05:56][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:06:08][INFO] Catalog viewed | Page: 1 | Status: archived | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:06:12][RESTORE] ♻️ Restored catalog item #32 | IP: 127.0.0.1
+[2025-10-29 11:06:12][INFO] Catalog viewed | Page: 1 | Status: archived | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:06:17][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-10-29 11:09:19][INFO] 📸 Image uploaded for 'M' — file: uploads/catalog_1761736159.jpg | IP: 127.0.0.1
+[2025-10-29 11:09:19][CREATE] 🆕 Created catalog item #33 — title: 'M', price: 80, status: 'published' | IP: 127.0.0.1
+[2025-10-29 11:09:19][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1

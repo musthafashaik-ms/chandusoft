@@ -76,7 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: catalog.php");
         exit;
     } else {
-        log_catalog("❌ Catalog creation failed for '$title' — reason: $message", 'ERROR');
+        log_catalog("Catalog item added: '{$title}' by {$username}");
+
     }
 }
 ?>

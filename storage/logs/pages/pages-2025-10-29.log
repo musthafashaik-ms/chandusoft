@@ -1,0 +1,8 @@
+[2025-10-29 07:38:34][INFO] Page created | Title: Sample1 | Slug: sample1 | Status: draft | By: admin | IP: 127.0.0.1
+[2025-10-29 07:42:15][INFO] Page archived | ID: 15 | Title: services2 | By: admin | IP: 127.0.0.1
+[2025-10-29 07:47:22][INFO] 🗃️Page archived | ID: 17 | Title: Sample1 | By: admin | IP: 127.0.0.1
+[2025-10-29 08:44:30][INFO] ✏️Edit Page | ID: 17 | Title: Sample1 | Slug: sample1 | Status: draft | By: user | IP: 127.0.0.1
+[2025-10-29 11:14:36][INFO] 🆕 Page created | Title: z | Slug: z | Status: draft | By: admin | IP: 127.0.0.1
+[2025-10-29 11:15:04][INFO] ✏️Edit Page | ID: 13 | Title: FAQ | Slug: faq | Status: draft | By: admin | IP: 127.0.0.1
+[2025-10-29 11:15:24][INFO] 🗃️Page archived | ID: 13 | Title: FAQ | By: admin | IP: 127.0.0.1
+[2025-10-29 11:19:58][INFO] ✏️Edit Page | ID: 13 | Title: FAQ | Slug: faq | Status: draft | By: user | IP: 127.0.0.1

@@ -29,21 +29,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // ✅ Send Email
             $mail = new PHPMailer\PHPMailer\PHPMailer(true);
             try {
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'cstltest4@gmail.com';
-                $mail->Password = 'vwrs cubq qpqg wfcg'; // Gmail App Password
-                $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
+               $environment = 'development'; // or 'production'
+               if ($environment === 'development') {
+              // Use Mailpit (local)
+              $mail->isSMTP();
+              $mail->Host = 'localhost';
+              $mail->Port = 1025;
+              $mail->SMTPAuth = false;
+              $mail->SMTPSecure = false;
+            }
+            else {
+              // Use Gmail (production)
+              $mail->isSMTP();
+              $mail->Host = 'smtp.gmail.com';
+              $mail->SMTPAuth = true;
+              $mail->Username = 'cstltest4@gmail.com';
+              $mail->Password = 'vwrs cubq qpqg wfcg';
+              $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+              $mail->Port = 587;
+            }
+            // ✅ Make sure UTF-8 is used for emojis/icons
+              $mail->CharSet = 'UTF-8';
+              $mail->Encoding = 'base64'; // optional but recommended for emojis
+
+            $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact');
+            $mail->addAddress('musthafa.shaik@chandusoft.com');
+            $mail->addReplyTo($email, $name);
  
-                $mail->setFrom('cstltest4@gmail.com', 'Chandusoft Contact');
-                $mail->addAddress('jaisai.chintala@chandusoft.com');
-                $mail->addReplyTo($email, $name);
- 
-                $mail->isHTML(true);
-                $mail->Subject = "New Contact Form Submission";
-                $mail->Body = "
+            $mail->isHTML(true);
+            $mail->Subject ="🚀New Contact Form Submission";
+            $mail->Body = "
                     <h3>New Contact Form Message</h3>
                     <p><strong>Name:</strong> {$name}</p>
                     <p><strong>Email:</strong> {$email}</p>

@@ -1,40 +1,34 @@
 <?php
-session_start();
-require 'config.php';
 
-// Generate token only if it doesn't exist
+session_start();                  // must be before any output
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
-
-// Repopulate old input
-$old = $_SESSION['register_old'] ?? ['email' => '', 'username' => ''];
+$old = $_SESSION['register_old'] ?? ['email'=>'', 'username'=>''];
 unset($_SESSION['register_old']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Register</title>
-<style>
-body { font-family: Arial; background: #f7f7f7; display: flex; justify-content: center; align-items: center; height: 100vh; }
-.container { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 350px; }
-h2 { text-align: center; margin-bottom: 20px; }
-label { display: block; margin-bottom: 6px; font-weight: bold; }
-input { width: 100%; padding: 12px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 4px; }
-button { width: 100%; padding: 14px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-button:hover { background: #218838; }
-.message { padding: 10px; border-radius: 4px; text-align: center; margin-bottom: 15px; }
-.message.error { background: #f8d7da; color: #721c24; }
-.message.success { background: #d4edda; color: #155724; }
-.link { text-align: center; margin-top: 15px; }
-.link a { color: #007BFF; text-decoration: none; }
-.link a:hover { text-decoration: underline; }
-</style>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body { font-family: Arial; background: #f7f7f7; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 350px; }
+        h2 { text-align: center; margin-bottom: 20px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; }
+        input { width: 100%; padding: 12px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 14px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #218838; }
+        .message { padding: 10px; border-radius: 4px; text-align: center; margin-bottom: 15px; }
+        .message.error { background: #f8d7da; color: #721c24; }
+        .message.success { background: #d4edda; color: #155724; }
+        .link { text-align: center; margin-top: 15px; }
+        .link a { color: #007BFF; text-decoration: none; }
+        .link a:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-
 <div class="container">
     <h2>Create an Account</h2>
 
@@ -53,7 +47,8 @@ button:hover { background: #218838; }
     ?>
 
    <form action="register_handler.php" method="POST">
-    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="<?= htmlspecialchars($old['email']) ?>" required>
 
@@ -73,6 +68,5 @@ button:hover { background: #218838; }
         <p>Already have an account? <a href="../admin/login.php">Login here</a></p>
     </div>
 </div>
-
 </body>
 </html>
