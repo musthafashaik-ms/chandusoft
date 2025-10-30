@@ -58,8 +58,8 @@ nav button:hover {
 }
 
 nav a.active {
-    background-color: white !important;
-    color: #007BFF !important;
+    background-color: white ;
+    color: #5aa5f5 ;
     
 }
 

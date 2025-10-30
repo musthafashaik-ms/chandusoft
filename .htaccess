@@ -45,6 +45,10 @@ RewriteRule ^public/send-enquiry/?$ public/send-enquiry.php [L,QSA]
 # ------------------------------------------------------------
 # ⚙️ Generic Page Routes (index, about, services, contact)
 # ------------------------------------------------------------
+# 🚫 Force access only through /index (block or redirect root)
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /index [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(index|about|services|contact)$ $1.php [L,QSA]

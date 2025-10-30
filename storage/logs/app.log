@@ -190,3 +190,7 @@
 [2025-10-29 09:55:46][INFO] Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-10-29 11:03:25][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-10-29 11:17:30][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-10-30 03:03:47][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-10-30 03:59:24][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-10-30 03:59:40][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-10-30 04:00:21][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
