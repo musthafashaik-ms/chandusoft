@@ -26,42 +26,52 @@ header {
     align-items: center;
     border-bottom: 1px solid #ccc;
 }
-
+ 
 .logo img {
     width: 400px;
     height: auto;
 }
-
+ 
 nav {
     display: flex;
     justify-content: center;
     gap: 15px;
     align-items: center;
 }
-
+ 
 /* Navigation Links */
-
-nav button {
+nav a {
     display: inline-block;
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
     font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: 1px solid #007BFF;
+    color: white;
+    position: relative;
+    transition: color 0.3s ease;
 }
-
-
-nav button:hover {
-    background-color: white;
-    color: #007BFF;
+ 
+/* Hover effect: underline only */
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #FFD700; /* underline color (gold/yellow) */
+    transition: width 0.3s ease;
 }
-
+ 
+nav a:hover::after,
+nav a.active::after {
+    width: 100%; /* full underline on hover or active */
+}
+ 
+nav a:hover,
 nav a.active {
-    background-color: white ;
-    color: #5aa5f5 ;
-    
+    color: #FFD700; /* text color change on hover or active (optional) */
 }
+ 
 
 
 /* Back to Top Button */
@@ -213,7 +223,7 @@ footer p b {
 }
 .section-title
  { 
-    color: blue;
+    color: #0056b3;
  }
 .highlight {
     font-weight: bold;

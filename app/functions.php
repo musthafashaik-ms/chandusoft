@@ -2,10 +2,16 @@
 require_once __DIR__ . '/config.php';
 
 /**
- * Get a setting value by its key.
+ * -------------------------------
+ * SETTINGS FUNCTIONS
+ * -------------------------------
+ */
+
+/**
+ * Get a setting value by key.
  *
  * @param string $key The setting key.
- * @return string The setting value or an empty string if not found.
+ * @return string The setting value or empty string if not found.
  */
 function get_setting($key) {
     global $pdo;
@@ -20,11 +26,11 @@ function get_setting($key) {
 }
 
 /**
- * Set a setting value by its key. If the setting exists, update it. If not, insert it.
+ * Set a setting value by key. Insert or update.
  *
  * @param string $key The setting key.
  * @param string $value The setting value.
- * @return bool Returns true on success, false on failure.
+ * @return bool True on success, false on failure.
  */
 function set_setting($key, $value) {
     global $pdo;
@@ -41,18 +47,27 @@ function set_setting($key, $value) {
     }
 }
 
+/**
+ * Update a site setting (alias for set_setting)
+ *
+ * @param string $key
+ * @param string $value
+ * @return bool
+ */
+function update_site_setting($key, $value) {
+    return set_setting($key, $value);
+}
 
 /**
- * Ensure the `site_settings` table exists with necessary columns and constraints.
+ * Ensure site_settings table exists.
  */
 function ensure_site_settings_table() {
     global $pdo;
     try {
-        // Create the table if it doesn't exist
         $stmt = $pdo->prepare("
             CREATE TABLE IF NOT EXISTS site_settings (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                `key` VARCHAR(255) NOT NULL UNIQUE,  -- Ensure 'key' is unique
+                `key` VARCHAR(255) NOT NULL UNIQUE,
                 `value` TEXT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -60,51 +75,15 @@ function ensure_site_settings_table() {
         ");
         $stmt->execute();
     } catch (PDOException $e) {
-        // Log the error if the table creation fails
-        error_log("Error ensuring site_settings table: " . $e->getMessage());
+        error_log("Error creating site_settings table: " . $e->getMessage());
     }
 }
 
 /**
- * Update a setting value by its key.
- *
- * @param string $key The setting key.
- * @param string $value The setting value.
- * @return bool Returns true on success, false on failure.
+ * -------------------------------
+ * UPLOAD DIRECTORY FUNCTIONS
+ * -------------------------------
  */
-// Update this part in the functions.php file
-
-function update_site_setting($key, $value) {
-    global $pdo;
-
-    // Make sure the $key is a valid column name in the table
-    $validKeys = ['site_name', 'logo_path']; // List all valid columns
-
-    if (!in_array($key, $validKeys)) {
-        throw new Exception("Invalid setting key: $key");
-    }
-
-    // Check if the setting exists in the database
-    $stmt = $pdo->prepare("SELECT * FROM site_settings WHERE id = 1");
-    $stmt->execute();
-    $existingSetting = $stmt->fetch();
-
-    if ($existingSetting) {
-        // Update the setting
-        $updateStmt = $pdo->prepare("UPDATE site_settings SET $key = ?, updated_at = NOW() WHERE id = 1");
-        $updateStmt->execute([$value]);
-    } else {
-        // Insert the new setting (first-time setup)
-        if ($key === 'site_name') {
-            $insertStmt = $pdo->prepare("INSERT INTO site_settings (site_name, logo_path, created_at, updated_at) VALUES (?, '', NOW(), NOW())");
-            $insertStmt->execute([$value]);
-        } else if ($key === 'logo_path') {
-            $insertStmt = $pdo->prepare("INSERT INTO site_settings (site_name, logo_path, created_at, updated_at) VALUES ('', ?, NOW(), NOW())");
-            $insertStmt->execute([$value]);
-        }
-    }
-}
-
 
 /**
  * Ensure the uploads directory exists.
@@ -116,24 +95,29 @@ function ensure_uploads_directory() {
     }
 }
 
+/**
+ * -------------------------------
+ * IMAGE FUNCTIONS
+ * -------------------------------
+ */
 
 /**
- * Check if GD and WebP support are available for image manipulation.
+ * Check if WebP support is available.
  *
- * @return bool Returns true if WebP support is available, false otherwise.
+ * @return bool
  */
 function is_webp_supported() {
     return function_exists('imagewebp');
 }
 
 /**
- * Resize and convert an image to WebP format.
+ * Resize and convert image to WebP.
  *
- * @param string $source The path to the source image.
- * @param string $target The target path for the WebP image.
- * @param int $maxWidth The maximum width of the resized image.
- * @param int $maxHeight The maximum height of the resized image.
- * @return bool Returns true if the image was resized and converted successfully, false otherwise.
+ * @param string $source Path to source image.
+ * @param string $target Path to save WebP image.
+ * @param int $maxWidth Maximum width.
+ * @param int $maxHeight Maximum height.
+ * @return bool True on success, false on failure.
  */
 function resize_and_convert_to_webp($source, $target, $maxWidth = 1600, $maxHeight = 1600) {
     if (!is_webp_supported()) {
@@ -142,10 +126,11 @@ function resize_and_convert_to_webp($source, $target, $maxWidth = 1600, $maxHeig
     }
 
     try {
-        // Get image dimensions
         list($width, $height, $type) = getimagesize($source);
 
-        // If the image is too large, resize it
+        // Calculate new dimensions
+        $newWidth = $width;
+        $newHeight = $height;
         if ($width > $maxWidth || $height > $maxHeight) {
             $ratio = $width / $height;
             if ($width > $height) {
@@ -155,47 +140,41 @@ function resize_and_convert_to_webp($source, $target, $maxWidth = 1600, $maxHeig
                 $newHeight = $maxHeight;
                 $newWidth = $maxHeight * $ratio;
             }
-
-            // Create a new image resource from the original image
-            switch ($type) {
-                case IMAGETYPE_JPEG:
-                    $image = imagecreatefromjpeg($source);
-                    break;
-                case IMAGETYPE_PNG:
-                    $image = imagecreatefrompng($source);
-                    break;
-                case IMAGETYPE_GIF:
-                    $image = imagecreatefromgif($source);
-                    break;
-                default:
-                    error_log("Unsupported image type.");
-                    return false;
-            }
-
-            // Create a new empty image with the resized dimensions
-            $newImage = imagecreatetruecolor($newWidth, $newHeight);
-            imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-            // Save the image as WebP
-            if (imagewebp($newImage, $target)) {
-                imagedestroy($image);
-                imagedestroy($newImage);
-                return true;
-            } else {
-                error_log("Failed to save image as WebP.");
-                imagedestroy($image);
-                imagedestroy($newImage);
-                return false;
-            }
-        } else {
-            // If the image doesn't need resizing, just save as WebP
-            return imagewebp(imagecreatefromjpeg($source), $target);
         }
+
+        // Create image resource
+        switch ($type) {
+            case IMAGETYPE_JPEG: $image = imagecreatefromjpeg($source); break;
+            case IMAGETYPE_PNG:  $image = imagecreatefrompng($source); break;
+            case IMAGETYPE_GIF:  $image = imagecreatefromgif($source); break;
+            default:
+                error_log("Unsupported image type: $type");
+                return false;
+        }
+
+        // Resize if needed
+        if ($newWidth !== $width || $newHeight !== $height) {
+            $resized = imagecreatetruecolor($newWidth, $newHeight);
+            // Preserve transparency for PNG/GIF
+            if ($type == IMAGETYPE_PNG || $type == IMAGETYPE_GIF) {
+                imagecolortransparent($resized, imagecolorallocatealpha($resized, 0, 0, 0, 127));
+                imagealphablending($resized, false);
+                imagesavealpha($resized, true);
+            }
+            imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            $imageToSave = $resized;
+        } else {
+            $imageToSave = $image;
+        }
+
+        $success = imagewebp($imageToSave, $target);
+        imagedestroy($image);
+        if (isset($resized)) imagedestroy($resized);
+
+        return $success;
     } catch (Exception $e) {
-        // Log any other errors
-        error_log("Error during image resizing or WebP conversion: " . $e->getMessage());
+        error_log("Error resizing/converting image: " . $e->getMessage());
         return false;
     }
 }
-
 ?>

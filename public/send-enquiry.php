@@ -1,105 +1,53 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/logger.php';
 
-// For testing, directly assign your secret key here
-$TURNSTILE_SECRET = '0x4AAAAAAB7ii73wAJ7ecUp7fBr4RTvr5N8';
-
-// Debug: Log received product value
-error_log('Product received: ' . ($_POST['product'] ?? 'NOT SET'));
-
-// Only allow POST requests
+// Only allow POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     exit("Method Not Allowed");
 }
 
-// Get and sanitize form inputs
+// Get and validate form data
 $name    = trim($_POST['name'] ?? '');
 $email   = trim($_POST['email'] ?? '');
 $message = trim($_POST['message'] ?? '');
 $product = trim($_POST['product'] ?? 'Unknown product');
-$token   = $_POST['cf-turnstile-response'] ?? '';
 
-// Validate token presence
-if (!$token) {
-    http_response_code(400);
-    exit("Turnstile verification failed: no token.");
-}
-
-// Validate other form data
 if (!$name || !$email || !$message || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     exit("Invalid form data.");
 }
 
-// Verify Turnstile token using cURL
-$ch = curl_init('https://challenges.cloudflare.com/turnstile/v0/siteverify');
-
-$postFields = http_build_query([
-    'secret' => $TURNSTILE_SECRET,
-    'response' => $token,
-    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
-]);
-
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-
-$response = curl_exec($ch);
-
-if (curl_errno($ch)) {
-    error_log("cURL error during Turnstile verification: " . curl_error($ch));
-    http_response_code(500);
-    exit("Internal server error during CAPTCHA verification.");
-}
-
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-if ($httpCode !== 200) {
-    error_log("Turnstile verification HTTP error: $httpCode");
-    http_response_code(500);
-    exit("Turnstile verification service error.");
-}
-
-$captchaResult = json_decode($response, true);
-
-if (empty($captchaResult['success'])) {
-    http_response_code(403);
-    exit("Turnstile verification failed.");
-}
-
-// Insert into database
+// Save enquiry to DB
 try {
     $stmt = $pdo->prepare("INSERT INTO enquiries (product, name, email, message, submitted_at) VALUES (?, ?, ?, ?, NOW())");
     $stmt->execute([$product, $name, $email, $message]);
 } catch (Exception $e) {
-    error_log('Database insert error: ' . $e->getMessage());
+    log_error("Database insert failed: " . $e->getMessage());
     http_response_code(500);
-    exit("Server error while saving your enquiry: " . htmlspecialchars($e->getMessage()));
+    exit("Server error while saving enquiry.");
 }
 
-// Send notification email
-$to = "musthafa.shaik@chandusoft.com";
-$subject = "New product enquiry: $product";
+// Prepare email
+$to = "admin@chandusoft.local";
+$subject = "New Product Enquiry: $product";
 $body = <<<EMAIL
-You received a new enquiry.
-
-Product: $product
-Name: $name
-Email: $email
-
-Message:
-$message
+<h3>New Product Enquiry</h3>
+<p><strong>Product:</strong> {$product}</p>
+<p><strong>Name:</strong> {$name}</p>
+<p><strong>Email:</strong> {$email}</p>
+<p><strong>Message:</strong><br>{$message}</p>
 EMAIL;
 
-$headers = [
-    'From' => 'no-reply@yourdomain.com',
-    'Reply-To' => $email,
-    'Content-Type' => 'text/plain; charset=UTF-8'
-];
+// Send email via Mailpit
+send_mailpit_notification($subject, $body);
 
-mail($to, $subject, $body, implode("\r\n", $headers));
+// Log the enquiry
+log_catalog("New enquiry for $product from $email");
 
-// Success response
-echo "✅ Thank you! Your enquiry has been sent.";
+// Success response (popup + redirect)
+echo "<script>
+    alert('✅ Thank you! Your enquiry has been sent successfully.');
+    window.location.href = '/public/catalog.php';
+</script>";

@@ -14,7 +14,7 @@ $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusof
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -68,5 +68,6 @@ unset($_SESSION['register_old']);
         <p>Already have an account? <a href="../admin/login.php">Login here</a></p>
     </div>
 </div>
+
 </body>
 </html>

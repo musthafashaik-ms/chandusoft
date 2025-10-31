@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
+require_once __DIR__ . '/../app/logger.php';
 
 // ✅ Public Catalog List (only published items)
 $search = trim($_GET['search'] ?? '');
@@ -25,6 +26,9 @@ $totalPages = ceil($total / $limit);
 $stmt = $pdo->prepare("SELECT * FROM catalog $where ORDER BY created_at DESC LIMIT $offset, $limit");
 $stmt->execute($params);
 $items = $stmt->fetchAll();
+
+// Log page view
+log_page("Visited Catalog Page | Search: $search | Page: $page");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,22 +86,36 @@ $items = $stmt->fetchAll();
             height: 200px;
             object-fit: cover;
             border-radius: 6px;
+            transition: transform 0.2s ease;
         }
         .card h3 {
             margin: 10px 0 5px;
-            color: #333;
+            color: #007BFF;
         }
         .card p {
             margin: 0 0 10px;
             color: #555;
         }
-        .card a {
+        .card a.card-link {
+            display: block;
+            color: inherit;
             text-decoration: none;
-            padding: 8px 12px;
-            background: #007BFF;
+        }
+        .card .view-details-btn {
+            display: inline-block;
+            background-color: #007BFF;
             color: white;
+            padding: 8px 12px;
             border-radius: 4px;
             text-align: center;
+            margin-top: 10px;
+        }
+        .card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        .card img:hover {
+            transform: scale(1.05);
         }
         .pagination {
             text-align: center;
@@ -115,6 +133,60 @@ $items = $stmt->fetchAll();
             background: #007BFF;
             color: white;
         }
+        /* Buttons container - display buttons side by side */
+.buttons {
+    display: flex;
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 10px;
+    width: 100%; /* Ensure buttons take up the full width of the card */
+}
+
+/* Quantity input field */
+.quantity-input {
+    width: 50px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 15px;
+}
+
+/* Both Buy Now and Add to Cart buttons */
+.buy-now-btn, .add-to-cart-btn {
+    border: none;
+    border-radius: 0; /* Removing rounded corners for rectangular shape */
+    cursor: pointer;
+    width: 75%; /* Ensure buttons share equal space */
+    text-align: center;
+    font-size: 1em;
+}
+
+/* Buy Now button - Green */
+.buy-now-btn {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.buy-now-btn:hover {
+    background-color: #218838; /* Darker green for hover */
+}
+
+/* Add to Cart button - Blue */
+.add-to-cart-btn {
+    background-color: #007BFF; /* Blue */
+    color: white;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #0056b3; /* Darker blue for hover */
+}
+
+/* Card hover effect */
+.card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+
     </style>
 </head>
 <body>
@@ -131,14 +203,30 @@ $items = $stmt->fetchAll();
 <div class="grid">
     <?php if ($items): ?>
         <?php foreach ($items as $item): ?>
-            <div class="card">
-                <?php if ($item['image']): ?>
-                    <img src="/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['title']) ?>">
-                <?php endif; ?>
-                <h3><?= htmlspecialchars($item['title']) ?></h3>
-                <p>$<?= number_format($item['price'], 2) ?></p>
-                <a href="catalog-item.php?slug=<?= urlencode($item['slug']) ?>">View Details</a>
-            </div>
+           <div class="card">
+    <a href="catalog-item.php?slug=<?= urlencode($item['slug']) ?>" class="card-link">
+        <?php if ($item['image']): ?>
+            <img src="/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['title']) ?>">
+        <?php endif; ?>
+        <h3><?= htmlspecialchars($item['title']) ?></h3>
+        <p>$<?= number_format($item['price'], 2) ?></p>
+    </a>
+    
+    <!-- Add Buy Now and Add to Cart buttons -->
+    <div class="buttons">
+        <form method="post" action="/public/cart" class="buy-now-form">
+            <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
+            <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+            <button type="submit" class="buy-now-btn">Buy Now</button>
+        </form>
+        <form method="post" action="/public/cart" class="add-to-cart-form">
+            <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
+            <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+        </form>
+    </div>
+</div>
+
         <?php endforeach; ?>
     <?php else: ?>
         <p style="text-align:center;">No items found.</p>

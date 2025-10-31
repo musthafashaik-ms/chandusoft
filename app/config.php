@@ -27,4 +27,13 @@ try {
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
+// config.php
+
+// config.php
+
+define('STRIPE_SECRET_KEY', 'sk_test_51SNs3wAhJkYkXNzXsOYQJ2VYGfYIfcXd20lVISFv3Dq4W1eafNWaVQQQFEVUplug1FUx2jY4PDivCDC3bJSL2gX900hbscfEG2');  // Replace with your actual test secret key
+define('PAYPAL_CLIENT_ID', 'your-paypal-client-id-here');
+define('PAYPAL_SANDBOX', true);  // Or false for live environment
+define('APP_URL', 'http://chandusoft.test');  // Your app base URL
+
 ?>

@@ -36,6 +36,7 @@ $_SESSION['LAST_ACTIVITY'] = time();
 // --- Retrieve old form data ---
 $old_email = $_SESSION['old_email'] ?? '';
 unset($_SESSION['old_email']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +113,7 @@ unset($_SESSION['old_email']);
 
     <div style="text-align:center; margin-top:15px;">
         <p>Don't have an account?</p>
-        <a href="../app/register.php"><button type="button" style="background:#28a745;">Register</button></a>
+        <a href="../app/register"><button type="button" style="background:#28a745;">Register</button></a>
     </div>
 </div>
 </body>

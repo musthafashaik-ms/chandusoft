@@ -194,3 +194,37 @@
 [2025-10-30 03:59:24][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-10-30 03:59:40][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
 [2025-10-30 04:00:21][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-10-30 06:01:35][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-10-30 08:18:00][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-10-30 10:26:16][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'name' in 'field list' | IP: 127.0.0.1
+[2025-10-30 10:28:49][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'name' in 'field list' | IP: 127.0.0.1
+[2025-10-30 10:30:10][ERROR] Order placement failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'chandusoft.order_items' doesn't exist | IP: 127.0.0.1
+[2025-10-30 11:07:30][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'payment_status' in 'field list' | IP: 127.0.0.1
+[2025-10-30 11:07:34][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'payment_status' in 'field list' | IP: 127.0.0.1
+[2025-10-31 03:52:05][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-10-31 07:52:03][ERROR] Order placement failed: Invalid API Key provided: your-str***************here | IP: 127.0.0.1
+[2025-10-31 07:53:16][ERROR] Order placement failed: Invalid API Key provided: your-str***************here | IP: 127.0.0.1
+[2025-10-31 07:53:47][ERROR] Order placement failed: Invalid API Key provided: your-str***************here | IP: 127.0.0.1
+[2025-10-31 07:54:46][ERROR] Order placement failed: Invalid API Key provided: your-str***************here | IP: 127.0.0.1
+[2025-10-31 07:55:56][ERROR] Order placement failed: Expired API Key provided: sk_test_4e******************p7dc | IP: 127.0.0.1
+[2025-10-31 07:56:44][ERROR] Order placement failed: Expired API Key provided: sk_test_4e******************p7dc | IP: 127.0.0.1
+[2025-10-31 07:59:47][ERROR] Order placement failed: Expired API Key provided: sk_test_4e******************p7dc | IP: 127.0.0.1
+[2025-10-31 07:59:57][ERROR] Order placement failed: Expired API Key provided: sk_test_4e******************p7dc | IP: 127.0.0.1
+[2025-10-31 08:00:03][ERROR] Order placement failed: Expired API Key provided: sk_test_4e******************p7dc | IP: 127.0.0.1
+[2025-10-31 08:00:11][ERROR] Order placement failed: Expired API Key provided: sk_test_4e******************p7dc | IP: 127.0.0.1
+[2025-10-31 08:01:58][ERROR] Order placement failed: Invalid URL: An explicit scheme (such as https) must be provided. | IP: 127.0.0.1
+[2025-10-31 08:03:22][ERROR] Order placement failed: Invalid URL: An explicit scheme (such as https) must be provided. | IP: 127.0.0.1
+[2025-10-31 08:40:54][ERROR] Order placement failed: Invalid URL: An explicit scheme (such as https) must be provided. | IP: 127.0.0.1
+[2025-10-31 08:41:16][ERROR] Order placement failed: Invalid URL: An explicit scheme (such as https) must be provided. | IP: 127.0.0.1
+[2025-10-31 08:43:58][ERROR] Order placement failed: Not a valid URL | IP: 127.0.0.1
+[2025-10-31 08:44:46][ERROR] Order placement failed: Not a valid URL | IP: 127.0.0.1
+[2025-10-31 11:05:30][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'address' in 'field list' | IP: 127.0.0.1
+[2025-10-31 11:05:39][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'address' in 'field list' | IP: 127.0.0.1
+[2025-10-31 11:07:26][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'city' in 'field list' | IP: 127.0.0.1
+[2025-10-31 11:07:29][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'city' in 'field list' | IP: 127.0.0.1
+[2025-10-31 11:08:05][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'city' in 'field list' | IP: 127.0.0.1
+[2025-10-31 11:08:08][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'city' in 'field list' | IP: 127.0.0.1
+[2025-10-31 11:10:11][ERROR] Order placement failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'postal_code' in 'field list' | IP: 127.0.0.1
+[2025-10-31 11:11:21][ERROR] Order placement failed: SQLSTATE[01000]: Warning: 1265 Data truncated for column 'payment_gateway' at row 1 | IP: 127.0.0.1
+[2025-10-31 11:14:20][ERROR] Order placement failed: SQLSTATE[01000]: Warning: 1265 Data truncated for column 'payment_gateway' at row 1 | IP: 127.0.0.1
+[2025-10-31 11:14:23][ERROR] Order placement failed: SQLSTATE[01000]: Warning: 1265 Data truncated for column 'payment_gateway' at row 1 | IP: 127.0.0.1
