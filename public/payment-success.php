@@ -21,6 +21,7 @@ if ($order_id) {
         // Display order details
         echo "<h2>✅ Payment successful! Your order $order_id has been confirmed.</h2>";
 
+
         echo "<h3>Order Details:</h3>";
         echo "<p><strong>Customer Name:</strong> " . htmlspecialchars($order['customer_name']) . "</p>";
         

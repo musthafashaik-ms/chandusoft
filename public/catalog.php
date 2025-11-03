@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/logger.php';
+include __DIR__ . '/../admin/header.php';
+
 
 // ✅ Public Catalog List (only published items)
 $search = trim($_GET['search'] ?? '');
@@ -40,7 +42,7 @@ log_page("Visited Catalog Page | Search: $search | Page: $page");
             font-family: Arial, sans-serif;
             background: #f8f9fa;
             margin: 0;
-            padding: 20px;
+            padding: 0px;
         }
         h1 {
             text-align: center;
@@ -186,7 +188,133 @@ log_page("Visited Catalog Page | Search: $search | Page: $page");
     transform: translateY(-5px);
 }
 
+/* Header Styles */
+header {
+    background-color: #007BFF;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+ 
+.logo img {
+    width: 400px;
+    height: auto;
+}
+ 
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+ 
+/* Navigation Links */
+nav a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    transition: color 0.3s ease;
+}
+ 
+/* Hover effect: underline only */
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 3px;
+    background-color: #FFD700; /* underline color (gold/yellow) */
+    transition: width 0.3s ease;
+}
+ 
+nav a:hover::after,
+nav a.active::after {
+    width: 100%; /* full underline on hover or active */
+}
+ 
+nav a:hover,
+nav a.active {
+    color: #FFD700; /* text color change on hover or active (optional) */
+}
+ 
 
+
+/* Back to Top Button */
+/* Back to Top Button */
+#back-to-top {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    display: none; /* Hidden by default */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 10px; /* Adjusted padding for a smaller button */
+    border-radius: 30%; /* Round shape */
+    font-size: 20px; /* Increase font size for better visibility */
+    cursor: pointer;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Center the content inside the button */
+    width: 50px; /* Adjust the width of the button */
+    height: 50px; /* Adjust the height of the button */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content (the arrow) inside the button */
+}
+
+
+
+/* Change background color when hovered */
+#back-to-top:hover {
+    background-color: #0056b3;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    margin-top: auto;
+    font-size: 14px;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+footer p b {
+    font-weight: bold;
+}
+
+.social-icons a {
+    color: #fff;
+    margin-left: 15px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #1da1f2; /* Hover color */
+}
     </style>
 </head>
 <body>
@@ -238,6 +366,9 @@ log_page("Visited Catalog Page | Search: $search | Page: $page");
         <a href="?search=<?= urlencode($search) ?>&page=<?= $i ?>" class="<?= $i === $page ? 'active' : '' ?>"><?= $i ?></a>
     <?php endfor; ?>
 </div>
+<?php include __DIR__ . '/../admin/footer.php'; ?>
 
+    <button id="back-to-top" title="Back to Top">↑</button>
+    <script src="/include.js"></script>
 </body>
 </html>

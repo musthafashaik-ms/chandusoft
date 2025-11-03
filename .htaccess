@@ -43,11 +43,10 @@ RewriteRule ^checkout/?$ public/checkout.php [L,QSA]
 RewriteRule ^public/place-order/?$ public/place-order.php [L,QSA]
 
 # ------------------------------------------------------------
-# Routing for payment success and cancel pages
+# ✅ Payment success / cancel pages
 # ------------------------------------------------------------
 RewriteRule ^payment-success/?$ public/payment-success.php [L,QSA]
 RewriteRule ^payment-cancel/?$ public/payment-cancel.php [L,QSA]
-
 
 # ------------------------------------------------------------
 # ⚙️ Generic Page Routes (index, about, services, contact)
