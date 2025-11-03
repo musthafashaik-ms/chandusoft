@@ -8,29 +8,42 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Add or Update Item in Cart
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
-    $pid = intval($_POST['product_id']);
-    $qty = max(1, intval($_POST['quantity'] ?? 1));
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? '';
 
-    // Check if product is already in the cart, if so update it, otherwise add it
-    if (isset($_SESSION['cart'][$pid])) {
-        $_SESSION['cart'][$pid]['quantity'] += $qty; // Update quantity
-    } else {
-        $_SESSION['cart'][$pid] = ['quantity' => $qty]; // Add new item to cart
+    switch ($action) {
+        case 'update':
+            $pid = intval($_POST['product_id']);
+            $qty = max(1, intval($_POST['quantity'] ?? 1));
+            if (isset($_SESSION['cart'][$pid])) {
+                $_SESSION['cart'][$pid]['quantity'] = $qty; // Set exact quantity
+            }
+            break;
+
+        case 'remove':
+            $pid = intval($_POST['product_id']);
+            unset($_SESSION['cart'][$pid]);
+            break;
+
+        case 'empty':
+            $_SESSION['cart'] = [];
+            break;
+
+        default:
+            // Adding new item (no action field)
+            if (isset($_POST['product_id'])) {
+                $pid = intval($_POST['product_id']);
+                $qty = max(1, intval($_POST['quantity'] ?? 1));
+                if (isset($_SESSION['cart'][$pid])) {
+                    $_SESSION['cart'][$pid]['quantity'] += $qty;
+                } else {
+                    $_SESSION['cart'][$pid] = ['quantity' => $qty];
+                }
+            }
+            break;
     }
 
-    // Redirect to cart page after updating
-    header("Location: /public/cart");
-    exit; // Make sure no further code runs
-}
-
-// Remove Item from Cart
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'remove') {
-    $pid = intval($_POST['product_id']);
-    unset($_SESSION['cart'][$pid]); // Remove item from cart
-
-    // Redirect back to cart page
+    // Redirect to cart after any action
     header("Location: /public/cart");
     exit;
 }

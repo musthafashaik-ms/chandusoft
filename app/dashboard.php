@@ -107,7 +107,7 @@ $draftPages = $draftPagesResult->fetch_assoc()['count'];
 <body>
 
 <div class="navbar">
-    <div><strong>Chandusoft Admin</strong></div>
+    <div><strong>Chandusoft <?= $role ?> </strong></div>
     <div class="links">
         Welcome <?= $role ?>!
         <a href="/app/dashboard.php">Dashboard</a>

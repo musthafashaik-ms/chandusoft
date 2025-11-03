@@ -1,6 +1,14 @@
 <?php
-require __DIR__ . '/../app/config.php';  // correct path to config.php
+session_start();
+
+// Clear all session data
 session_unset();
 session_destroy();
-header("Location: login.php");  // assuming login.php is in admin folder
+
+// Also clear specific session variables that might be causing the issue
+unset($_SESSION['old_email']);
+
+// Redirect to login page
+header("Location: /admin/login.php");
 exit();
+?>

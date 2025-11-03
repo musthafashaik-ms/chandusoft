@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  
 <!-- ✅ Navbar -->
 <div class="navbar">
-    <div><strong>Chandusoft Admin</strong></div>
+    <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
         Welcome <?= $role ?>!
         <a href="/app/dashboard.php">Dashboard</a>
@@ -191,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if ($role === 'Admin'): ?>
         <a href="/admin/catalog.php">Admin Catalog</a>
         <a href="/public/catalog.php">Public Catalog</a>
+        <a href="/admin/orders.php">Orders</a>
     <?php elseif ($role === 'Editor'): ?>
         <a href="/public/catalog.php">Public Catalog</a>
     <?php endif; ?>

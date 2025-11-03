@@ -13,10 +13,7 @@ if (!$item) {
     exit;
 }
 
-// Turnstile site key (optional for local)
 $TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
-
-// Log view
 log_catalog("Viewed catalog item: {$item['title']}");
 ?>
 <!DOCTYPE html>
@@ -40,13 +37,11 @@ log_catalog("Viewed catalog item: {$item['title']}");
         overflow: hidden;
         max-width: 1000px;
         margin: 0 auto 30px;
-        flex-wrap: wrap;
     }
 
     .product-image {
-        flex: 1 1 300px;
-        max-width: 400px;
-        height: auto;
+        flex: 1;
+        max-width: 50%;
     }
 
     .product-image img {
@@ -57,21 +52,21 @@ log_catalog("Viewed catalog item: {$item['title']}");
     }
 
     .product-info {
-        flex: 2 1 500px;
+        flex: 1;
         padding: 30px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
     }
 
     .product-info h1 {
         color: #007BFF;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     .price {
         color: green;
-        font-size: 1.5em;
+        font-size: 1.4em;
         margin-bottom: 15px;
     }
 
@@ -80,62 +75,79 @@ log_catalog("Viewed catalog item: {$item['title']}");
         margin-bottom: 20px;
     }
 
-    .action-section {
+    /* Tabs */
+    .tabs {
         display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
+        border-bottom: 2px solid #007BFF;
+        margin-bottom: 20px;
     }
 
-    .cart-form, .enquiry-form {
+    .tab {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        font-weight: bold;
+        color: #007BFF;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s;
+    }
+
+    .tab.active {
+        border-color: Blue;
+        color: #007bff;
+    }
+
+    .tab-content {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .tab-content.active {
+        display: block;
+        opacity: 1;
+    }
+
+    form {
         background: #f9f9f9;
         padding: 20px;
         border-radius: 8px;
-        flex: 1 1 250px;
         box-shadow: 0 1px 5px rgba(0,0,0,0.1);
     }
 
-    .cart-form input[type="number"] {
-        width: 80px;
-        padding: 8px;
-        margin-right: 10px;
+    form input, form textarea, form button {
+        width: 100%;
+        margin-bottom: 12px;
+        padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        box-sizing: border-box;
     }
 
-    .cart-form button, .enquiry-form button {
+    form button {
         background: #007BFF;
-        color: #fff;
+        color: white;
         border: none;
-        border-radius: 4px;
-        padding: 10px 16px;
         cursor: pointer;
+        transition: background 0.3s;
     }
 
-    .cart-form button:hover, .enquiry-form button:hover {
+    form button:hover {
         background: #0056b3;
     }
+.cf-turnstile {
+    margin: 5px 0 15px 45px; /* Add left margin (20px) to move it right */
+    width: 100%; /* Full width */
+    max-width: 800px; /* Optional: Max width */
+    height: 50px; /* Set height */
+    transform: scale(1.2); /* Adjust size */
+    transform-origin: top center; /* Scale from the top */
+    overflow: hidden;
+}
 
-    .enquiry-form input, .enquiry-form textarea {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
 
-    .cf-turnstile { margin: 15px 0; }
 
-    @media (max-width: 768px) {
-        .product-card {
-            flex-direction: column;
-        }
-        .product-image, .product-info {
-            max-width: 100%;
-        }
-        .action-section {
-            flex-direction: column;
-        }
-    }
 
     .back-to-catalog {
         display: inline-block;
@@ -146,8 +158,18 @@ log_catalog("Viewed catalog item: {$item['title']}");
         border-radius: 4px;
         text-decoration: none;
     }
+
     .back-to-catalog:hover {
         background: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+        .product-card {
+            flex-direction: column;
+        }
+        .product-image, .product-info {
+            max-width: 100%;
+        }
     }
 </style>
 </head>
@@ -163,46 +185,56 @@ log_catalog("Viewed catalog item: {$item['title']}");
 
     <!-- Info Section -->
     <div class="product-info">
-        <div>
-            <h1><?= htmlspecialchars($item['title']) ?></h1>
-            <p class="price">$<?= number_format($item['price'], 2) ?></p>
-            <p class="product-description"><?= nl2br(htmlspecialchars($item['short_desc'])) ?></p>
+        <h1><?= htmlspecialchars($item['title']) ?></h1>
+        <p class="price">$<?= number_format($item['price'], 2) ?></p>
+        <p class="product-description"><?= nl2br(htmlspecialchars($item['short_desc'])) ?></p>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" data-target="cart-tab">🛒 Add to Cart</div>
+            <div class="tab" data-target="enquiry-tab">📩 Enquiry</div>
         </div>
 
-        <!-- Action Section -->
-        <div class="action-section">
-            <!-- Add to Cart Form -->
-            <form class="cart-form" method="post" action="/public/cart">
-                <h3>Add to Cart</h3>
+        <!-- Add to Cart Form -->
+        <div id="cart-tab" class="tab-content active">
+            <form method="post" action="/public/cart">
                 <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
-                <label>
-                    Quantity:
-                    <input type="number" name="quantity" value="1" min="1">
-                </label>
+                <label>Quantity:</label>
+                <input type="number" name="quantity" value="1" min="1" required>
                 <button type="submit">Add to Cart</button>
             </form>
+        </div>
 
-            <!-- Enquiry Form -->
-            <form class="enquiry-form" method="post" action="/public/send-enquiry">
-                <h3>Enquire About This Product</h3>
+        <!-- Enquiry Form -->
+        <div id="enquiry-tab" class="tab-content">
+            <form method="post" action="/public/send-enquiry">
                 <input type="hidden" name="product" value="<?= htmlspecialchars($item['title']) ?>">
                 <input type="text" name="name" placeholder="Your name" required>
                 <input type="email" name="email" placeholder="Your email" required>
                 <textarea name="message" placeholder="Your message" rows="4" required></textarea>
-
-                <!-- Optional Turnstile Widget -->
                 <div class="cf-turnstile"
                      data-sitekey="<?= htmlspecialchars($TURNSTILE_SITE) ?>"
-                     data-theme="light"></div>
-
+                     data-theme="light"
+                     data-size="compact"></div>
                 <button type="submit">Send Enquiry</button>
             </form>
         </div>
     </div>
 </div>
 
-<a href="catalog.php" class="back-to-catalog">Back to Catalog</a>
+<a href="/public/catalog" class="back-to-catalog">← Back to Catalog</a>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab, .tab-content').forEach(el => el.classList.remove('active'));
+        tab.classList.add('active');
+        const target = document.getElementById(tab.dataset.target);
+        target.classList.add('active');
+    });
+});
+</script>
+
 </body>
 </html>
