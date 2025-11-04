@@ -171,17 +171,38 @@ log_catalog("Viewed catalog item: {$item['title']}");
             max-width: 100%;
         }
     }
+
+    .zoom-container {
+    overflow: hidden;
+    position: relative;
+    cursor: zoom-in;
+}
+
+.zoom-container.zoomed {
+    cursor: zoom-out;
+}
+
+.zoom-image {
+    transition: transform 0.3s ease;
+}
+
+/* Optional: zoom on hover */
+.zoom-container:hover .zoom-image {
+    transform: scale(1.2);
+}
+
 </style>
 </head>
 <body>
 
 <div class="product-card">
     <!-- Image Section -->
-    <div class="product-image">
-        <?php if ($item['image']): ?>
-            <img src="/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['title']) ?>">
-        <?php endif; ?>
-    </div>
+    <div class="product-image zoom-container">
+    <?php if ($item['image']): ?>
+        <img src="/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['title']) ?>" class="zoom-image">
+    <?php endif; ?>
+</div>
+
 
     <!-- Info Section -->
     <div class="product-info">
@@ -233,6 +254,34 @@ document.querySelectorAll('.tab').forEach(tab => {
         const target = document.getElementById(tab.dataset.target);
         target.classList.add('active');
     });
+});
+
+
+const zoomContainer = document.querySelector('.zoom-container');
+const zoomImage = zoomContainer.querySelector('.zoom-image');
+
+zoomContainer.addEventListener('click', () => {
+    if (zoomContainer.classList.contains('zoomed')) {
+        zoomImage.style.transform = 'scale(1)';
+        zoomContainer.classList.remove('zoomed');
+    } else {
+        zoomImage.style.transform = 'scale(2)'; // Zoom factor
+        zoomContainer.classList.add('zoomed');
+    }
+});
+
+// Optional: change cursor dynamically
+zoomContainer.addEventListener('mousemove', (e) => {
+    if (zoomContainer.classList.contains('zoomed')) {
+        const rect = zoomContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const moveX = (x / rect.width) * 100;
+        const moveY = (y / rect.height) * 100;
+        zoomImage.style.transformOrigin = `${moveX}% ${moveY}%`;
+    } else {
+        zoomImage.style.transformOrigin = 'center center';
+    }
 });
 </script>
 

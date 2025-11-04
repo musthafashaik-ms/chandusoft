@@ -48,8 +48,10 @@ $currentURI = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         ?>
  
         <!-- ✅ Login/Register -->
-<span><a href="/admin/login.php" class="<?= ($currentPage === 'login') ? 'active' : '' ?>">Login</a>
-/<a href="/app/register" class="<?= ($currentPage === 'register') ? 'active' : '' ?>">Register</a>
+<span>
+  <a href="/admin/login.php" class="<?= ($currentPage === 'login') ? 'active' : '' ?>">Login</a>
+  /
+  <a href="/app/register" class="<?= ($currentPage === 'register') ? 'active' : '' ?>">Register</a>
 </span>
     </nav>
 </header>

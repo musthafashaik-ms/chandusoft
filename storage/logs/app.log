@@ -258,3 +258,5 @@
 [2025-11-03 10:58:06][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
 [2025-11-03 11:07:05][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-11-03 11:07:06][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-03 11:32:49][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-04 03:36:46][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
