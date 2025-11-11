@@ -8,7 +8,7 @@ $logoPath = get_setting('logo_path') ?: 'images/logo.jpg';
  
 // Fix logo path (uploads/)
 if ($logoPath && strpos($logoPath, 'uploads/') === 0) {
-    $logoPath = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $logoPath;
+    $logoPath = 'https://' . $_SERVER['HTTP_HOST'] . '/' . $logoPath;
 }
  
 // Get current URI (e.g. /index, /about, /services)

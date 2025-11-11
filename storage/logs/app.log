@@ -1434,3 +1434,32 @@
 [2025-11-10 16:45:00][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
 [2025-11-10 16:45:05][INFO] ✅Payment successful for Order ID: 79. Transaction ID: pi_3SRt3iFqmeKxNjQe0JZPQDis. Payment Gateway: stripe. | IP: 127.0.0.1
 [2025-11-11 08:33:09][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-11 12:16:39][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-11 13:21:54][INFO] 🛒 Checkout started — Total: 20 USD | IP: 127.0.0.1
+[2025-11-11 13:21:54][INFO] 🧾 Order 80 created (Ref: D933C116BCD2, Payment: stripe) | IP: 127.0.0.1
+[2025-11-11 13:21:54][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-11 13:21:55][INFO] 💳 Creating Stripe session for Order #80 | IP: 127.0.0.1
+[2025-11-11 13:22:05][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1KFnJXD0rFLHJcJ1dGqYiBY3a8dTPlDZuZ0L7ZEck2zQpPf6sy46UHxgi#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-11 13:41:42][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-11 14:45:31][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-11 14:45:31][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-11 14:45:43][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-11 14:45:43][INFO] 🔔 Stripe Event Received: checkout.session.expired | IP: ::1
+[2025-11-11 14:45:43][INFO] ℹ️ Unhandled event type: checkout.session.expired | IP: ::1
+[2025-11-11 14:45:43][INFO] ✅ Webhook processed successfully — Event: checkout.session.expired | IP: ::1
+[2025-11-11 14:45:45][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-11 14:45:45][INFO] 🔔 Stripe Event Received: payment_intent.canceled | IP: ::1
+[2025-11-11 14:45:45][INFO] ℹ️ Unhandled event type: payment_intent.canceled | IP: ::1
+[2025-11-11 14:45:45][INFO] ✅ Webhook processed successfully — Event: payment_intent.canceled | IP: ::1
+[2025-11-11 14:58:08][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-11 14:58:08][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-11 14:58:12][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-11 14:58:12][INFO] 🔔 Stripe Event Received: checkout.session.expired | IP: ::1
+[2025-11-11 14:58:12][INFO] ℹ️ Unhandled event type: checkout.session.expired | IP: ::1
+[2025-11-11 14:58:12][INFO] ✅ Webhook processed successfully — Event: checkout.session.expired | IP: ::1
+[2025-11-11 14:58:16][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-11 14:58:16][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-11 14:58:16][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-11 14:58:16][INFO] 🔔 Stripe Event Received: payment_intent.canceled | IP: ::1
+[2025-11-11 14:58:16][INFO] ℹ️ Unhandled event type: payment_intent.canceled | IP: ::1
+[2025-11-11 14:58:16][INFO] ✅ Webhook processed successfully — Event: payment_intent.canceled | IP: ::1
