@@ -1,0 +1,27 @@
+[2025-11-07 09:00:23][INFO] Viewed catalog item: Curd | IP: 127.0.0.1
+[2025-11-07 09:01:19][INFO] Viewed catalog item: Curd | IP: 127.0.0.1
+[2025-11-07 09:07:09][INFO] Viewed catalog item: TestA | IP: ::1
+[2025-11-07 09:28:20][INFO] Payment canceled for order 68 | IP: 127.0.0.1
+[2025-11-07 10:22:55][INFO] Viewed catalog item: TestA | IP: 127.0.0.1
+[2025-11-07 11:06:37][INFO] Viewed catalog item: Curd | IP: 127.0.0.1
+[2025-11-07 11:06:58][INFO] Payment canceled for order 71 | IP: 127.0.0.1
+[2025-11-07 11:37:34][INFO] ❌ Payment canceled for Order ID 71 (Ref: B28C2B3E1A74) — User canceled payment on Stripe checkout page. | IP: 127.0.0.1
+[2025-11-07 16:07:11][INFO] 📸 Image uploaded for 'jai sai' — file: uploads/catalog_1762511831.png | IP: 127.0.0.1
+[2025-11-07 16:07:13][CREATE] 🆕 Created catalog item #34 — title: 'jai sai', price: 150, status: 'published' | IP: 127.0.0.1
+[2025-11-07 16:07:13][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-07 16:08:54][INFO] Viewed catalog item: Curd | IP: 127.0.0.1
+[2025-11-07 16:22:56][INFO] Viewed catalog item: TestA | IP: 127.0.0.1
+[2025-11-07 16:30:01][INFO] Viewed catalog item: M | IP: 127.0.0.1
+[2025-11-07 16:32:39][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-07 16:32:44][INFO] Catalog viewed | Page: 2 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-07 16:32:47][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-07 16:33:19][INFO] Viewed catalog item: M | IP: ::1
+[2025-11-07 16:35:30][INFO] Catalog viewed | Page: 1 | Status: published | Search: '%' | IP: 127.0.0.1
+[2025-11-07 16:35:34][INFO] Catalog viewed | Page: 1 | Status: published | Search: ''1'='1' | IP: 127.0.0.1
+[2025-11-07 16:35:36][INFO] Catalog viewed | Page: 1 | Status: published | Search: ''1'='1' | IP: 127.0.0.1
+[2025-11-07 16:35:40][INFO] Catalog viewed | Page: 1 | Status: published | Search: ''1'='1' | IP: 127.0.0.1
+[2025-11-07 16:35:42][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-07 16:45:43][INFO] Viewed catalog item: jai sai | IP: 127.0.0.1
+[2025-11-07 16:47:06][INFO] Viewed catalog item: jai sai | IP: 127.0.0.1
+[2025-11-07 16:47:14][INFO] Viewed catalog item: Curd | IP: 127.0.0.1
+[2025-11-07 16:47:20][INFO] Viewed catalog item: M | IP: 127.0.0.1

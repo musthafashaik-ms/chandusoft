@@ -260,3 +260,1177 @@
 [2025-11-03 11:07:06][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-11-03 11:32:49][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-11-04 03:36:46][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-04 05:34:07][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-04 05:34:07][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-04 10:08:53][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-04 10:40:20][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-04 10:40:38][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-05 11:29:12][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-06 03:48:38][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-06 03:48:38][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-06 12:30:47][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:30:47][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:30:47][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:31:02][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 12:31:02][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 12:31:02][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 12:31:33][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 12:31:33][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 12:31:33][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 12:31:35][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:31:35][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:31:35][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:36:17][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:36:17][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:36:17][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:37:25][INFO] 🛒 Checkout started — Total: 150 USD | IP: ::1
+[2025-11-06 12:37:26][INFO] 🧾 Order 44 created (Ref: DDE7614890DC, Payment: stripe) | IP: ::1
+[2025-11-06 12:37:26][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 12:37:26][INFO] 💳 Creating Stripe session for Order #44 | IP: ::1
+[2025-11-06 12:37:27][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1XQytwqtWA7ycmJFkHLjFiQ9SYXuuDEJfdjzqNQ8gioLAOF1TUZRoTA3e#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 12:48:58][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:48:58][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:48:58][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:49:00][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:49:00][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:49:00][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:49:12][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:49:12][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:49:12][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:52:16][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:52:16][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:52:16][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:52:17][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:52:17][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:52:17][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:52:18][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:52:18][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:52:18][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:52:57][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 12:52:58][INFO] 🧾 Order 45 created (Ref: C9B0CCB9AE1C, Payment: stripe) | IP: ::1
+[2025-11-06 12:52:58][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 12:52:58][INFO] 💳 Creating Stripe session for Order #45 | IP: ::1
+[2025-11-06 12:52:59][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1GOTxT7dgsyBIXvTsnXAmt0WQ9ktotDojGFZ8sZvyM6vVlt0A2yCg1wfB#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 12:56:34][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:56:34][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:56:34][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:58:20][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 12:58:20][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 12:58:20][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 12:59:29][INFO] 🛒 Checkout started — Total: 100 USD | IP: ::1
+[2025-11-06 12:59:29][INFO] 🧾 Order 46 created (Ref: 4C62955E683B, Payment: stripe) | IP: ::1
+[2025-11-06 12:59:29][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 12:59:29][INFO] 💳 Creating Stripe session for Order #46 | IP: ::1
+[2025-11-06 12:59:31][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_b1Mc361mhtW6w1vX9PduSFr5N5MDBAq4xFviJwzzW75o8iPnMKPd7DhaZL#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl | IP: ::1
+[2025-11-06 13:06:52][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 13:06:52][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 13:06:52][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 13:08:59][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 13:08:59][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 13:08:59][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 13:09:00][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 13:09:00][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 13:09:00][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 13:09:00][INFO] ✅ Stripe webhook initialized | IP: 127.0.0.1
+[2025-11-06 13:09:00][INFO] 🌐 Webhook triggered from host: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-06 13:09:00][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: 127.0.0.1 | IP: 127.0.0.1
+[2025-11-06 13:09:10][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 13:09:10][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 13:09:10][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 13:09:27][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 13:09:27][INFO] 🧾 Order 47 created (Ref: 8776BB347763, Payment: stripe) | IP: ::1
+[2025-11-06 13:09:27][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:09:27][INFO] 💳 Creating Stripe session for Order #47 | IP: ::1
+[2025-11-06 13:09:28][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1NWeIM5v0reXKaz2muefSZ6v9f4Oc4eIQkVTeA8IEJ3yfLdtProvv9Wve#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:18:32][INFO] 🛒 Checkout started — Total: 42 USD | IP: ::1
+[2025-11-06 13:18:33][INFO] 🧾 Order 48 created (Ref: 9AC182ADA2D0, Payment: stripe) | IP: ::1
+[2025-11-06 13:18:33][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:18:33][INFO] 💳 Creating Stripe session for Order #48 | IP: ::1
+[2025-11-06 13:18:34][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1Wa8kIz8O051FMgrnUoagM0jTzqz9aKJtxeUSnmKtmf3Nu8OmZMBU0u1E#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:22:18][INFO] 🛒 Checkout started — Total: 84 USD | IP: ::1
+[2025-11-06 13:22:19][INFO] 🧾 Order 49 created (Ref: 9C6A46F2105C, Payment: stripe) | IP: ::1
+[2025-11-06 13:22:19][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:22:19][INFO] 💳 Creating Stripe session for Order #49 | IP: ::1
+[2025-11-06 13:22:20][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a16c7Hkoo2ansDAFm5TuYZPrtAuH2sPLbC8WN5svIN2g2Mm8ZAZs7YxEPt#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:23:41][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 13:23:41][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 13:23:41][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 13:24:03][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 13:24:03][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 13:24:03][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 13:30:50][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 13:30:51][INFO] 🧾 Order 50 created (Ref: AB76A10620C0, Payment: stripe) | IP: ::1
+[2025-11-06 13:30:51][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:30:51][INFO] 💳 Creating Stripe session for Order #50 | IP: ::1
+[2025-11-06 13:30:52][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1RgzEeGqrKLdo0uebVBwDFWyKryDPYv8wfLV3PsTT0Jie8mtsZpMLdKsh#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:37:53][INFO] 🛒 Checkout started — Total: 42 USD | IP: ::1
+[2025-11-06 13:37:54][INFO] 🧾 Order 51 created (Ref: C5881FE78EE2, Payment: stripe) | IP: ::1
+[2025-11-06 13:37:54][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:37:54][INFO] 💳 Creating Stripe session for Order #51 | IP: ::1
+[2025-11-06 13:37:55][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1NTDFefWuJX8HEAonJZptv4ASxDHOYzd4XwvA7SLQUGP533whYZHymMTl#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:40:37][INFO] 🛒 Checkout started — Total: 42 USD | IP: ::1
+[2025-11-06 13:40:37][INFO] 🧾 Order 52 created (Ref: 8B32EB573E7C, Payment: stripe) | IP: ::1
+[2025-11-06 13:40:37][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:40:37][INFO] 💳 Creating Stripe session for Order #52 | IP: ::1
+[2025-11-06 13:40:38][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1nBQ7mtDICBMFtDHavS97obfmRAP9QXY0sh9LKSrPplzSzbQ15LoR8dg2#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:48:01][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 13:48:01][INFO] 🧾 Order 53 created (Ref: B0835E5EB4F8, Payment: stripe) | IP: ::1
+[2025-11-06 13:48:01][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:48:01][INFO] 💳 Creating Stripe session for Order #53 | IP: ::1
+[2025-11-06 13:48:02][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1Q3GL5WXcqE9JNsQ8RT8LIkKyn8kZCxSL8XUiuvjOMRtcw0a4rpMZYfDn#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0Vkt2NnJEbU9uXG5dS39dQ1dCUmZ8dDVwcEZRdEhjfUI3Z2JpclwwPWhhMlFHQVBsSFd3UFJwV3NNS25OfDdUMDJhTnBSYTVmfVdhVkQ0T0o2TVZkYEFjNTVvfEc1dEZzPScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:52:05][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 13:52:05][INFO] 🧾 Order 54 created (Ref: 1A80930E825E, Payment: stripe) | IP: ::1
+[2025-11-06 13:52:05][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:52:05][INFO] 💳 Creating Stripe session for Order #54 | IP: ::1
+[2025-11-06 13:52:07][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a10qNnRum2MCC0qsWIp3tLTClEpfk9BwBaAKTMjpsFlFLba9p3TCTWfEal#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 13:58:36][INFO] 🛒 Checkout started — Total: 80 USD | IP: ::1
+[2025-11-06 13:58:37][INFO] 🧾 Order 55 created (Ref: D58D10E40B10, Payment: stripe) | IP: ::1
+[2025-11-06 13:58:37][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 13:58:37][INFO] 💳 Creating Stripe session for Order #55 | IP: ::1
+[2025-11-06 13:58:38][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1iP9Qo5KFlEiKWqoCITV5CyK90EhnENwTGqKm6n03y9cDoMmYwjQugNaZ#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 14:00:33][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 14:00:33][INFO] 🧾 Order 56 created (Ref: 9D748B6C9AB4, Payment: stripe) | IP: ::1
+[2025-11-06 14:00:33][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 14:00:33][INFO] 💳 Creating Stripe session for Order #56 | IP: ::1
+[2025-11-06 14:00:34][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1LHKyivlvwRpelxQLFEjZSnDvYoiXHB4WrkuSNwoRFpcOunodx6Xemhyd#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 15:34:55][INFO] 🛒 Checkout started — Total: 150 USD | IP: ::1
+[2025-11-06 15:34:56][INFO] 🧾 Order 57 created (Ref: 3AB0970C26A6, Payment: stripe) | IP: ::1
+[2025-11-06 15:34:56][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 15:34:56][INFO] 💳 Creating Stripe session for Order #57 | IP: ::1
+[2025-11-06 15:34:57][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a188oySWvDCJTfb0qGUIhLNopTQMJWqKstgyzBfQA2dCF8sI5XcOpKSFAm#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 15:38:41][INFO] 🛒 Checkout started — Total: 80 USD | IP: ::1
+[2025-11-06 15:38:41][INFO] 🧾 Order 58 created (Ref: 39416E0405E0, Payment: stripe) | IP: ::1
+[2025-11-06 15:38:41][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 15:38:41][INFO] 💳 Creating Stripe session for Order #58 | IP: ::1
+[2025-11-06 15:38:42][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1dgoAyKxFOS37gHtHFGh4BE6wYgwooiHqDviWg2U37qI0IUU9PHPKHf4q#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 15:38:52][INFO] 🛒 Checkout started — Total: 80 USD | IP: ::1
+[2025-11-06 15:38:52][INFO] 🧾 Order 59 created (Ref: 841E1C2B7EDE, Payment: stripe) | IP: ::1
+[2025-11-06 15:38:52][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 15:38:52][INFO] 💳 Creating Stripe session for Order #59 | IP: ::1
+[2025-11-06 15:38:54][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1ePy699nzOjGKskfe9uGyjy5s0cezzXBCd60LedsDA7wzRrEvjhs7wgyn#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 15:44:01][INFO] 🛒 Checkout started — Total: 42 USD | IP: ::1
+[2025-11-06 15:44:01][INFO] 🧾 Order 60 created (Ref: 43FD342A5D1C, Payment: stripe) | IP: ::1
+[2025-11-06 15:44:01][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 15:44:01][INFO] 💳 Creating Stripe session for Order #60 | IP: ::1
+[2025-11-06 15:44:02][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1sE5MIl2r7UrCvBulf1zNdBcYMGLFQAl8BYHZ72nQIawCZakKgFohGG1A#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 15:48:25][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 15:48:25][INFO] 🧾 Order 61 created (Ref: FD40F467EB21, Payment: stripe) | IP: ::1
+[2025-11-06 15:48:25][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 15:48:25][INFO] 💳 Creating Stripe session for Order #61 | IP: ::1
+[2025-11-06 15:48:26][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1fPnyf6bavbXPuqcYJfEQKKiolBw19PNmLAwY5GgBfe7MVGWJntjUVFDR#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 15:55:08][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 15:55:08][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 15:55:08][INFO] ❌ Invalid request method: GET | IP: ::1
+[2025-11-06 15:55:52][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 15:55:52][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 15:55:52][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 15:55:55][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 15:55:55][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 15:55:55][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 15:56:22][INFO] ✅ Stripe webhook initialized | IP: ::1
+[2025-11-06 15:56:22][INFO] 🌐 Webhook triggered from host: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-06 15:56:22][WARNING] ⚠️ Webhook received empty payload. Method: GET | IP: ::1 | IP: ::1
+[2025-11-06 16:02:21][INFO] Non-POST request to webhook: GET | IP: ::1
+[2025-11-06 16:13:52][INFO] Non-POST request to webhook: GET | IP: 127.0.0.1
+[2025-11-06 16:13:53][INFO] Non-POST request to webhook: GET | IP: 127.0.0.1
+[2025-11-06 16:15:34][INFO] Received payload (first 500): {"type":"checkout.session.completed","data":{"object":{"metadata":{"order_id":"123"},"payment_intent":"pi_test_123","customer_email":"test@example.com","amount_total":9999}}} | IP: ::1
+[2025-11-06 16:15:34][INFO] No signature header/secret; parsed JSON directly | IP: ::1
+[2025-11-06 16:15:34][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:15:34][ERROR] DB/webhook handling error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'txn_id' in 'field list' | IP: ::1
+[2025-11-06 16:15:34][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:15:37][INFO] Received payload (first 500): {"type":"checkout.session.completed","data":{"object":{"metadata":{"order_id":"123"},"payment_intent":"pi_test_123","customer_email":"test@example.com","amount_total":9999}}} | IP: ::1
+[2025-11-06 16:15:37][INFO] No signature header/secret; parsed JSON directly | IP: ::1
+[2025-11-06 16:15:37][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:15:37][ERROR] DB/webhook handling error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'txn_id' in 'field list' | IP: ::1
+[2025-11-06 16:15:37][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:16:11][INFO] Empty body. CT=application/json CL=0 | IP: ::1
+[2025-11-06 16:16:11][INFO] Empty body. CT=application/json CL=0 | IP: ::1
+[2025-11-06 16:16:34][INFO] Received payload (first 500): {"type":"checkout.session.completed","data":{"object":{"metadata":{"order_id":"123"},"payment_intent":"pi_test_123","customer_email":"test@example.com","amount_total":9999}}} | IP: ::1
+[2025-11-06 16:16:34][INFO] No signature header/secret; parsed JSON directly | IP: ::1
+[2025-11-06 16:16:34][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:16:34][ERROR] DB/webhook handling error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'txn_id' in 'field list' | IP: ::1
+[2025-11-06 16:16:34][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:35:21][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 16:35:21][INFO] 🧾 Order 62 created (Ref: 7D1FF47FDD8B, Payment: stripe) | IP: ::1
+[2025-11-06 16:35:21][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 16:35:21][INFO] 💳 Creating Stripe session for Order #62 | IP: ::1
+[2025-11-06 16:35:22][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1c5uSWX4xbtTyh2ntaLpZ3ankaOgkVdL4jopONkRfja5qnR0PK8nRrrjy#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 16:35:30][INFO] Received payload (first 500): {
+  "id": "evt_3SQR0PFqmeKxNjQe1hYS6Nn8",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762427129,
+  "data": {
+    "object": {
+      "id": "pi_3SQR0PFqmeKxNjQe1U7KeVkv",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 2000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+ | IP: ::1
+[2025-11-06 16:35:30][INFO] Received payload (first 500): {
+  "id": "evt_1SQR0QFqmeKxNjQeBHMr2kvk",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762427130,
+  "data": {
+    "object": {
+      "id": "cs_test_a1c5uSWX4xbtTyh2ntaLpZ3ankaOgkVdL4jopONkRfja5qnR0PK8nRrrjy",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 2000,
+      "amount_total": 2000,
+      "automatic_tax": {
+        "enabl | IP: ::1
+[2025-11-06 16:35:30][INFO] Received payload (first 500): {
+  "id": "evt_3SQR0PFqmeKxNjQe1CTMAk1D",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762427129,
+  "data": {
+    "object": {
+      "id": "pi_3SQR0PFqmeKxNjQe1U7KeVkv",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+    | IP: ::1
+[2025-11-06 16:35:30][INFO] Signature verified | IP: ::1
+[2025-11-06 16:35:30][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:35:30][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:35:30][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 16:35:30][INFO] Signature verified | IP: ::1
+[2025-11-06 16:35:30][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:35:30][ERROR] DB/webhook handling error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'txn_id' in 'field list' | IP: ::1
+[2025-11-06 16:35:30][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:35:30][INFO] Signature verified | IP: ::1
+[2025-11-06 16:35:30][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 16:35:30][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 16:35:30][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 16:35:41][INFO] Received payload (first 500): {
+  "id": "evt_3SQQ3xFqmeKxNjQe0hqBI2ty",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762423505,
+  "data": {
+    "object": {
+      "id": "pi_3SQQ3xFqmeKxNjQe0JGQGXaN",
+      "object": "payment_intent",
+      "amount": 15000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+   | IP: ::1
+[2025-11-06 16:35:41][INFO] Signature verified | IP: ::1
+[2025-11-06 16:35:41][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 16:35:41][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 16:35:41][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 16:38:40][INFO] Received payload (first 500): {
+  "id": "evt_3SQQ7lFqmeKxNjQe1AlFrBgT",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762423742,
+  "data": {
+    "object": {
+      "id": "pi_3SQQ7lFqmeKxNjQe1wShTrFt",
+      "object": "payment_intent",
+      "amount": 8000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 8000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+ | IP: ::1
+[2025-11-06 16:38:40][INFO] Signature verified | IP: ::1
+[2025-11-06 16:38:40][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:38:40][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:38:40][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 16:39:24][INFO] Received payload (first 500): {
+  "id": "evt_3SQQ7lFqmeKxNjQe1C2AOv8m",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762423741,
+  "data": {
+    "object": {
+      "id": "pi_3SQQ7lFqmeKxNjQe1wShTrFt",
+      "object": "payment_intent",
+      "amount": 8000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+    | IP: ::1
+[2025-11-06 16:39:24][INFO] Signature verified | IP: ::1
+[2025-11-06 16:39:24][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 16:39:24][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 16:39:24][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 16:39:43][INFO] Received payload (first 500): {
+  "id": "evt_1SQQ7mFqmeKxNjQeNmgjq49T",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762423742,
+  "data": {
+    "object": {
+      "id": "cs_test_a1ePy699nzOjGKskfe9uGyjy5s0cezzXBCd60LedsDA7wzRrEvjhs7wgyn",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 8000,
+      "amount_total": 8000,
+      "automatic_tax": {
+        "enabl | IP: ::1
+[2025-11-06 16:39:43][INFO] Signature verified | IP: ::1
+[2025-11-06 16:39:43][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:39:43][ERROR] DB/webhook handling error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'txn_id' in 'field list' | IP: ::1
+[2025-11-06 16:39:43][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:43:34][INFO] 🛒 Checkout started — Total: 20 USD | IP: ::1
+[2025-11-06 16:43:34][INFO] 🧾 Order 63 created (Ref: EEB54C93B199, Payment: stripe) | IP: ::1
+[2025-11-06 16:43:34][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 16:43:34][INFO] 💳 Creating Stripe session for Order #63 | IP: ::1
+[2025-11-06 16:43:35][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1VSSI4PnP8vUTREH72pyen6cZI1KUn4g2DbJktPVaF3FtGzqyk4XqmGkx#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 16:43:44][INFO] Received payload (first 500): {
+  "id": "evt_3SQR8NFqmeKxNjQe1ek3kZIz",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762427624,
+  "data": {
+    "object": {
+      "id": "pi_3SQR8NFqmeKxNjQe1MJXfaFQ",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 2000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+ | IP: ::1
+[2025-11-06 16:43:44][INFO] Received payload (first 500): {
+  "id": "evt_1SQR8OFqmeKxNjQePM1jzLi1",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762427624,
+  "data": {
+    "object": {
+      "id": "cs_test_a1VSSI4PnP8vUTREH72pyen6cZI1KUn4g2DbJktPVaF3FtGzqyk4XqmGkx",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 2000,
+      "amount_total": 2000,
+      "automatic_tax": {
+        "enabl | IP: ::1
+[2025-11-06 16:43:44][INFO] Received payload (first 500): {
+  "id": "evt_3SQR8NFqmeKxNjQe1VLRQfot",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762427623,
+  "data": {
+    "object": {
+      "id": "pi_3SQR8NFqmeKxNjQe1MJXfaFQ",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+    | IP: ::1
+[2025-11-06 16:43:44][INFO] Signature verified | IP: ::1
+[2025-11-06 16:43:44][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:43:44][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:43:44][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 16:43:44][INFO] Signature verified | IP: ::1
+[2025-11-06 16:43:44][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:43:44][INFO] Signature verified | IP: ::1
+[2025-11-06 16:43:44][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 16:43:44][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 16:43:44][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 16:43:44][INFO] Order Ref EEB54C93B199 marked PAID (txn pi_3SQR8NFqmeKxNjQe1MJXfaFQ) | IP: ::1
+[2025-11-06 16:43:44][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:44:55][INFO] Received payload (first 500): {
+  "id": "evt_3SQQD0FqmeKxNjQe10TonR9c",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762424067,
+  "data": {
+    "object": {
+      "id": "pi_3SQQD0FqmeKxNjQe1oFx7Fag",
+      "object": "payment_intent",
+      "amount": 4200,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 4200,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+ | IP: ::1
+[2025-11-06 16:44:55][INFO] Signature verified | IP: ::1
+[2025-11-06 16:44:55][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:44:55][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:44:55][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 16:44:56][INFO] Received payload (first 500): {
+  "id": "evt_1SQQD1FqmeKxNjQeGQaH8JKR",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762424067,
+  "data": {
+    "object": {
+      "id": "cs_test_a1sE5MIl2r7UrCvBulf1zNdBcYMGLFQAl8BYHZ72nQIawCZakKgFohGG1A",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 4200,
+      "amount_total": 4200,
+      "automatic_tax": {
+        "enabl | IP: ::1
+[2025-11-06 16:44:56][INFO] Signature verified | IP: ::1
+[2025-11-06 16:44:56][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:44:56][INFO] Order Ref 43FD342A5D1C marked PAID (txn pi_3SQQD0FqmeKxNjQe1oFx7Fag) | IP: ::1
+[2025-11-06 16:44:56][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:45:20][INFO] Received payload (first 500): {
+  "id": "evt_3SQQD0FqmeKxNjQe1owvscSl",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762424066,
+  "data": {
+    "object": {
+      "id": "pi_3SQQD0FqmeKxNjQe1oFx7Fag",
+      "object": "payment_intent",
+      "amount": 4200,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+    | IP: ::1
+[2025-11-06 16:45:20][INFO] Signature verified | IP: ::1
+[2025-11-06 16:45:20][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 16:45:20][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 16:45:20][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 16:48:49][INFO] Received payload (first 500): {
+  "id": "evt_3SQQH0FqmeKxNjQe0KLZdOeX",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762424315,
+  "data": {
+    "object": {
+      "id": "pi_3SQQH0FqmeKxNjQe0vpAyonv",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 2000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+ | IP: ::1
+[2025-11-06 16:48:49][INFO] Signature verified | IP: ::1
+[2025-11-06 16:48:49][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:48:49][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:48:49][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 16:49:04][INFO] Received payload (first 500): {
+  "id": "evt_3SQQH0FqmeKxNjQe0TDXVl6n",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762424314,
+  "data": {
+    "object": {
+      "id": "pi_3SQQH0FqmeKxNjQe0vpAyonv",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+    | IP: ::1
+[2025-11-06 16:49:04][INFO] Signature verified | IP: ::1
+[2025-11-06 16:49:04][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 16:49:04][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 16:49:04][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 16:49:05][INFO] Received payload (first 500): {
+  "id": "evt_1SQQH1FqmeKxNjQeGzHHGy7v",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762424315,
+  "data": {
+    "object": {
+      "id": "cs_test_a1fPnyf6bavbXPuqcYJfEQKKiolBw19PNmLAwY5GgBfe7MVGWJntjUVFDR",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 2000,
+      "amount_total": 2000,
+      "automatic_tax": {
+        "enabl | IP: ::1
+[2025-11-06 16:49:05][INFO] Signature verified | IP: ::1
+[2025-11-06 16:49:05][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:49:05][INFO] Order Ref FD40F467EB21 marked PAID (txn pi_3SQQH0FqmeKxNjQe0vpAyonv) | IP: ::1
+[2025-11-06 16:49:05][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 16:58:04][INFO] Received payload (first 500): {
+  "id": "evt_3SQOabFqmeKxNjQe1nGcRkjN",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762417842,
+  "data": {
+    "object": {
+      "id": "pi_3SQOabFqmeKxNjQe14huh2hw",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 2000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+ | IP: ::1
+[2025-11-06 16:58:04][INFO] Signature verified | IP: ::1
+[2025-11-06 16:58:04][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:58:04][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 16:58:04][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 16:59:45][INFO] Received payload (first 500): {
+  "id": "evt_3SQOabFqmeKxNjQe1ZblrPeK",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762417841,
+  "data": {
+    "object": {
+      "id": "pi_3SQOabFqmeKxNjQe14huh2hw",
+      "object": "payment_intent",
+      "amount": 2000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+    | IP: ::1
+[2025-11-06 16:59:45][INFO] Signature verified | IP: ::1
+[2025-11-06 16:59:45][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 16:59:45][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 16:59:45][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 16:59:47][INFO] 🛒 Checkout started — Total: 166 USD | IP: ::1
+[2025-11-06 16:59:47][INFO] 🧾 Order 64 created (Ref: 5761DB1BC5A0, Payment: stripe) | IP: ::1
+[2025-11-06 16:59:47][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 16:59:47][INFO] 💳 Creating Stripe session for Order #64 | IP: ::1
+[2025-11-06 16:59:48][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_b1whnKMNxTbXowdq9Hx9IY41zlV9hkNgLv109xx7xERMXvKx7jdKfMpbVR#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl | IP: ::1
+[2025-11-06 16:59:57][INFO] Received payload (first 500): {
+  "id": "evt_1SQOYkFqmeKxNjQed2QEkiGi",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762417726,
+  "data": {
+    "object": {
+      "id": "cs_test_a1iP9Qo5KFlEiKWqoCITV5CyK90EhnENwTGqKm6n03y9cDoMmYwjQugNaZ",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 8000,
+      "amount_total": 8000,
+      "automatic_tax": {
+        "enabl | IP: ::1
+[2025-11-06 16:59:58][INFO] Signature verified | IP: ::1
+[2025-11-06 16:59:58][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 16:59:58][INFO] Order Ref D58D10E40B10 marked PAID (txn pi_3SQOYjFqmeKxNjQe1cavAs9v) | IP: ::1
+[2025-11-06 16:59:58][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 17:00:13][INFO] Received payload (first 500): {
+  "id": "evt_1SQROLFqmeKxNjQerppzfI28",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762428613,
+  "data": {
+    "object": {
+      "id": "cs_test_b1whnKMNxTbXowdq9Hx9IY41zlV9hkNgLv109xx7xERMXvKx7jdKfMpbVR",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 16600,
+      "amount_total": 16600,
+      "automatic_tax": {
+        "ena | IP: ::1
+[2025-11-06 17:00:13][INFO] Received payload (first 500): {
+  "id": "evt_3SQROKFqmeKxNjQe1JUyw3AW",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762428612,
+  "data": {
+    "object": {
+      "id": "pi_3SQROKFqmeKxNjQe1Tlzi1J2",
+      "object": "payment_intent",
+      "amount": 16600,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 16600,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null | IP: ::1
+[2025-11-06 17:00:13][INFO] Signature verified | IP: ::1
+[2025-11-06 17:00:13][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 17:00:13][INFO] Received payload (first 500): {
+  "id": "evt_3SQROKFqmeKxNjQe1NP4xeD9",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762428612,
+  "data": {
+    "object": {
+      "id": "pi_3SQROKFqmeKxNjQe1Tlzi1J2",
+      "object": "payment_intent",
+      "amount": 16600,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+   | IP: ::1
+[2025-11-06 17:00:13][INFO] Signature verified | IP: ::1
+[2025-11-06 17:00:13][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 17:00:13][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 17:00:13][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 17:00:13][INFO] Order Ref 5761DB1BC5A0 marked PAID (txn pi_3SQROKFqmeKxNjQe1Tlzi1J2) | IP: ::1
+[2025-11-06 17:00:13][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 17:00:13][INFO] Signature verified | IP: ::1
+[2025-11-06 17:00:13][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 17:00:13][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 17:00:13][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 17:00:40][INFO] Received payload (first 500): {
+  "id": "evt_3SQOYjFqmeKxNjQe1axAgQTn",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762417726,
+  "data": {
+    "object": {
+      "id": "pi_3SQOYjFqmeKxNjQe1cavAs9v",
+      "object": "payment_intent",
+      "amount": 8000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 8000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+ | IP: ::1
+[2025-11-06 17:00:40][INFO] Signature verified | IP: ::1
+[2025-11-06 17:00:40][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 17:00:40][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-06 17:00:40][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-06 17:01:30][INFO] Received payload (first 500): {
+  "id": "evt_3SQOYjFqmeKxNjQe1sKuxxqe",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762417725,
+  "data": {
+    "object": {
+      "id": "pi_3SQOYjFqmeKxNjQe1cavAs9v",
+      "object": "payment_intent",
+      "amount": 8000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+    | IP: ::1
+[2025-11-06 17:01:30][INFO] Signature verified | IP: ::1
+[2025-11-06 17:01:30][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-06 17:01:30][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-06 17:01:30][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-06 17:02:16][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-06 17:03:54][INFO] Received payload (first 500): {
+  "id": "evt_1SQOacFqmeKxNjQeYV0o8Qkt",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762417842,
+  "data": {
+    "object": {
+      "id": "cs_test_a1LHKyivlvwRpelxQLFEjZSnDvYoiXHB4WrkuSNwoRFpcOunodx6Xemhyd",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 2000,
+      "amount_total": 2000,
+      "automatic_tax": {
+        "enabl | IP: ::1
+[2025-11-06 17:03:54][INFO] Signature verified | IP: ::1
+[2025-11-06 17:03:54][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-06 17:03:54][INFO] Order Ref 9D748B6C9AB4 marked PAID (txn pi_3SQOabFqmeKxNjQe14huh2hw) | IP: ::1
+[2025-11-06 17:03:54][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-06 17:10:03][INFO] 🛒 Checkout started — Total: 150 USD | IP: ::1
+[2025-11-06 17:10:03][INFO] 🧾 Order 65 created (Ref: EFB530BDCD13, Payment: stripe) | IP: ::1
+[2025-11-06 17:10:03][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 17:10:03][INFO] 💳 Creating Stripe session for Order #65 | IP: ::1
+[2025-11-06 17:10:04][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1NuuNMNV2P5gaxXe3tYCh5N2cVtz6sIzeGAN3aEkeLGqtQZnxfbcWJtYC#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 17:20:11][INFO] 🛒 Checkout started — Total: 42 USD | IP: ::1
+[2025-11-06 17:20:11][INFO] 🧾 Order 66 created (Ref: EC028AED520E, Payment: stripe) | IP: ::1
+[2025-11-06 17:20:11][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 17:20:11][INFO] 💳 Creating Stripe session for Order #66 | IP: ::1
+[2025-11-06 17:20:12][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1h9q2RvDxbt7s6XXnwbuhcojQSlMVhNFAfCRFsQak5GEmBUtULlXV17cP#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-06 17:20:35][INFO] 🛒 Checkout started — Total: 150 USD | IP: ::1
+[2025-11-06 17:20:35][INFO] 🧾 Order 67 created (Ref: 67D8FA929E0A, Payment: stripe) | IP: ::1
+[2025-11-06 17:20:35][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-06 17:20:35][INFO] 💳 Creating Stripe session for Order #67 | IP: ::1
+[2025-11-06 17:20:36][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1wWSIF5lSgYt16c7DulDJOoAWkxCM2B8HZGwhm0f92tBeBXHQzu1aA6FJ#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-07 09:28:07][INFO] 🛒 Checkout started — Total: 140 USD | IP: 127.0.0.1
+[2025-11-07 09:28:07][INFO] 🧾 Order 68 created (Ref: 794A79403688, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 09:28:07][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 09:28:07][INFO] 💳 Creating Stripe session for Order #68 | IP: 127.0.0.1
+[2025-11-07 09:28:09][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_b1VSSvPNgMkHL55gopdjkKD42sGYT8QG5HCSC7zqSMYyEJ5jR0Nwwn0agy#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl | IP: 127.0.0.1
+[2025-11-07 10:23:24][INFO] 🛒 Checkout started — Total: 150 USD | IP: 127.0.0.1
+[2025-11-07 10:23:24][INFO] 🧾 Order 69 created (Ref: 09C2884A18C4, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 10:23:24][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 10:23:24][INFO] 💳 Creating Stripe session for Order #69 | IP: 127.0.0.1
+[2025-11-07 10:23:25][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1rTdGRvh6WpIdIT6T4dBXUrYteP3UgN4yMph98nSmMBFahKQET9wO5UDZ#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-07 10:23:35][INFO] Received payload (first 500): {
+  "id": "evt_3SQhg2FqmeKxNjQe0dRVuAdp",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762491215,
+  "data": {
+    "object": {
+      "id": "pi_3SQhg2FqmeKxNjQe0bytOcSP",
+      "object": "payment_intent",
+      "amount": 15000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 15000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null | IP: ::1
+[2025-11-07 10:23:36][INFO] Received payload (first 500): {
+  "id": "evt_3SQhg2FqmeKxNjQe0uFAK7Re",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762491214,
+  "data": {
+    "object": {
+      "id": "pi_3SQhg2FqmeKxNjQe0bytOcSP",
+      "object": "payment_intent",
+      "amount": 15000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+   | IP: ::1
+[2025-11-07 10:23:36][INFO] Received payload (first 500): {
+  "id": "evt_1SQhg3FqmeKxNjQemmUuMDQ6",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762491215,
+  "data": {
+    "object": {
+      "id": "cs_test_a1rTdGRvh6WpIdIT6T4dBXUrYteP3UgN4yMph98nSmMBFahKQET9wO5UDZ",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 15000,
+      "amount_total": 15000,
+      "automatic_tax": {
+        "ena | IP: ::1
+[2025-11-07 10:23:36][INFO] Signature verified | IP: ::1
+[2025-11-07 10:23:36][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 10:23:36][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 10:23:36][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-07 10:23:36][INFO] Signature verified | IP: ::1
+[2025-11-07 10:23:36][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-07 10:23:36][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-07 10:23:36][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-07 10:23:36][INFO] Signature verified | IP: ::1
+[2025-11-07 10:23:36][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-07 10:23:36][INFO] Order Ref 09C2884A18C4 marked PAID (txn pi_3SQhg2FqmeKxNjQe0bytOcSP) | IP: ::1
+[2025-11-07 10:23:36][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-07 10:25:30][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: ::1
+[2025-11-07 11:02:15][INFO] 🛒 Checkout started — Total: 150 USD | IP: 127.0.0.1
+[2025-11-07 11:02:15][INFO] 🧾 Order 70 created (Ref: A3FDBCDD47EF, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 11:02:15][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 11:02:15][INFO] 💳 Creating Stripe session for Order #70 | IP: 127.0.0.1
+[2025-11-07 11:02:16][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1OCsQcpu9MiGrpmhdQYJwhy1JWQ8hGk3FYWr5VHAM7CyN7gACa3KxATwc#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-07 11:02:49][INFO] Received payload (first 500): {
+  "id": "evt_3SQiI0FqmeKxNjQe0axCNUGb",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762493569,
+  "data": {
+    "object": {
+      "id": "pi_3SQiI0FqmeKxNjQe04odBcSP",
+      "object": "payment_intent",
+      "amount": 15000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 15000,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null | IP: ::1
+[2025-11-07 11:02:49][INFO] Received payload (first 500): {
+  "id": "evt_1SQiI1FqmeKxNjQezpGy5yy7",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762493569,
+  "data": {
+    "object": {
+      "id": "cs_test_a1OCsQcpu9MiGrpmhdQYJwhy1JWQ8hGk3FYWr5VHAM7CyN7gACa3KxATwc",
+      "object": "checkout.session",
+      "adaptive_pricing": {
+        "enabled": true
+      },
+      "after_expiration": null,
+      "allow_promotion_codes": null,
+      "amount_subtotal": 15000,
+      "amount_total": 15000,
+      "automatic_tax": {
+        "ena | IP: ::1
+[2025-11-07 11:02:49][INFO] Received payload (first 500): {
+  "id": "evt_3SQiI0FqmeKxNjQe0dk4kQ4N",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1762493568,
+  "data": {
+    "object": {
+      "id": "pi_3SQiI0FqmeKxNjQe04odBcSP",
+      "object": "payment_intent",
+      "amount": 15000,
+      "amount_capturable": 0,
+      "amount_details": {
+        "tip": {}
+      },
+      "amount_received": 0,
+      "application": null,
+      "application_fee_amount": null,
+      "automatic_payment_methods": null,
+      "canceled_at": null,
+   | IP: ::1
+[2025-11-07 11:02:49][INFO] Signature verified | IP: ::1
+[2025-11-07 11:02:49][INFO] Event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 11:02:49][INFO] Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 11:02:49][INFO] Webhook processed OK — payment_intent.succeeded | IP: ::1
+[2025-11-07 11:02:50][INFO] Signature verified | IP: ::1
+[2025-11-07 11:02:50][INFO] Event type: checkout.session.completed | IP: ::1
+[2025-11-07 11:02:50][INFO] Signature verified | IP: ::1
+[2025-11-07 11:02:50][INFO] Event type: payment_intent.created | IP: ::1
+[2025-11-07 11:02:50][INFO] Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-07 11:02:50][INFO] Webhook processed OK — payment_intent.created | IP: ::1
+[2025-11-07 11:02:50][INFO] Order Ref A3FDBCDD47EF marked PAID (txn pi_3SQiI0FqmeKxNjQe04odBcSP) | IP: ::1
+[2025-11-07 11:02:50][INFO] Webhook processed OK — checkout.session.completed | IP: ::1
+[2025-11-07 11:06:44][INFO] 🛒 Checkout started — Total: 20 USD | IP: 127.0.0.1
+[2025-11-07 11:06:45][INFO] 🧾 Order 71 created (Ref: B28C2B3E1A74, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 11:06:45][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 11:06:45][INFO] 💳 Creating Stripe session for Order #71 | IP: 127.0.0.1
+[2025-11-07 11:06:46][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1PLpgnJXPGp2NcsJJ3EsSGEoF8mc35FrCDGnTE6c19DzYFYdGtmhXWDq2#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-07 11:38:36][INFO] 🛒 Checkout started — Total: 750 USD | IP: 127.0.0.1
+[2025-11-07 11:38:36][INFO] 🧾 Order 72 created (Ref: A8A6542AC56D, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 11:38:36][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 11:38:36][INFO] 💳 Creating Stripe session for Order #72 | IP: 127.0.0.1
+[2025-11-07 11:38:37][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1thUh9BEvBXxiWBH7qgGFjKGGnh5uT3rXU1plPgE9Pefyw5FBCRWhO5fI#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-07 11:40:52][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 11:40:52][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 11:40:52][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 11:40:52][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 11:40:52][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 11:40:52][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-07 11:40:52][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-07 11:40:52][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 11:40:52][INFO] 🔔 Stripe Event Received: payment_intent.payment_failed | IP: ::1
+[2025-11-07 11:40:52][INFO] ⚠️ Missing order_ref/order_id in failed payment webhook | IP: ::1
+[2025-11-07 11:40:52][INFO] ✅ Webhook processed successfully — Event: payment_intent.payment_failed | IP: ::1
+[2025-11-07 12:01:31][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-07 12:15:38][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-07 13:18:41][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-07 16:01:43][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:01:43][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:01:43][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:01:43][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:01:43][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:01:43][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:01:43][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:01:43][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:01:43][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:01:43][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-07 16:01:43][INFO] ✅ Order Ref A8A6542AC56D marked PAID — txn: pi_3SQisoFqmeKxNjQe0pEBtPYc, amount: 750, email: musthafa.shaik@gmai.com | IP: ::1
+[2025-11-07 16:01:43][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-07 16:09:05][INFO] 🛒 Checkout started — Total: 20 USD | IP: 127.0.0.1
+[2025-11-07 16:09:06][INFO] 🧾 Order 73 created (Ref: F2A1D1F15CD7, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 16:09:06][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 16:09:06][INFO] 💳 Creating Stripe session for Order #73 | IP: 127.0.0.1
+[2025-11-07 16:09:07][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1iOt8lzMsloVhyTBrbtigyH5gjGIeDwmR82udgSoJayYQrcGw5idW6xve#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-07 16:09:22][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:09:22][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:09:22][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:09:22][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:09:22][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:09:22][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-07 16:09:22][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-07 16:09:22][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-07 16:09:22][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:09:22][INFO] 🔔 Stripe Event Received: payment_intent.payment_failed | IP: ::1
+[2025-11-07 16:09:22][INFO] ⚠️ Missing order_ref/order_id in failed payment webhook | IP: ::1
+[2025-11-07 16:09:22][INFO] ✅ Webhook processed successfully — Event: payment_intent.payment_failed | IP: ::1
+[2025-11-07 16:14:02][INFO] ❌ Payment canceled for Order ID 73 (Ref: F2A1D1F15CD7) — User canceled payment on Stripe checkout page. | IP: 127.0.0.1
+[2025-11-07 16:23:15][INFO] 🛒 Checkout started — Total: 150 USD | IP: 127.0.0.1
+[2025-11-07 16:23:15][INFO] 🧾 Order 74 created (Ref: 27F4B98C6DA8, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 16:23:15][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 16:23:15][INFO] 💳 Creating Stripe session for Order #74 | IP: 127.0.0.1
+[2025-11-07 16:23:16][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1T0fjWRmnWrzdxg8HZSrJNs7Y1n5vGxEQoX9iOhD1kQ25X3ZiFjCltOP8#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-07 16:23:32][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:23:32][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:23:32][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:23:32][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:23:32][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:23:32][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:23:32][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:23:32][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:23:32][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:23:32][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:23:32][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:23:32][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-07 16:23:32][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:23:32][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-07 16:23:32][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-07 16:23:32][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-07 16:23:33][INFO] ✅ Order Ref 27F4B98C6DA8 marked PAID — txn: pi_3SQnINFqmeKxNjQe1wfSVbaH, amount: 150, email: musthafa.shaik@gmai.com | IP: ::1
+[2025-11-07 16:23:33][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-07 16:29:29][INFO] Payment successful for Order ID: 74. Transaction ID: pi_3SQnINFqmeKxNjQe1wfSVbaH. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-07 16:30:21][INFO] 🛒 Checkout started — Total: 80 USD | IP: 127.0.0.1
+[2025-11-07 16:30:21][INFO] 🧾 Order 75 created (Ref: 27411BABEF50, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 16:30:21][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 16:30:21][INFO] 💳 Creating Stripe session for Order #75 | IP: 127.0.0.1
+[2025-11-07 16:30:22][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a14nFls5UPq0GV90MSOSLXe01cFlWO3Y5viMdIvY40Qu97OJ4WSWOe0ew1#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-07 16:30:29][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:30:29][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:30:29][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:30:29][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:30:29][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:30:29][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:30:29][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Order Ref 27411BABEF50 marked PAID — txn: pi_3SQnP6FqmeKxNjQe1KEAenSJ, amount: 80, email: musthafa.shaik000@gmai.com | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:30:29][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-07 16:30:29][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-07 16:30:29][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-07 16:30:31][INFO] Payment successful for Order ID: 75. Transaction ID: pi_3SQnP6FqmeKxNjQe1KEAenSJ. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-07 16:51:05][INFO] 🛒 Checkout started — Total: 162 USD | IP: 127.0.0.1
+[2025-11-07 16:51:06][INFO] 🧾 Order 76 created (Ref: 51626553CC93, Payment: stripe) | IP: 127.0.0.1
+[2025-11-07 16:51:06][INFO] 🌐 Using base URL: http://chandusoft.test | IP: 127.0.0.1
+[2025-11-07 16:51:06][INFO] 💳 Creating Stripe session for Order #76 | IP: 127.0.0.1
+[2025-11-07 16:51:07][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_b1fpmGuFipd8kGIi1Vfwb350y0IH2OXRzQ0Mprz9xPpbGIQmToowQpZJEP#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl | IP: 127.0.0.1
+[2025-11-07 16:57:29][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:57:29][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:57:29][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 16:57:29][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:57:29][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:57:29][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:57:29][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 16:57:29][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-07 16:57:29][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Order Ref 51626553CC93 marked PAID — txn: pi_3SQnpEFqmeKxNjQe0BTxg5DC, amount: 162, email: DUMMY357@GMAIL.COM | IP: ::1
+[2025-11-07 16:57:29][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-07 16:57:31][INFO] ✅Payment successful for Order ID: 76. Transaction ID: pi_3SQnpEFqmeKxNjQe0BTxg5DC. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-07 17:10:04][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 17:10:04][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 17:10:04][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 17:10:04][INFO] 🔔 Stripe Event Received: checkout.session.expired | IP: ::1
+[2025-11-07 17:10:04][INFO] ℹ️ Unhandled event type: checkout.session.expired | IP: ::1
+[2025-11-07 17:10:04][INFO] ✅ Webhook processed successfully — Event: checkout.session.expired | IP: ::1
+[2025-11-07 17:20:13][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 17:20:13][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 17:20:13][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 17:20:13][INFO] 🔔 Stripe Event Received: checkout.session.expired | IP: ::1
+[2025-11-07 17:20:13][INFO] ℹ️ Unhandled event type: checkout.session.expired | IP: ::1
+[2025-11-07 17:20:13][INFO] ✅ Webhook processed successfully — Event: checkout.session.expired | IP: ::1
+[2025-11-07 17:20:36][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-07 17:20:36][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-07 17:20:36][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-07 17:20:36][INFO] 🔔 Stripe Event Received: checkout.session.expired | IP: ::1
+[2025-11-07 17:20:36][INFO] ℹ️ Unhandled event type: checkout.session.expired | IP: ::1
+[2025-11-07 17:20:36][INFO] ✅ Webhook processed successfully — Event: checkout.session.expired | IP: ::1
+[2025-11-10 08:47:25][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-10 09:09:16][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-10 11:37:17][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-10 11:38:20][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-10 11:42:55][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-10 13:06:18][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-10 13:09:03][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-10 13:09:14][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-10 13:52:24][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: ::1
+[2025-11-10 14:45:31][INFO] 🛒 Checkout started — Total: 20 USD | IP: 127.0.0.1
+[2025-11-10 14:45:32][INFO] 🧾 Order 77 created (Ref: 2C95E1514526, Payment: stripe) | IP: 127.0.0.1
+[2025-11-10 14:45:32][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-10 14:45:32][INFO] 💳 Creating Stripe session for Order #77 | IP: 127.0.0.1
+[2025-11-10 14:45:33][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1KbkiMQTyIe25tHKYvEL2GVZkT3qM3twvQWQYXWBPP4fTHE12w5HMB26g#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-10 14:46:51][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-10 14:46:51][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-10 14:46:51][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-10 14:46:51][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-10 14:46:51][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-10 14:46:51][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-10 14:46:52][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+: ::1
+[2025-11-10 14:46:52][INFO] ⚠️ Missing order_ref/order_id in failed payment webhook | IP: ::1
+[2025-11-10 14:46:52][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+: ::1
+[2025-11-10 14:48:54][INFO] ❌ Payment canceled for Order ID 77 (Ref: 2C95E1514526) — User canceled payment on Stripe checkout page. | IP: 127.0.0.1
+[2025-11-10 14:58:07][INFO] 🛒 Checkout started — Total: 168 USD | IP: 127.0.0.1
+[2025-11-10 14:58:08][INFO] 🧾 Order 78 created (Ref: 86CF834CAA4D, Payment: stripe) | IP: 127.0.0.1
+[2025-11-10 14:58:08][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-10 14:58:08][INFO] 💳 Creating Stripe session for Order #78 | IP: 127.0.0.1
+[2025-11-10 14:58:09][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1xIZZpyqnHJG5Fs4qBNZlfaorgbTkc285q8lz6Ng1HDzV2QUb19YoKY76#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-10 14:58:20][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-10 14:58:20][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-10 14:58:20][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-10 14:58:20][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-10 14:58:20][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-10 14:58:20][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-10 14:58:20][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-10 14:58:20][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-10 14:58:20][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-10 14:58:20][INFO] 🔔 Stripe Event Received: payment_intent.payment_failed | IP: ::1
+[2025-11-10 14:58:20][INFO] ⚠️ Missing order_ref/order_id in failed payment webhook | IP: ::1
+[2025-11-10 14:58:20][INFO] ✅ Webhook processed successfully — Event: payment_intent.payment_failed | IP: ::1
+[2025-11-10 15:15:09][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: ::1
+[2025-11-10 15:17:43][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-10 16:08:34][WARNING] Failed login attempt for admin@example.com | IP: ::1
+[2025-11-10 16:08:42][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: ::1
+[2025-11-10 16:44:49][INFO] 🛒 Checkout started — Total: 170 USD | IP: 127.0.0.1
+[2025-11-10 16:44:49][INFO] 🧾 Order 79 created (Ref: 3828B15F0AE1, Payment: stripe) | IP: 127.0.0.1
+[2025-11-10 16:44:49][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-10 16:44:49][INFO] 💳 Creating Stripe session for Order #79 | IP: 127.0.0.1
+[2025-11-10 16:44:51][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_b1vBfcxG5jBscAzYvQwfsV28fPpmqssM6at6nNqVhXzd4dC8dgCmiSju8v#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl | IP: 127.0.0.1
+[2025-11-10 16:45:00][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-10 16:45:00][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-10 16:45:00][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-10 16:45:00][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-10 16:45:00][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-10 16:45:00][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-10 16:45:00][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-10 16:45:00][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-10 16:45:00][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Order Ref 3828B15F0AE1 marked PAID — txn: pi_3SRt3iFqmeKxNjQe0JZPQDis, amount: 170, email: musthafa.shaik@chandusoft.com | IP: ::1
+[2025-11-10 16:45:00][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-10 16:45:05][INFO] ✅Payment successful for Order ID: 79. Transaction ID: pi_3SRt3iFqmeKxNjQe0JZPQDis. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-11 08:33:09][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1

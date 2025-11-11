@@ -2,8 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-?>
-<?php
+
 session_start();
 
 // ✅ Redirect if not logged in
@@ -22,33 +21,55 @@ if ($conn->connect_error) {
     die("❌ DB connection failed: " . $conn->connect_error);
 }
 
+// ✅ Handle Archive / Unarchive toggle in the same file
+if (isset($_GET['toggle']) && isset($_GET['action'])) {
+    $id = intval($_GET['toggle']);
+    $action = $_GET['action'];
+
+    if ($id > 0) {
+        if ($action === 'unarchive') {
+            $conn->query("UPDATE pages SET status='published', updated_at=NOW() WHERE id=$id");
+        } else {
+            $conn->query("UPDATE pages SET status='archived', updated_at=NOW() WHERE id=$id");
+        }
+    }
+    // Redirect to remove GET params and refresh the table
+    header("Location: pages.php");
+    exit;
+}
+
 // ✅ Get page counts based on status
 $publishedCount = $conn->query("SELECT COUNT(*) as count FROM pages WHERE status = 'published'")->fetch_assoc()['count'];
 $draftCount = $conn->query("SELECT COUNT(*) as count FROM pages WHERE status = 'draft'")->fetch_assoc()['count'];
 $archivedCount = $conn->query("SELECT COUNT(*) as count FROM pages WHERE status = 'archived'")->fetch_assoc()['count'];
 $allCount = $conn->query("SELECT COUNT(*) as count FROM pages")->fetch_assoc()['count'];
 
-// ✅ Search logic
-$search = $_GET['search'] ?? '';
-$search = trim($search);
-
-// Determine if there's a filter by status
+// ✅ Search & filter logic
+$search = trim($_GET['search'] ?? '');
 $status = $_GET['status'] ?? '';
 $whereClause = '';
+
 if ($status) {
     $whereClause = "WHERE status = '" . $conn->real_escape_string($status) . "'";
 }
 
 if ($search !== '') {
-    // Search by title or slug
-    $stmt = $conn->prepare("SELECT * FROM pages $whereClause AND (title LIKE ? OR slug LIKE ?) ORDER BY updated_at DESC");
-    $likeSearch = "%$search%";
-    $stmt->bind_param("ss", $likeSearch, $likeSearch);
-    $stmt->execute();
-    $pages = $stmt->get_result();
-    $stmt->close();
+    if (preg_match('/^[%_]+$/', $search)) {
+        $pages = $conn->query("SELECT * FROM pages WHERE 1=0");
+    } else {
+        if ($whereClause) {
+            $whereClause .= " AND";
+        } else {
+            $whereClause = "WHERE";
+        }
+        $stmt = $conn->prepare("SELECT * FROM pages $whereClause (title LIKE ? OR slug LIKE ?) ORDER BY updated_at DESC");
+        $likeSearch = "%$search%";
+        $stmt->bind_param("ss", $likeSearch, $likeSearch);
+        $stmt->execute();
+        $pages = $stmt->get_result();
+        $stmt->close();
+    }
 } else {
-    // No search, show all
     $pages = $conn->query("SELECT * FROM pages $whereClause ORDER BY updated_at DESC");
 }
 ?>
@@ -81,10 +102,6 @@ if ($search !== '') {
             font-weight: bold;
         }
 
-        .navbar .links a:hover {
-            text-decoration: none;
-        }
-
         .container {
             max-width: 1100px;
             margin: 30px auto;
@@ -92,72 +109,6 @@ if ($search !== '') {
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .top-bar .filters a {
-            margin-right: 15px;
-            text-decoration: none;
-            color: #000000ff;
-        }
-
-        .filters a {
-            color: black;
-            text-decoration: none;
-            transition: text-decoration 0.3s ease, color 0.3s ease;
-        }
-
-        .filters a:hover {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .top-bar input[type="text"] {
-            padding: 8px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .top-bar .create-btn {
-            background-color: #27ae60;
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .search-form {
-            margin-bottom: 20px;
-        }
-
-        .search-form input[type="text"] {
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 250px;
-        }
-
-        .search-form input[type="submit"] {
-            padding: 8px 12px;
-            font-size: 14px;
-            border: none;
-            background-color: #3498db;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .search-form input[type="submit"]:hover {
-            background-color: #2980b9;
         }
 
         table {
@@ -183,28 +134,7 @@ if ($search !== '') {
             background-color: #eef7ff;
         }
 
-        .actions a {
-            margin-right: 10px;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .actions a:hover {
-            text-decoration: none;
-        }
-
-        .actions a.edit-btn {
-            background-color: #27ae60;
-            color: white;
-        }
-
-        .actions a.edit-btn:hover {
-            background-color: #219150;
-        }
-
-        .actions .btn {
+        .btn {
             display: inline-block;
             padding: 6px 12px;
             margin-right: 6px;
@@ -215,26 +145,12 @@ if ($search !== '') {
             color: white;
         }
 
-        .btn-edit {
-            background-color: #2ecc71;
-        }
+        .btn-edit { background-color: #2ecc71; }
+        .btn-archive { background-color: #f39c12; }
+        .btn-unarchive { background-color: #2793aeff; }
+        .btn-delete { background-color: #e74c3c; }
 
-        .btn-archive {
-            background-color: #f39c12;
-        }
-
-        .btn-delete {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            cursor: not-allowed;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
+        .btn:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
@@ -243,26 +159,25 @@ if ($search !== '') {
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
-        Welcome <?= $role ?>!
+        Welcome <?= $username ?>!
         <a href="/app/dashboard.php">Dashboard</a>
-         <!-- Dynamic catalog link based on user role -->
-    <?php if ($role === 'Admin'): ?>
-        <a href="/admin/catalog.php">Admin Catalog</a>
-        <a href="/public/catalog.php">Public Catalog</a>
-        <a href="/admin/orders.php">Orders</a>
-    <?php elseif ($role === 'Editor'): ?>
-        <a href="/public/catalog.php">Public Catalog</a>
-    <?php endif; ?>
+        <?php if ($role === 'Admin'): ?>
+            <a href="/admin/catalog.php">Admin Catalog</a>
+            <a href="/public/catalog.php">Public Catalog</a>
+            <a href="/admin/orders.php">Orders</a>
+        <?php elseif ($role === 'Editor'): ?>
+            <a href="/public/catalog.php">Public Catalog</a>
+        <?php endif; ?>
         <a href="/admin/admin-leads.php">Leads</a>
         <a href="/admin/pages.php">Pages</a>
         <a href="/admin/logout.php">Logout</a>
-
     </div>
 </div>
 
 <!-- ✅ Main container -->
 <div class="container">
     <h1>Pages</h1>
+
     <div class="top-bar" style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <div class="filters" style="gap: 15px; display: flex;">
             <a href="pages.php">All (<?= $allCount ?>)</a>
@@ -277,9 +192,7 @@ if ($search !== '') {
         </form>
 
         <div>
-            <a class="create-btn" href="create.php">
-                + Create New Page
-            </a>
+            <a class="btn btn-edit" href="create.php">+ Create New Page</a>
         </div>
     </div>
 
@@ -292,21 +205,37 @@ if ($search !== '') {
             <th>Actions</th>
         </tr>
 
-        <?php while ($page = $pages->fetch_assoc()): ?>
-<tr>
-    <td><?= htmlspecialchars($page['title']) ?></td>
-    <td><?= htmlspecialchars($page['slug']) ?></td>
-    <td><?= ucfirst($page['status']) ?></td>
-    <td><?= htmlspecialchars($page['updated_at']) ?></td>
-    <td class="actions">
-        <!-- Edit button -->
-        <a href="edit.php?id=<?= $page['id'] ?>" class="btn btn-edit">Edit</a>
+        <?php if ($pages && $pages->num_rows > 0): ?>
+            <?php while ($page = $pages->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($page['title']) ?></td>
+                    <td><?= htmlspecialchars($page['slug']) ?></td>
+                    <td><?= ucfirst($page['status']) ?></td>
+                    <td><?= htmlspecialchars($page['updated_at']) ?></td>
+                    <td class="actions">
+                        <a href="edit.php?id=<?= $page['id'] ?>" class="btn btn-edit">Edit</a>
 
-        <!-- Admin-only buttons -->
-        <?php if (strtolower($role) === 'admin'): ?>
-            <a href="archive.php?id=<?= $page['id'] ?>" class="btn btn-archive">Archive</a>
-            <a href="delete.php?id=<?= $page['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this page?')">Delete</a>
+                        <?php if (strtolower($role) === 'admin'): ?>
+                            <?php if ($page['status'] === 'archived'): ?>
+                                <a href="pages.php?toggle=<?= $page['id'] ?>&action=unarchive" class="btn btn-unarchive">Unarchive</a>
+                            <?php else: ?>
+                                <a href="pages.php?toggle=<?= $page['id'] ?>&action=archive" class="btn btn-archive">Archive</a>
+                            <?php endif; ?>
+
+                            <a href="delete.php?id=<?= $page['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this page?')">Delete</a>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="5" style="text-align:center; padding:15px; color:#d00; font-weight:bold;">
+                    🚫 No items found.
+                </td>
+            </tr>
         <?php endif; ?>
-    </td>
-</tr>
-<?php endwhile; ?>
+    </table>
+</div>
+
+</body>
+</html>

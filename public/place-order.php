@@ -4,14 +4,14 @@ require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/logger.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_WARNING);
-
+ 
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
 use PayPalCheckoutSdk\Core\SandboxEnvironment;
 use PayPalCheckoutSdk\Core\ProductionEnvironment;
 use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
-
+ 
 // ============================================================
 // 1️⃣ CART VALIDATION
 // ============================================================
@@ -19,14 +19,13 @@ if (empty($_SESSION['cart'])) {
     header("Location: /public/cart");
     exit;
 }
-
-// Fetch cart items
+ 
 $cart_items = [];
 $total = 0.0;
 $ids = implode(',', array_keys($_SESSION['cart']));
 $stmt = $pdo->query("SELECT * FROM catalog WHERE id IN ($ids) AND status='published'");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+ 
 foreach ($products as $p) {
     $qty = $_SESSION['cart'][$p['id']]['quantity'] ?? 1;
     $p['quantity'] = $qty;
@@ -34,9 +33,9 @@ foreach ($products as $p) {
     $total += $p['subtotal'];
     $cart_items[] = $p;
 }
-
-log_page("Visited Checkout Page");
-
+ 
+log_to_file("🛒 Checkout started — Total: $total USD");
+ 
 // ============================================================
 // 2️⃣ FORM VALIDATION
 // ============================================================
@@ -46,36 +45,35 @@ $address = trim($_POST['address'] ?? '');
 $city = trim($_POST['city'] ?? '');
 $postal_code = trim($_POST['postal_code'] ?? '');
 $payment_method = $_POST['payment_method'] ?? '';
-
+ 
 if (!$name || !$email || !$address || !$city || !$postal_code) {
     http_response_code(400);
     exit("Missing required fields.");
 }
-
+ 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     exit("Invalid email format.");
 }
-
+ 
 if (!in_array($payment_method, ['stripe', 'paypal'])) {
     http_response_code(400);
     exit("Invalid payment method.");
 }
-
+ 
 // ============================================================
 // 3️⃣ CREATE ORDER RECORD
 // ============================================================
 $order_ref = strtoupper(bin2hex(random_bytes(6)));
-
+ 
 $stmt = $pdo->prepare("
-    INSERT INTO orders 
+    INSERT INTO orders
     (order_ref, customer_name, customer_email, address, city, postal_code, payment_gateway, total, payment_status, created_at)
     VALUES (?,?,?,?,?,?,?,?, 'pending', NOW())
 ");
 $stmt->execute([$order_ref, $name, $email, $address, $city, $postal_code, $payment_method, $total]);
 $order_id = $pdo->lastInsertId();
-
-// Insert items
+ 
 $stmt_item = $pdo->prepare("
     INSERT INTO order_items (order_id, product_id, product_name, quantity, price, subtotal)
     VALUES (?,?,?,?,?,?)
@@ -85,13 +83,45 @@ foreach ($products as $p) {
     $subtotal = $p['price'] * $qty;
     $stmt_item->execute([$order_id, $p['id'], $p['title'], $qty, $p['price'], $subtotal]);
 }
-
+ 
+log_to_file("🧾 Order $order_id created (Ref: $order_ref, Payment: $payment_method)");
+ 
 // ============================================================
-// 4️⃣ STRIPE CHECKOUT FLOW
+// 4️⃣ DETERMINE TEST MODE
+// ============================================================
+$is_test_mode = false;
+ 
+if (defined('STRIPE_SECRET_KEY') && str_starts_with(STRIPE_SECRET_KEY, 'sk_test_')) {
+    $is_test_mode = true;
+}
+if (defined('PAYPAL_SANDBOX') && PAYPAL_SANDBOX === true) {
+    $is_test_mode = true;
+}
+ 
+// ============================================================
+// 5️⃣ AUTO-DETECT BASE URL (ngrok or local)
+// ============================================================
+$appUrl = $_ENV['APP_URL'] ?? 'http://localhost';
+ 
+if (!empty($_SERVER['HTTP_HOST'])) {
+    $host = $_SERVER['HTTP_HOST'];
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+ 
+    if (strpos($host, 'ngrok-free.dev') !== false || strpos($host, 'ngrok.io') !== false) {
+        $appUrl = 'https://' . $host . '/public';
+    } else {
+        $appUrl = $protocol . $host;
+    }
+}
+ 
+log_to_file("🌐 Using base URL: $appUrl");
+ 
+// ============================================================
+// 6️⃣ STRIPE CHECKOUT FLOW
 // ============================================================
 if ($payment_method === 'stripe') {
     Stripe::setApiKey(STRIPE_SECRET_KEY);
-
+ 
     $line_items = [];
     foreach ($products as $p) {
         $qty = $_SESSION['cart'][$p['id']]['quantity'] ?? 1;
@@ -104,33 +134,42 @@ if ($payment_method === 'stripe') {
             'quantity' => $qty,
         ];
     }
-
+ 
+    $success_url = $appUrl . '/payment-success.php?order_id=' . $order_id;
+    $cancel_url  = $appUrl . '/payment-cancel.php?order_id=' . $order_id;
+    if ($is_test_mode) {
+        $success_url .= '&testmode=1';
+        $cancel_url  .= '&testmode=1';
+    }
+ 
+    log_to_file("💳 Creating Stripe session for Order #$order_id");
+ 
     $session = StripeSession::create([
         'payment_method_types' => ['card'],
         'line_items' => $line_items,
         'mode' => 'payment',
         'customer_email' => $email,
-       'success_url' => APP_URL . '/payment-success?order_id=' . $order_id,
-'cancel_url'  => APP_URL . '/payment-cancel?order_id=' . $order_id,
+        'client_reference_id' => $order_ref,
+        'success_url' => $success_url,
+        'cancel_url' => $cancel_url,
     ]);
-
+ 
     $_SESSION['cart'] = [];
+    log_to_file("✅ Redirecting to Stripe checkout: " . $session->url);
     header("Location: " . $session->url);
     exit;
 }
-
+ 
 // ============================================================
-// 5️⃣ PAYPAL CHECKOUT v2 FLOW
+// 7️⃣ PAYPAL CHECKOUT FLOW
 // ============================================================
 elseif ($payment_method === 'paypal') {
-    // Choose environment
     $environment = PAYPAL_SANDBOX
         ? new SandboxEnvironment(PAYPAL_CLIENT_ID, PAYPAL_SECRET)
         : new ProductionEnvironment(PAYPAL_CLIENT_ID, PAYPAL_SECRET);
-
+ 
     $client = new PayPalHttpClient($environment);
-
-    // Build item list
+ 
     $items = [];
     foreach ($products as $p) {
         $qty = $_SESSION['cart'][$p['id']]['quantity'] ?? 1;
@@ -140,7 +179,7 @@ elseif ($payment_method === 'paypal') {
             'quantity' => (string)$qty,
         ];
     }
-
+ 
     $request = new OrdersCreateRequest();
     $request->prefer('return=representation');
     $request->body = [
@@ -157,44 +196,42 @@ elseif ($payment_method === 'paypal') {
             'items' => $items,
         ]],
         'application_context' => [
-            'cancel_url' => APP_URL . '/payment-cancel?order_id=' . $order_id,
-    'return_url' => APP_URL . '/payment-success?order_id=' . $order_id,
+            'cancel_url' => $appUrl . '/payment-cancel.php?order_id=' . $order_id . ($is_test_mode ? '&testmode=1' : ''),
+            'return_url' => $appUrl . '/payment-success.php?order_id=' . $order_id . ($is_test_mode ? '&testmode=1' : ''),
             'brand_name' => 'Chandusoft',
             'user_action' => 'PAY_NOW',
         ],
     ];
-
+ 
     try {
         $response = $client->execute($request);
-        $approvalUrl = null;
         foreach ($response->result->links as $link) {
             if ($link->rel === 'approve') {
-                $approvalUrl = $link->href;
-                break;
+                $_SESSION['cart'] = [];
+                log_to_file("✅ Redirecting to PayPal approval URL for order $order_id");
+                header("Location: " . $link->href);
+                exit;
             }
         }
-        if (!$approvalUrl) throw new Exception("No approval URL returned from PayPal.");
-
-        $_SESSION['cart'] = [];
-        header("Location: " . $approvalUrl);
-        exit;
-
+        throw new Exception("No approval URL returned from PayPal.");
     } catch (Exception $e) {
-        error_log("PayPal V2 Error: " . $e->getMessage());
+        log_to_file("❌ PayPal error: " . $e->getMessage(), 'ERROR');
         die("⚠️ PayPal Checkout failed: " . htmlspecialchars($e->getMessage()));
     }
 }
-
+ 
 // ============================================================
-// 6️⃣ FALLBACK - CASH ON DELIVERY
+// 8️⃣ FALLBACK - CASH ON DELIVERY
 // ============================================================
 else {
     $_SESSION['cart'] = [];
+    log_to_file("🚚 Cash-on-delivery order $order_id confirmed.");
     echo "<script>
         alert('✅ Thank you! Your order has been placed successfully (Cash on Delivery).');
         window.location.href = '/public/catalog';
     </script>";
 }
-
-log_catalog("Order created: ID $order_id, Payment: $payment_method, Total: $$total");
+ 
+log_to_file("📦 Checkout complete for Order $order_id ($payment_method)");
 ?>
+ 

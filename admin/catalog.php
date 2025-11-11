@@ -23,11 +23,16 @@ $statusFilter = isset($_GET['status']) && in_array($_GET['status'], ['published'
 // ✅ Build WHERE clause
 $where = "WHERE status = ?";
 $params = [$statusFilter];
- 
 if ($search) {
-    $where .= " AND title LIKE ?";
-    $params[] = "%$search%";
+    // If search term is only a wildcard symbol (% or _), show no results
+    if (trim($search) === '%' || trim($search) === '_') {
+        $where .= " AND 1 = 0"; // Always false condition
+    } else {
+        $where .= " AND title LIKE ?";
+        $params[] = "%$search%";
+    }
 }
+
  
 // ✅ Count total records
 try {

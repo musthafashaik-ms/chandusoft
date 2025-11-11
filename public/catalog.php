@@ -3,8 +3,6 @@ require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/logger.php';
 include __DIR__ . '/../admin/header.php';
 
-
-// ✅ Public Catalog List (only published items)
 $search = trim($_GET['search'] ?? '');
 $page = max(1, intval($_GET['page'] ?? 1));
 $limit = 9;
@@ -13,9 +11,10 @@ $offset = ($page - 1) * $limit;
 $where = "WHERE status = 'published'";
 $params = [];
 
-if ($search) {
-    $where .= " AND title LIKE ?";
-    $params[] = "%$search%";
+if ($search !== '') {
+    $searchEscaped = str_replace(['%', '_'], ['\\%', '\\_'], $search);
+    $where .= " AND title LIKE :search ESCAPE '\\\\'";
+    $params[':search'] = "%{$searchEscaped}%";
 }
 
 // Count total
@@ -28,6 +27,7 @@ $totalPages = ceil($total / $limit);
 $stmt = $pdo->prepare("SELECT * FROM catalog $where ORDER BY created_at DESC LIMIT $offset, $limit");
 $stmt->execute($params);
 $items = $stmt->fetchAll();
+
 
 // Log page view
 log_page("Visited Catalog Page | Search: $search | Page: $page");
@@ -342,7 +342,7 @@ footer p b {
     
     <!-- Add Buy Now and Add to Cart buttons -->
     <div class="buttons">
-        <form method="post" action="/public/cart" class="buy-now-form">
+        <form method="post" action="/checkout" class="buy-now-form">
             <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
             <input type="number" name="quantity" value="1" min="1" class="quantity-input">
             <button type="submit" class="buy-now-btn">Buy Now</button>

@@ -76,16 +76,27 @@ $search = $_GET['search'] ?? '';
 $search = trim($search);
 
 if ($search !== '') {
-    // Modified query to fetch the leads in ascending order for storage and display latest first (DESC).
-    $stmt = $conn->prepare("SELECT * FROM leads WHERE id LIKE ? OR name LIKE ? OR email LIKE ? OR message LIKE ? ORDER BY id DESC");
-    $likeSearch = "%$search%";
-    $stmt->bind_param("ssss", $likeSearch, $likeSearch, $likeSearch, $likeSearch);
-    $stmt->execute();
-    $resultLatest = $stmt->get_result();
+    // If the search term is only % or _ (wildcard characters), show no results
+    if (preg_match('/^[%_]+$/', $search)) {
+        // Always false condition — no rows returned
+        $resultLatest = $conn->query("SELECT * FROM leads WHERE 1=0");
+    } else {
+        // Normal search
+        $stmt = $conn->prepare("
+            SELECT * FROM leads 
+            WHERE id LIKE ? OR name LIKE ? OR email LIKE ? OR message LIKE ?
+            ORDER BY id DESC
+        ");
+        $likeSearch = "%$search%";
+        $stmt->bind_param("ssss", $likeSearch, $likeSearch, $likeSearch, $likeSearch);
+        $stmt->execute();
+        $resultLatest = $stmt->get_result();
+    }
 } else {
-    // Fetch all leads in ascending order for storage, but display latest first (DESC).
+    // Show all leads if no search term
     $resultLatest = $conn->query("SELECT * FROM leads ORDER BY id DESC");
 }
+
 
 // Get user role for navbar display
 $user = $_SESSION['user'];
@@ -212,18 +223,33 @@ $username = htmlspecialchars($user['username'] ?? 'User');
     </form>
 
     <table>
-        <tr><th>Name</th><th>Email</th><th>Message</th><th>Submitted At</th><th>IP</th></tr>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Submitted At</th>
+        <th>IP</th>
+    </tr>
+
+    <?php if ($resultLatest && $resultLatest->num_rows > 0): ?>
         <?php while($row = $resultLatest->fetch_assoc()): ?>
-        <tr>
-    
-            <td><?= htmlspecialchars($row['name']) ?></td>
-            <td><?= htmlspecialchars($row['email']) ?></td>
-            <td><?= htmlspecialchars($row['message']) ?></td>
-            <td><?= htmlspecialchars($row['created_at']) ?></td>
-            <td><?= !empty($row['IP']) ? htmlspecialchars($row['IP']) : '' ?></td>
-        </tr>
+            <tr>
+                <td><?= htmlspecialchars($row['name']) ?></td>
+                <td><?= htmlspecialchars($row['email']) ?></td>
+                <td><?= htmlspecialchars($row['message']) ?></td>
+                <td><?= htmlspecialchars($row['created_at']) ?></td>
+                <td><?= !empty($row['IP']) ? htmlspecialchars($row['IP']) : '' ?></td>
+            </tr>
         <?php endwhile; ?>
-    </table>
+    <?php else: ?>
+        <tr>
+            <td colspan="5" style="text-align:center; padding:15px; color:#d00; font-weight:bold;">
+                🚫 No items found.
+            </td>
+        </tr>
+    <?php endif; ?>
+</table>
+
 </div>
 
 </body>
