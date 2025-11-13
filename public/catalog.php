@@ -34,6 +34,8 @@ log_page("Visited Catalog Page | Search: $search | Page: $page");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <head>
     <meta charset="UTF-8">
     <title>Our Catalog</title>
@@ -278,21 +280,17 @@ nav a.active {
 
 /* Footer Styles */
 footer {
-    text-align: center;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    margin-top: auto;
-    font-size: 14px;
-}
-
-footer {
     background: #333;
     color: #fff;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;  /* Fixes the footer at the bottom of the screen */
+    left: 0;
+    bottom: 0;  /* Ensures it's always at the bottom */
+    width: 100%;  /* Full width */
+    z-index: 1000;  /* Keeps footer above other content */
 }
 
 footer p {
@@ -315,6 +313,7 @@ footer p b {
 .social-icons a:hover {
     color: #1da1f2; /* Hover color */
 }
+
     </style>
 </head>
 <body>

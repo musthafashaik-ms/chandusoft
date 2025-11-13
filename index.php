@@ -13,6 +13,8 @@ $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusof
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <head>
     <link rel="stylesheet" href="/styles.css">
 

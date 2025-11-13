@@ -13,7 +13,7 @@ if (!$item) {
     exit;
 }
 
-$TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAAB7ii-4RV0QMh131';
+$TURNSTILE_SITE = getenv('TURNSTILE_SITE') ?: '0x4AAAAAACAr8MRFjLqZzPF2';
 log_catalog("Viewed catalog item: {$item['title']}");
 ?>
 <!DOCTYPE html>
@@ -22,6 +22,7 @@ log_catalog("Viewed catalog item: {$item['title']}");
 <meta charset="UTF-8">
 <title><?= htmlspecialchars($item['title']) ?></title>
 <style>
+    /* Basic Styling */
     body {
         font-family: Arial, sans-serif;
         background-color: #f8f9fa;
@@ -136,18 +137,17 @@ log_catalog("Viewed catalog item: {$item['title']}");
     form button:hover {
         background: #0056b3;
     }
-.cf-turnstile {
-    margin: 5px 0 15px 45px; /* Add left margin (20px) to move it right */
-    width: 100%; /* Full width */
-    max-width: 800px; /* Optional: Max width */
-    height: 50px; /* Set height */
-    transform: scale(1.2); /* Adjust size */
-    transform-origin: top center; /* Scale from the top */
-    overflow: hidden;
-}
 
-
-
+    /* Cloudflare Turnstile widget styling */
+    .cf-turnstile {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        transform: scale(1.1);
+        transform-origin: center center;
+    }
 
     .back-to-catalog {
         display: inline-block;
@@ -176,20 +176,20 @@ log_catalog("Viewed catalog item: {$item['title']}");
     overflow: hidden;
     position: relative;
     cursor: zoom-in;
-}
+    }
 
-.zoom-container.zoomed {
+    .zoom-container.zoomed {
     cursor: zoom-out;
-}
+    }
 
-.zoom-image {
+    .zoom-image {
     transition: transform 0.3s ease;
-}
+    }
 
-/* Optional: zoom on hover */
-.zoom-container:hover .zoom-image {
+    /* Optional: zoom on hover */
+    .zoom-container:hover .zoom-image {
     transform: scale(1.2);
-}
+    }
 
 </style>
 </head>
@@ -201,8 +201,7 @@ log_catalog("Viewed catalog item: {$item['title']}");
     <?php if ($item['image']): ?>
         <img src="/<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['title']) ?>" class="zoom-image">
     <?php endif; ?>
-</div>
-
+    </div>
 
     <!-- Info Section -->
     <div class="product-info">
@@ -233,10 +232,13 @@ log_catalog("Viewed catalog item: {$item['title']}");
                 <input type="text" name="name" placeholder="Your name" required>
                 <input type="email" name="email" placeholder="Your email" required>
                 <textarea name="message" placeholder="Your message" rows="4" required></textarea>
+                
+                <!-- Cloudflare Turnstile Widget -->
                 <div class="cf-turnstile"
                      data-sitekey="<?= htmlspecialchars($TURNSTILE_SITE) ?>"
                      data-theme="light"
-                     data-size="compact"></div>
+                     data-size="compact"
+                     data-callback="turnstileCallback"></div>
                 <button type="submit">Send Enquiry</button>
             </form>
         </div>
@@ -246,6 +248,7 @@ log_catalog("Viewed catalog item: {$item['title']}");
 <a href="/public/catalog" class="back-to-catalog">← Back to Catalog</a>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <script>
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
@@ -256,7 +259,6 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
-
 const zoomContainer = document.querySelector('.zoom-container');
 const zoomImage = zoomContainer.querySelector('.zoom-image');
 
@@ -265,12 +267,11 @@ zoomContainer.addEventListener('click', () => {
         zoomImage.style.transform = 'scale(1)';
         zoomContainer.classList.remove('zoomed');
     } else {
-        zoomImage.style.transform = 'scale(2)'; // Zoom factor
+        zoomImage.style.transform = 'scale(2)';
         zoomContainer.classList.add('zoomed');
     }
 });
 
-// Optional: change cursor dynamically
 zoomContainer.addEventListener('mousemove', (e) => {
     if (zoomContainer.classList.contains('zoomed')) {
         const rect = zoomContainer.getBoundingClientRect();
@@ -281,6 +282,21 @@ zoomContainer.addEventListener('mousemove', (e) => {
         zoomImage.style.transformOrigin = `${moveX}% ${moveY}%`;
     } else {
         zoomImage.style.transformOrigin = 'center center';
+    }
+});
+
+// Turnstile Callback Function
+function turnstileCallback(token) {
+    console.log('Turnstile completed. Token:', token);
+    document.getElementById('turnstile_token').value = token;  // Store token in hidden field
+}
+
+// Handle form submission with Turnstile verification
+document.querySelector('form').addEventListener('submit', function (event) {
+    const token = document.getElementById('turnstile_token').value;
+    if (!token) {
+        alert('Please complete the CAPTCHA to submit the form.');
+        event.preventDefault(); // Prevent form submission if CAPTCHA is not completed
     }
 });
 </script>

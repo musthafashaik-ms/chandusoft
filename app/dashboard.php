@@ -38,94 +38,140 @@ $draftPages = $draftPagesResult->fetch_assoc()['count'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Chandusoft Admin</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
-        .navbar {
-            background-color: #2c3e50;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .navbar .links a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-            font-weight: bold;
-        }
-        .navbar .links a:hover {
-            text-decoration: none;
-        }
-        .dashboard-box {
-            background: #fff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            max-width: 1200px;
-            margin: 20px auto;
-        }
-        h2 { margin-top: 15px; }
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 20px;
-        }
-        li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
+       
+        /* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.navbar .links a:hover {
+    text-decoration: none;
+}
+
+/* Active Link Styling */
+.navbar .links a.active {
+    background-color: #0078D7; /* Blue background when active */
+    color: white;  /* Ensure the text is white when active */
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+/* Dashboard Box Styling */
+.dashboard-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+ /* Page Heading */
+        h2 {
+            color: #007BFF;  /* Blue color for h1 */
+            margin-bottom: 20px;
+            font-size: 28px;
             text-align: left;
         }
-        th {
-            background-color: #3498db;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #e6f7ff;
-        }
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+
+li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e6f7ff;
+}
+
     </style>
 </head>
 <body>
 
-<div class="navbar">
-    <div><strong>Chandusoft <?= $role ?> </strong></div>
-    <div class="links">
-        Welcome <?= $role ?>!
-        <a href="/app/dashboard.php">Dashboard</a>
-         <!-- Dynamic catalog link based on user role -->
-    <?php if ($role === 'Admin'): ?>
-        <a href="/admin/catalog.php">Admin Catalog</a>
-        <a href="/public/catalog.php">Public Catalog</a>
-        <a href="/admin/orders.php">Orders</a>
-    <?php elseif ($role === 'Editor'): ?>
-        <a href="/public/catalog.php">Public Catalog</a>
-    <?php endif; ?>
-        <a href="/admin/admin-leads.php">Leads</a>
-        <a href="/admin/pages.php">Pages</a>
-        <a href="/admin/logout.php">Logout</a>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Chandusoft</title>
+    <style>
+        /* Your CSS code here, as shown above */
+    </style>
+</head>
+<body>
+    <!-- ✅ Navbar -->
+    <div class="navbar">
+        <div><strong>Chandusoft <?= $role ?></strong></div>
+        <div class="links">
+            Welcome <?= $role ?>!
+            <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+            <!-- Dynamic catalog link based on user role -->
+            <?php if ($role === 'Admin'): ?>
+                <a href="/admin/catalog.php">Admin Catalog</a>
+                <a href="/public/catalog.php">Public Catalog</a>
+                <a href="/admin/orders.php">Orders</a>
+            <?php elseif ($role === 'Editor'): ?>
+                <a href="/public/catalog.php">Public Catalog</a>
+            <?php endif; ?>
+            <a href="/admin/admin-leads.php">Leads</a>
+            <a href="/admin/pages.php">Pages</a>
+            <a href="/admin/logout.php">Logout</a>
+        </div>
     </div>
-</div>
-
 <div class="dashboard-box">
     <h2>Dashboard</h2>
 

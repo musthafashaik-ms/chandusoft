@@ -233,5 +233,13 @@ else {
 }
  
 log_to_file("📦 Checkout complete for Order $order_id ($payment_method)");
+
+ // ============================================================
+// 🔚 Final cleanup safety (in case of early exits or errors)
+// ============================================================
+if (!headers_sent() && !empty($_SESSION['cart'])) {
+    unset($_SESSION['cart']);
+    log_to_file("🧹 Session cart cleared at end of place-order script.");
+}
 ?>
  

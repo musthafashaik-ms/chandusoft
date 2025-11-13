@@ -69,6 +69,7 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
     <title>Catalog - Admin</title>
     <style>
        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+        /* Navbar Styling */
         .navbar {
             background-color: #2c3e50;
             color: white;
@@ -77,17 +78,27 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
             justify-content: space-between;
             align-items: center;
         }
+
         .navbar .links a {
             color: white;
             text-decoration: none;
             margin-left: 15px;
             font-weight: bold;
         }
+
         .navbar .links a:hover {
             text-decoration: none;
         }
-    
- 
+
+        /* Highlight Active Link */
+        .navbar .links a.active {
+            background-color: #007BFF; /* Blue background when active */
+            color: white;  /* Ensure text color is white */
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        /* Content Section */
         .container {
             max-width: 1000px;
             margin: 20px auto;
@@ -95,13 +106,13 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
             padding: 20px;
             border-radius: 8px;
         }
- 
+
         h1 {
             text-align: center;
             color: #007BFF;
             margin-bottom: 20px;
         }
- 
+
         form.search {
             display: flex;
             justify-content: center;
@@ -109,13 +120,13 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
- 
+
         form.search input[type=text], form.search select {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
- 
+
         form.search button {
             padding: 8px 15px;
             background: #007BFF;
@@ -124,11 +135,11 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
             cursor: pointer;
             border-radius: 4px;
         }
- 
+
         form.search button:hover {
             background: #0056b3;
         }
- 
+
         .new-btn {
             display: inline-block;
             background: #007BFF;
@@ -137,24 +148,23 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
             text-decoration: none;
             border-radius: 5px;
         }
- 
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
         }
- 
+
         th, td {
             padding: 10px;
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
- 
+
         th {
             background: #007BFF;
             color: #fff;
         }
- 
         img.thumb {
             max-width: 80px;
             border-radius: 4px;
@@ -215,23 +225,23 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
     </style>
 </head>
 <body>
- <div class="navbar">
+ 
+<!-- ✅ Navbar -->
+<div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
-         Welcome <?= $role ?>!
-        <a href="/app/dashboard.php">Dashboard</a>
-         <!-- Dynamic catalog link based on user role -->
-    <?php if ($role === 'Admin'): ?>
-        <a href="/admin/catalog.php">Admin Catalog</a>
-        <a href="/public/catalog.php">Public Catalog</a>
-        <a href="/admin/orders.php">Orders</a>
-    <?php elseif ($role === 'Editor'): ?>
-        <a href="/public/catalog.php">Public Catalog</a>
-    <?php endif; ?>  
-        <a href="/admin/admin-leads.php">Leads</a>
-        <a href="/admin/pages.php">Pages</a>
+        Welcome <?= $role ?>!
+        <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+        <?php if ($role === 'Admin'): ?>
+            <a href="/admin/catalog.php" class="<?= basename($_SERVER['PHP_SELF']) === 'catalog.php' ? 'active' : '' ?>">Admin Catalog</a>
+            <a href="/public/catalog.php">Public Catalog</a>
+            <a href="/admin/orders.php">Orders</a>
+        <?php elseif ($role === 'Editor'): ?>
+            <a href="/public/catalog.php">Public Catalog</a>
+        <?php endif; ?>
+        <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
+        <a href="/admin/pages.php" class="<?= basename($_SERVER['PHP_SELF']) === 'pages.php' ? 'active' : '' ?>">Pages</a>
         <a href="/admin/logout.php">Logout</a>
-
     </div>
 </div>
  

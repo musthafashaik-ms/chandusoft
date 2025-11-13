@@ -1463,3 +1463,47 @@
 [2025-11-11 14:58:16][INFO] 🔔 Stripe Event Received: payment_intent.canceled | IP: ::1
 [2025-11-11 14:58:16][INFO] ℹ️ Unhandled event type: payment_intent.canceled | IP: ::1
 [2025-11-11 14:58:16][INFO] ✅ Webhook processed successfully — Event: payment_intent.canceled | IP: ::1
+[2025-11-13 09:09:45][INFO] 🛒 Checkout started — Total: 150 USD | IP: 127.0.0.1
+[2025-11-13 09:09:45][INFO] 🧾 Order 81 created (Ref: 13840F7FF57F, Payment: stripe) | IP: 127.0.0.1
+[2025-11-13 09:09:45][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-13 09:09:45][INFO] 💳 Creating Stripe session for Order #81 | IP: 127.0.0.1
+[2025-11-13 09:09:57][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1wVBwQ59mIgSECNVwtUvFNmqYS0WsV4Vvz9CYQVsYU867n2wBRWbr2Ejl#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-13 09:10:38][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-13 09:10:38][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-13 09:10:38][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-13 09:10:38][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-13 09:10:38][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-13 09:10:38][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-13 09:10:38][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-13 09:10:38][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-13 09:10:38][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Order Ref 13840F7FF57F marked PAID — txn: pi_3SSrOiFqmeKxNjQe151xxsfo, amount: 150, email: musthafa.shaik@gmai.com | IP: ::1
+[2025-11-13 09:10:38][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-13 09:10:40][INFO] ✅Payment successful for Order ID: 81. Transaction ID: pi_3SSrOiFqmeKxNjQe151xxsfo. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-13 10:03:18][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-13 11:19:00][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-13 11:19:14][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-13 11:55:55][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-13 12:18:23][INFO] 🛒 Checkout started — Total: 230 USD | IP: 127.0.0.1
+[2025-11-13 12:18:23][INFO] 🧾 Order 82 created (Ref: ABA533284888, Payment: stripe) | IP: 127.0.0.1
+[2025-11-13 12:18:23][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-13 12:18:23][INFO] 💳 Creating Stripe session for Order #82 | IP: 127.0.0.1
+[2025-11-13 12:18:26][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_b1WExxAeQSf8U2RtW6dCBDvkbJkADbKUFODOoblDQL5X29AnFqITBpRvlS#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl | IP: 127.0.0.1
+[2025-11-13 12:25:59][INFO] 🛒 Checkout started — Total: 150 USD | IP: 127.0.0.1
+[2025-11-13 12:25:59][INFO] 🧾 Order 83 created (Ref: 469986895894, Payment: paypal) | IP: 127.0.0.1
+[2025-11-13 12:25:59][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-13 12:26:06][INFO] ✅ Redirecting to PayPal approval URL for order 83 | IP: 127.0.0.1
+[2025-11-13 13:29:32][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-13 15:37:41][INFO] ✅Payment successful for Order ID: 81. Transaction ID: pi_3SSrOiFqmeKxNjQe151xxsfo. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-13 16:14:16][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-13 16:18:12][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-13 16:24:44][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-13 16:35:59][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-13 16:48:41][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1

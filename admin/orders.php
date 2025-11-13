@@ -100,13 +100,16 @@ render_page:
     <title>Admin - Orders</title>
     <style>
         
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
+         /* General Body Styling */
+        body, html {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
         }
 
+        /* Navbar Styling */
         .navbar {
             background-color: #2c3e50;
             color: white;
@@ -127,35 +130,179 @@ render_page:
             text-decoration: none;
         }
 
-        h1 { color: #007BFF; margin-bottom: 20px; }
-        table { border-collapse: collapse; width: 100%; background: #fff; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        th, td { padding: 12px 15px; border: 1px solid #ccc; text-align: left; }
-        thead { background: #007BFF; color: #fff; }
-        .filter-bar { margin-bottom: 20px; display: flex; gap: 10px; }
-        input[type="text"], select { padding: 8px; font-size: 14px; }
-        button { padding: 8px 15px; cursor: pointer; background: #007BFF; color: white; border: none; border-radius: 4px; }
-        button:hover { background: #0056b3; }
-        .pagination { margin-top: 20px; text-align: center; }
-        .pagination a { display: inline-block; padding: 6px 10px; margin: 2px; background: #eee; color: #333; text-decoration: none; border-radius: 4px; }
-        .pagination a.active { background: #007BFF; color: #fff; }
-        .badge { padding: 4px 8px; border-radius: 4px; color: #fff; font-size: 12px; text-transform: capitalize; }
+        /* Highlight Active Link */
+        .navbar .links a.active {
+            background-color: #007BFF; /* Blue background when active */
+            color: white;  /* Ensure text color is white */
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        /* Page Heading */
+        h1 {
+            color: #007BFF;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: left;
+        }
+
+        /* Content Section */
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        /* Search Form Styling */
+.search-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px; /* Space between the elements */
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center; /* Center vertically */
+}
+
+/* Search Input Styling */
+.search-form input[type="text"], .search-form select {
+    padding: 12px; /* Increase padding for larger input */
+    font-size: 16px; /* Increase font size */
+    width: 250px; /* Adjust width of the input and select box */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Filter Button Styling */
+.search-form button {
+    padding: 12px 18px; /* Increase padding for a larger button */
+    font-size: 16px; /* Increase font size */
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover Effect for Submit Button */
+.search-form button:hover {
+    background-color: #2980b9;
+}
+
+
+        /* Orders Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+
+        /* Action Button Styles */
+        .view-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .view-btn:hover {
+            background: #138496;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #007BFF;
+        }
+
+        /* Pagination */
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 6px 10px;
+            margin: 2px;
+            background: #eee;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .pagination a.active {
+            background: #007BFF;
+            color: #fff;
+        }
+
+        /* Badge for Order Status */
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 12px;
+            text-transform: capitalize;
+        }
+
         .badge.pending { background: #f0ad4e; }
         .badge.paid { background: #5cb85c; }
         .badge.failed { background: #d9534f; }
         .badge.refunded { background: #0275d8; }
         .badge.cancelled { background: #999; }
-        .view-btn { background: #17a2b8; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; }
-        .view-btn:hover { background: #138496; }
-
-        .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .modal-content { background: #fff; margin: 5% auto; padding: 20px; width: 600px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); position: relative; }
-        .modal-content h2 { margin-top: 0; color: #333; }
-        .modal-content p { margin: 8px 0; font-size: 14px; }
-        .close { position: absolute; right: 10px; top: 10px; font-size: 18px; cursor: pointer; }
-        .close:hover { color: #007BFF; }
-        table.items { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        table.items th, table.items td { border: 1px solid #ccc; padding: 6px; font-size: 13px; }
-        table.items th { background: #f1f1f1; }
     </style>
 </head>
 <body>
@@ -164,91 +311,87 @@ render_page:
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
         Welcome <?= $role ?>!
-        <a href="/app/dashboard.php">Dashboard</a>
-         <!-- Dynamic catalog link based on user role -->
-    <?php if ($role === 'Admin'): ?>
-        <a href="/admin/catalog.php">Admin Catalog</a>
-        <a href="/public/catalog.php">Public Catalog</a>
-        <a href="/admin/orders.php">Orders</a>
-    <?php elseif ($role === 'Editor'): ?>
-        <a href="/public/catalog.php">Public Catalog</a>
-    <?php endif; ?>
-        <a href="/admin/admin-leads.php">Leads</a>
-        <a href="/admin/pages.php">Pages</a>
+        <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+        <?php if ($role === 'Admin'): ?>
+            <a href="/admin/catalog.php" class="<?= basename($_SERVER['PHP_SELF']) === 'catalog.php' ? 'active' : '' ?>">Admin Catalog</a>
+            <a href="/public/catalog.php">Public Catalog</a>
+            <a href="/admin/orders.php" class="<?= basename($_SERVER['PHP_SELF']) === 'orders.php' ? 'active' : '' ?>">Orders</a>
+        <?php elseif ($role === 'Editor'): ?>
+            <a href="/public/catalog.php">Public Catalog</a>
+        <?php endif; ?>
+        <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
+        <a href="/admin/pages.php" class="<?= basename($_SERVER['PHP_SELF']) === 'pages.php' ? 'active' : '' ?>">Pages</a>
         <a href="/admin/logout.php">Logout</a>
-
     </div>
 </div>
 
+    <!-- Orders Page Content -->
+    <div class="content">
+        <h1>Orders</h1>
 
-<h1>Orders</h1>
+        <!-- Search Form -->
+        <form method="get" class="search-form">
+            <input type="text" name="search" placeholder="Search by email or order ref" value="<?= htmlspecialchars($search) ?>">
+            <select name="status">
+                <option value="">All Statuses</option>
+                <?php foreach ($statuses as $status): ?>
+                    <option value="<?= $status ?>" <?= ($status === $statusFilter) ? 'selected' : '' ?>><?= ucfirst($status) ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
 
-<form method="get" class="filter-bar">
-    <input type="text" name="search" placeholder="Search by email or order ref"
-           value="<?= htmlspecialchars($search) ?>">
-    <select name="status">
-        <option value="">All Statuses</option>
-        <?php foreach ($statuses as $status): ?>
-            <option value="<?= $status ?>" <?= ($status === $statusFilter) ? 'selected' : '' ?>>
-                <?= ucfirst($status) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <button type="submit">Filter</button>
-</form>
-
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Order Ref</th>
-            <th>Customer</th>
-            <th>Email</th>
-            <th>Total</th>
-            <th>Gateway</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if (!empty($orders)): ?>
-            <?php foreach ($orders as $order): ?>
+        <!-- Orders Table -->
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $order['id'] ?></td>
-                    <td><?= htmlspecialchars($order['order_ref']) ?></td>
-                    <td><?= htmlspecialchars($order['customer_name']) ?></td>
-                    <td><?= htmlspecialchars($order['customer_email']) ?></td>
-                    <td>$<?= number_format($order['total'], 2) ?></td>
-                    <td><?= ucfirst($order['payment_gateway']) ?></td>
-                    <td><span class="badge <?= $order['payment_status'] ?>">
-                        <?= ucfirst($order['payment_status']) ?>
-                    </span></td>
-                    <td><?= htmlspecialchars($order['created_at']) ?></td>
-                    <td>
-                        <button class="view-btn"
-                            data-order='<?= json_encode($order, JSON_HEX_APOS | JSON_HEX_QUOT) ?>'>
-                            View
-                        </button>
-                    </td>
+                    <th>ID</th>
+                    <th>Order Ref</th>
+                    <th>Customer</th>
+                    <th>Email</th>
+                    <th>Total</th>
+                    <th>Gateway</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Action</th>
                 </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr><td colspan="9">No orders found.</td></tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                <?php if (!empty($orders)): ?>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td><?= $order['id'] ?></td>
+                            <td><?= htmlspecialchars($order['order_ref']) ?></td>
+                            <td><?= htmlspecialchars($order['customer_name']) ?></td>
+                            <td><?= htmlspecialchars($order['customer_email']) ?></td>
+                            <td>$<?= number_format($order['total'], 2) ?></td>
+                            <td><?= ucfirst($order['payment_gateway']) ?></td>
+                            <td><span class="badge <?= $order['payment_status'] ?>"><?= ucfirst($order['payment_status']) ?></span></td>
+                            <td><?= htmlspecialchars($order['created_at']) ?></td>
+                            <td>
+                                <button class="view-btn" data-order='<?= json_encode($order, JSON_HEX_APOS | JSON_HEX_QUOT) ?>'>
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr><td colspan="9">No orders found.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
 
-<div class="pagination">
-    <?php if ($totalPages > 1): ?>
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>&status=<?= urlencode($statusFilter) ?>"
-               class="<?= ($i === $page) ? 'active' : '' ?>">
-               <?= $i ?>
-            </a>
-        <?php endfor; ?>
-    <?php endif; ?>
-</div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php if ($totalPages > 1): ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>&status=<?= urlencode($statusFilter) ?>" class="<?= ($i === $page) ? 'active' : '' ?>">
+                        <?= $i ?>
+                    </a>
+                <?php endfor; ?>
+            <?php endif; ?>
+        </div>
+    </div>
 
 <!-- Modal -->
 <div id="orderModal" class="modal">

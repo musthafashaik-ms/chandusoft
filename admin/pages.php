@@ -78,6 +78,7 @@ if ($search !== '') {
 <html>
 <head>
     <title>Pages - Admin</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,6 +87,8 @@ if ($search !== '') {
             padding: 0;
         }
 
+      
+        /* Navbar Styling */
         .navbar {
             background-color: #2c3e50;
             color: white;
@@ -102,11 +105,31 @@ if ($search !== '') {
             font-weight: bold;
         }
 
+        .navbar .links a:hover {
+            text-decoration: none;
+        }
+
+        /* Highlight Active Link */
+        .navbar .links a.active {
+            background-color: #007BFF; /* Blue background when active */
+            color: white;  /* Ensure text color is white */
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        /* Page Heading */
+        h1 {
+            color: #007BFF;  /* Blue color for h1 */
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: left;
+        }
+
         .container {
             max-width: 1100px;
             margin: 30px auto;
             background: #fff;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
@@ -133,6 +156,15 @@ if ($search !== '') {
         tr:hover {
             background-color: #eef7ff;
         }
+        /* Filters Styling */
+.top-bar .filters a {
+    color: #007BFF;  /* Blue color for the filter links */
+    text-decoration: none;  /* Remove underline from the links */
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
 
         .btn {
             display: inline-block;
@@ -151,6 +183,36 @@ if ($search !== '') {
         .btn-delete { background-color: #e74c3c; }
 
         .btn:hover { opacity: 0.9; }
+        /* Search Form */
+.search-form {
+    display: flex;
+    gap: 5px;
+    max-width: 600px; /* Optional: limit total width */
+}
+
+.search-form input[type="text"] {
+    flex: 1; /* Takes all available space */
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.search-form input[type="submit"] {
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
     </style>
 </head>
 <body>
@@ -159,8 +221,8 @@ if ($search !== '') {
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
-        Welcome <?= $username ?>!
-        <a href="/app/dashboard.php">Dashboard</a>
+        Welcome <?= $role ?>!
+        <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
         <?php if ($role === 'Admin'): ?>
             <a href="/admin/catalog.php">Admin Catalog</a>
             <a href="/public/catalog.php">Public Catalog</a>
@@ -168,8 +230,10 @@ if ($search !== '') {
         <?php elseif ($role === 'Editor'): ?>
             <a href="/public/catalog.php">Public Catalog</a>
         <?php endif; ?>
-        <a href="/admin/admin-leads.php">Leads</a>
-        <a href="/admin/pages.php">Pages</a>
+        <!-- Leads Link with Active Class Check -->
+        <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
+        <!-- Pages Link with Active Class Check -->
+        <a href="/admin/pages.php" class="<?= basename($_SERVER['PHP_SELF']) === 'pages.php' ? 'active' : '' ?>">Pages</a>
         <a href="/admin/logout.php">Logout</a>
     </div>
 </div>

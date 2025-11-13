@@ -111,38 +111,42 @@ main.contact-page {
     align-items: center;
     padding: 40px 20px;
 }
- 
+
 /* ✅ Modern Form Design */
 .contact-form {
     width: 100%;
-    max-width: 380px;
-    background: rgba(255, 255, 255, 0.9);
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    padding: 35px 30px;
+    padding: 40px 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
     animation: fadeInUp 0.6s ease;
+    box-sizing: border-box; /* keeps borders even */
+    overflow: hidden; /* prevents inner overflow */
 }
- 
+
 @keyframes fadeInUp {
     from { transform: translateY(25px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
- 
+
 .contact-page h2 {
     text-align: center;
     color: #0078D7;
     margin-bottom: 25px;
     font-weight: 600;
 }
- 
+
+/* ✅ Label Styling */
 .contact-form label {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
     color: #333;
 }
- 
+
+/* ✅ Input & Textarea Fields */
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -151,18 +155,29 @@ main.contact-page {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
+    box-sizing: border-box; /* ensures even border spacing */
 }
- 
+
+/* ✅ Textarea: only vertical resize */
+.contact-form textarea {
+    resize: vertical; /* ✅ allow only up/down resizing */
+    min-height: 120px;
+    max-height: 300px;
+    overflow: auto; /* scrolls inside when text is long */
+}
+
+/* ✅ Focus Style (balanced on all sides) */
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: #0078D7;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0,120,215,0.1);
+    box-shadow: 0 0 6px 2px rgba(0, 120, 215, 0.2); /* even glow */
     background: #fff;
 }
- 
+
+/* ✅ Submit Button */
 .contact-form button {
     width: 100%;
     padding: 12px;
@@ -174,13 +189,14 @@ main.contact-page {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0,120,215,0.2);
+    box-shadow: 0 3px 10px rgba(0, 120, 215, 0.2);
 }
- 
+
 .contact-form button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,120,215,0.3);
+    box-shadow: 0 5px 15px rgba(0, 120, 215, 0.3);
 }
+
  
 /* ✅ Toast (bottom-center with iOS blur) */
 .alert {

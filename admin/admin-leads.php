@@ -116,6 +116,8 @@ $username = htmlspecialchars($user['username'] ?? 'User');
             margin: 0;
             padding: 0;
         }
+      
+        /* Navbar Styling */
         .navbar {
             background-color: #2c3e50;
             color: white;
@@ -124,15 +126,27 @@ $username = htmlspecialchars($user['username'] ?? 'User');
             justify-content: space-between;
             align-items: center;
         }
+
         .navbar .links a {
             color: white;
             text-decoration: none;
             margin-left: 15px;
             font-weight: bold;
         }
+
         .navbar .links a:hover {
             text-decoration: none;
         }
+
+        /* Highlight Active Link */
+        .navbar .links a.active {
+            background-color: #007BFF; /* Blue background when active */
+            color: white;  /* Ensure text color is white */
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        /* Content Section */
         .content {
             padding: 20px;
             max-width: 1200px;
@@ -142,13 +156,16 @@ $username = htmlspecialchars($user['username'] ?? 'User');
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+
         h1 {
             margin-bottom: 20px;
-            color: #2c3e50;
+            color: #007BFF;
         }
+
         .search-form {
             margin-bottom: 20px;
         }
+
         .search-form input[type="text"] {
             padding: 8px;
             font-size: 14px;
@@ -156,6 +173,7 @@ $username = htmlspecialchars($user['username'] ?? 'User');
             border-radius: 4px;
             width: 250px;
         }
+
         .search-form input[type="submit"] {
             padding: 8px 12px;
             font-size: 14px;
@@ -165,53 +183,59 @@ $username = htmlspecialchars($user['username'] ?? 'User');
             border-radius: 4px;
             cursor: pointer;
         }
+
         .search-form input[type="submit"]:hover {
             background-color: #2980b9;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin-top: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+
         th, td {
             border: 1px solid #ccc;
             padding: 10px;
             text-align: left;
         }
+
         th {
             background-color: #2980b9;
             color: white;
         }
+
         tr:nth-child(even) {
             background: #f2f2f2;
         }
+
         tr:hover {
             background-color: #e6f7ff;
         }
     </style>
 </head>
 <body>
+<!-- ✅ Navbar -->
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
         Welcome <?= $role ?>!
-        <a href="/app/dashboard.php">Dashboard</a>
-         <!-- Dynamic catalog link based on user role -->
-    <?php if ($role === 'Admin'): ?>
-        <a href="/admin/catalog.php">Admin Catalog</a>
-        <a href="/public/catalog.php">Public Catalog</a>
-        <a href="/admin/orders.php">Orders</a>
-    <?php elseif ($role === 'Editor'): ?>
-        <a href="/public/catalog.php">Public Catalog</a>
-    <?php endif; ?>
-        <a href="/admin/admin-leads.php">Leads</a>
+        <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+        <?php if ($role === 'Admin'): ?>
+            <a href="/admin/catalog.php">Admin Catalog</a>
+            <a href="/public/catalog.php">Public Catalog</a>
+            <a href="/admin/orders.php">Orders</a>
+        <?php elseif ($role === 'Editor'): ?>
+            <a href="/public/catalog.php">Public Catalog</a>
+        <?php endif; ?>
+        <!-- Leads Link with Active Class Check -->
+        <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
         <a href="/admin/pages.php">Pages</a>
         <a href="/admin/logout.php">Logout</a>
-
-    </div>
     </div>
 </div>
+
 
 <div class="content">
     <h1>Leads</h1>

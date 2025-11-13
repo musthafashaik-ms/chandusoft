@@ -15,6 +15,8 @@ if ($logoPath && strpos($logoPath, 'uploads/') === 0) {
 $currentURI = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 // Example results: "index", "about", "services", "slug", "app/register"
 ?>
+<!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <header>
     <div class="logo">
         <a href="/index">
