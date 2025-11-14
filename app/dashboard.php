@@ -127,7 +127,7 @@ th, td {
 }
 
 th {
-    background-color: #3498db;
+    background-color: #2980b9;
     color: white;
 }
 

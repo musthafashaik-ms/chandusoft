@@ -113,6 +113,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .navbar .links a:hover {
             text-decoration: none;
         }
+  /* Highlight Active Link */
+        .navbar .links a.active {
+            background-color: #007BFF; /* Blue background when active */
+            color: white;  /* Ensure text color is white */
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
 
         .container {
             max-width: 800px;
@@ -142,26 +149,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
  
-<!-- ✅ Navbar -->
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
         Welcome <?= $role ?>!
-        <a href="/app/dashboard.php">Dashboard</a>
-         <!-- Dynamic catalog link based on user role -->
-    <?php if ($role === 'Admin'): ?>
-        <a href="/admin/catalog.php">Admin Catalog</a>
-        <a href="/public/catalog.php">Public Catalog</a>
-        <a href="/admin/orders.php">Orders</a>
-    <?php elseif ($role === 'Editor'): ?>
-        <a href="/public/catalog.php">Public Catalog</a>
-    <?php endif; ?>
-        <a href="/admin/admin-leads.php">Leads</a>
-        <a href="/admin/pages.php">Pages</a>
+        <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+        <?php if ($role === 'Admin'): ?>
+            <a href="/admin/catalog.php" class="<?= strpos($_SERVER['PHP_SELF'], 'catalog') !== false ? 'active' : '' ?>">Admin Catalog</a>
+            <a href="/public/catalog.php">Public Catalog</a>
+            <a href="/admin/orders.php">Orders</a>
+        <?php elseif ($role === 'Editor'): ?>
+            <a href="/public/catalog.php">Public Catalog</a>
+        <?php endif; ?>
+        <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
+        <a href="/admin/pages.php" class="<?= basename($_SERVER['PHP_SELF']) === 'pages.php' ? 'active' : '' ?>">Pages</a>
         <a href="/admin/logout.php">Logout</a>
-
     </div>
 </div>
+
  
 <div class="container">
     <a href="catalog.php" class="back-link">← Back to Catalog</a>

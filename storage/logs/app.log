@@ -1507,3 +1507,17 @@
 [2025-11-13 16:24:44][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-11-13 16:35:59][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
 [2025-11-13 16:48:41][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-14 08:32:03][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-14 09:53:46][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-14 11:02:12][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-14 12:22:34][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-14 12:22:56][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-14 13:17:52][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-14 13:17:52][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-14 13:17:52][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-14 13:17:52][INFO] 🔔 Stripe Event Received: checkout.session.expired | IP: ::1
+[2025-11-14 13:17:52][INFO] ℹ️ Unhandled event type: checkout.session.expired | IP: ::1
+[2025-11-14 13:17:52][INFO] ✅ Webhook processed successfully — Event: checkout.session.expired | IP: ::1
+[2025-11-14 16:45:31][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-14 16:51:25][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-14 16:54:47][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: ::1

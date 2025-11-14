@@ -20,7 +20,7 @@ main {
 /* Header Styles */
 header {
     background-color: #007BFF;
-    padding: 15px;
+    padding: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -221,10 +221,7 @@ footer p b {
     color: #555;
     margin: 0;
 }
-.section-title
- { 
-    color: #0056b3;
- }
+
 .highlight {
     font-weight: bold;
     color: black;

@@ -108,14 +108,14 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
         }
 
         h1 {
-            text-align: center;
+            text-align: left;
             color: #007BFF;
             margin-bottom: 20px;
         }
 
         form.search {
             display: flex;
-            justify-content: center;
+            justify-content: left;
             gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 20px;
@@ -129,7 +129,7 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
 
         form.search button {
             padding: 8px 15px;
-            background: #007BFF;
+            background: #2980b9;
             color: #fff;
             border: none;
             cursor: pointer;
@@ -137,34 +137,50 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
         }
 
         form.search button:hover {
-            background: #0056b3;
+            background: #2980b9;
         }
 
         .new-btn {
             display: inline-block;
-            background: #007BFF;
+            background: #2980b9;
             color: #fff;
             padding: 8px 15px;
             text-decoration: none;
             border-radius: 5px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
+        /* Add borders to the table */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Merge borders for cleaner look */
+    margin-top: 15px;
+    border: 1px solid #ccc; /* Outer border of the table */
+}
 
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
+/* Table headers */
+th {
+    background: #2980b9;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc; /* Column borders */
+    text-align: left;
+}
 
-        th {
-            background: #007BFF;
-            color: #fff;
-        }
+/* Table cells */
+td {
+    padding: 10px;
+    border: 1px solid #ccc; /* Row & column borders */
+}
+
+/* Optional: alternate row colors for better readability */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e6f2ff; /* Highlight row on hover */
+}
+
         img.thumb {
             max-width: 80px;
             border-radius: 4px;
@@ -188,12 +204,12 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
         }
  
         .actions a[href*="catalog-delete.php"] {
-            background: #dc3545;
+            background: #007BFF;
             color: #fff;
         }
  
         .actions a[href*="catalog-delete.php"]:hover {
-            background: #c82333;
+            background: #007BFF;
         }
  
         .actions a[href*="catalog-restore.php"] {
@@ -204,7 +220,25 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
         .actions a[href*="catalog-restore.php"]:hover {
             background: #e0a800;
         }
- 
+ /* Permanent Delete button styling */
+.actions a[href*="catalog-delete-permanent.php"] {
+    background: #e53935; /* Bright red */
+    color: #fff;
+}
+
+.actions a[href*="catalog-delete-permanent.php"]:hover {
+    background: #c62828; /* Darker red on hover */
+}
+/* Delete button hover cursor */
+
+.actions a[href*="catalog-delete-permanent.php"] {
+    cursor: not-allowed; /* Shows block/stop symbol */
+}
+
+/* Optional: keep the color hover effect */
+.actions a[href*="catalog-delete-permanent.php"]:hover {
+    background: #c82333; /* Dark red hover */
+}
         .pagination {
             text-align: center;
             margin-top: 20px;
@@ -287,6 +321,8 @@ log_catalog("Catalog viewed | Page: $page | Status: $statusFilter | Search: '$se
                         <?php else: ?>
                             <a href="catalog-restore.php?id=<?php echo $item['id']; ?>" onclick="return confirm('Restore this item?')">Restore</a>
                         <?php endif; ?>
+                        <!-- ✅ Always display Delete button -->
+    <a href="catalog-delete-permanent.php?id=<?php echo $item['id']; ?>" onclick="return confirm('Are you sure you want to permanently delete this item?')">Delete</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -133,7 +133,7 @@ main.contact-page {
 
 .contact-page h2 {
     text-align: center;
-    color: #0078D7;
+    color: #1E90FF;
     margin-bottom: 25px;
     font-weight: 600;
 }

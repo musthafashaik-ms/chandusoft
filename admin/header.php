@@ -48,11 +48,15 @@ $currentURI = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
             echo "<!-- Navigation fetch error: " . htmlspecialchars($e->getMessage()) . " -->";
         }
         ?>
- 
-        <!-- ✅ Login/Register -->
-<span>
-  <a href="/admin/login.php" class="<?= ($currentPage === 'login') ? 'active' : '' ?>">Login/Register</a>
-  <a href="/app/register" class="<?= ($currentPage === 'register') ? 'active' : '' ?>"></a>
+
+<span class="auth-links">
+    <a href="/admin/login" 
+       class="btn <?= ($currentPage === 'login') ? 'active' : '' ?>">
+       Login
+    <a href="/app/register" 
+       class="btn <?= ($currentPage === 'register') ? 'active' : '' ?>">
+       Register
+    </a>
 </span>
-    </nav>
+ </nav>
 </header>

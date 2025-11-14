@@ -14,7 +14,8 @@
     <?php include __DIR__ . '/admin/header.php'; ?>
 
     <main>
-        <h2><span class="section-title">About Us</span></h2>
+       <h2><span class="section-title" style="color:#1E90FF;">About Us</span></h2>
+
  
         <p>
             <span class="highlight">Chandusoft</span> is a well-established company with over

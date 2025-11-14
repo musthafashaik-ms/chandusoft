@@ -11,7 +11,7 @@ session_set_cookie_params([
     'path' => '/',
     'secure' => isset($_SERVER['HTTPS']),
     'httponly' => true,
-    'samesite' => 'Lax'
+    'samesite' => 'Strict'
 ]);
 
 if (session_status() === PHP_SESSION_NONE) {

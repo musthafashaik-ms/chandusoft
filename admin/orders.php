@@ -207,7 +207,7 @@ render_page:
         }
 
         th {
-            background-color: #007BFF;
+            background-color: #2980b9;
             color: white;
         }
 
@@ -416,7 +416,7 @@ document.querySelectorAll('.view-btn').forEach(btn => {
         // Company Info
         const companyName = "Chandusoft Technologies Pvt Ltd";
         const companyAddress = "Module No.6, First Floor, IT Tower Medha,\nSurvey No. 52 & 53, Kesarapalli Village, Krishna District,\nAndhra Pradesh - 521102";
-        const companyEmail = "Chandusoft Email 1";
+        const companyEmail = "chandusoft.com";
         const companyPhone = "+91 8025 266 524";
 
         const items = order.items || [];
@@ -490,17 +490,22 @@ window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
     width: 100%; height: 100%;
     background: rgba(0,0,0,0.5);
 }
+
 .modal-content {
     position: absolute;
-    top: -65px;
+    top: -30px;
     left: 50%;
     transform: translateX(-50%);
     background: #fff;
     padding: 20px;
     width: 700px;
+    height: 80vh;  /* Set height to 80% of viewport height */
+    max-height: 90vh; /* Optional: limit the maximum height */
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    overflow-y: auto; /* Enable vertical scrolling */
 }
+
 .close {
     position: absolute;
     top: 10px;
@@ -508,7 +513,11 @@ window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
     font-size: 22px;
     cursor: pointer;
 }
-.close:hover { color: #007BFF; }
+
+.close:hover { 
+    color: #007BFF; 
+}
+
 .print-btn {
     margin-top: 15px;
     padding: 8px 16px;
@@ -518,7 +527,10 @@ window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
     border-radius: 4px;
     cursor: pointer;
 }
-.print-btn:hover { background: #0056b3; }
+
+.print-btn:hover { 
+    background: #0056b3; 
+}
 
 /* Invoice Styling */
 .invoice-header {
@@ -529,30 +541,72 @@ window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
+
 .header-left {
     max-width: 65%;
     text-align: left;
 }
+
 .company-logo {
     max-width: 200px;
     margin-bottom: 10px;
 }
-.invoice-info { margin-bottom: 20px; }
-.invoice-items { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-.invoice-items th, .invoice-items td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-.invoice-items th { background: #007BFF; color: #fff; }
-.invoice-items tbody tr:nth-child(even) { background: #f9f9f9; }
-.grand-total td { font-weight: bold; background: #eee; }
-.invoice-footer { font-size: 13px; color: #555; }
+
+.invoice-info { 
+    margin-bottom: 20px; 
+}
+
+.invoice-items { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 20px; 
+}
+
+.invoice-items th, .invoice-items td { 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    text-align: left; 
+}
+
+.invoice-items th { 
+    background: #007BFF; 
+    color: #fff; 
+}
+
+.invoice-items tbody tr:nth-child(even) { 
+    background: #f9f9f9; 
+}
+
+.grand-total td { 
+    font-weight: bold; 
+    background: #eee; 
+}
+
+.invoice-footer { 
+    font-size: 13px; 
+    color: #555; 
+}
 
 /* Print Styles */
 @media print {
-    body * { visibility: hidden; }
-    #orderModal, #orderModal * { visibility: visible; }
-    #orderModal { position: absolute; left: 0; top: 0; width: 100%; }
-    #orderModal .modal-content { box-shadow: none; border-radius: 0; }
-    .print-btn { display: none; }
+    body * { 
+        visibility: hidden; 
+    }
+    #orderModal, #orderModal * { 
+        visibility: visible; 
+    }
+    #orderModal { 
+        position: absolute; left: 0; top: 0; width: 100%; 
+    }
+    #orderModal .modal-content { 
+        box-shadow: none; 
+        border-radius: 0; 
+    }
+    .print-btn { 
+        display: none; 
+    }
 }
+
 </style>
 
 

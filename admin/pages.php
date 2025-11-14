@@ -217,26 +217,29 @@ if ($search !== '') {
 </head>
 <body>
 
-<!-- ✅ Navbar -->
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
         Welcome <?= $role ?>!
         <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+        
         <?php if ($role === 'Admin'): ?>
-            <a href="/admin/catalog.php">Admin Catalog</a>
+            <a href="/admin/catalog.php" class="<?= strpos($_SERVER['PHP_SELF'], 'catalog') !== false ? 'active' : '' ?>">Admin Catalog</a>
             <a href="/public/catalog.php">Public Catalog</a>
             <a href="/admin/orders.php">Orders</a>
         <?php elseif ($role === 'Editor'): ?>
             <a href="/public/catalog.php">Public Catalog</a>
         <?php endif; ?>
-        <!-- Leads Link with Active Class Check -->
+        
         <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
-        <!-- Pages Link with Active Class Check -->
-        <a href="/admin/pages.php" class="<?= basename($_SERVER['PHP_SELF']) === 'pages.php' ? 'active' : '' ?>">Pages</a>
+
+        <!-- Pages Link: Highlight if we're on pages.php, create.php, or edit.php -->
+        <a href="/admin/pages.php" class="<?= strpos($_SERVER['PHP_SELF'], 'pages') !== false ? 'active' : '' ?>">Pages</a>
+        
         <a href="/admin/logout.php">Logout</a>
     </div>
 </div>
+
 
 <!-- ✅ Main container -->
 <div class="container">
@@ -293,8 +296,8 @@ if ($search !== '') {
             <?php endwhile; ?>
         <?php else: ?>
             <tr>
-                <td colspan="5" style="text-align:center; padding:15px; color:#d00; font-weight:bold;">
-                    🚫 No items found.
+                <td colspan="5" style="text-align:center; padding:15px; color:#ccc; font-weight:bold;">
+                    No items found.
                 </td>
             </tr>
         <?php endif; ?>
