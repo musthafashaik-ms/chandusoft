@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
         }
         .navbar .links a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
         /* Highlight Active Link */
         .navbar .links a.active {

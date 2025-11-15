@@ -171,3 +171,14 @@
 [2025-11-14 17:15:26][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: ::1
 [2025-11-14 17:15:38][INFO] Catalog viewed | Page: 1 | Status: archived | Search: '' | IP: ::1
 [2025-11-14 17:15:52][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: ::1
+[2025-11-14 17:29:20][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:29:31][INFO] Catalog viewed | Page: 1 | Status: archived | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:29:33][INFO] Catalog viewed | Page: 1 | Status: draft | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:29:35][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:30:22][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: ::1
+[2025-11-14 17:37:38][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:37:43][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:42:23][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:42:42][ARCHIVE] 🗃️ Archived catalog item #28 | IP: 127.0.0.1
+[2025-11-14 17:42:42][INFO] Catalog viewed | Page: 1 | Status: published | Search: '' | IP: 127.0.0.1
+[2025-11-14 17:42:54][INFO] Catalog viewed | Page: 1 | Status: archived | Search: '' | IP: 127.0.0.1

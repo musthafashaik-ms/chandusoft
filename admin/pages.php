@@ -166,23 +166,38 @@ if ($search !== '') {
     transition: background-color 0.3s;
 }
 
-        .btn {
-            display: inline-block;
-            padding: 6px 12px;
-            margin-right: 6px;
-            font-size: 14px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 4px;
-            color: white;
-        }
+       /* The container for the buttons */
+td.actions {
+  display: flex;
+  gap: 8px;              /* small fixed space between buttons */
+  align-items: center;   /* vertically center the buttons inside td */
+}
 
-        .btn-edit { background-color: #2ecc71; }
-        .btn-archive { background-color: #f39c12; }
-        .btn-unarchive { background-color: #2793aeff; }
-        .btn-delete { background-color: #e74c3c; }
+/* All action buttons */
+.btn {
+  padding: 6px 12px;      /* consistent padding */
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 4px;
+  color: white;
+  display: inline-block;  /* ensures each is treated as a block inside flex */
+  min-width: 70px;        /* **new** ensure even minimum width */
+  text-align: center;     /* center the text inside the button */
+  white-space: nowrap;    /* avoid line‐break in button text */
+}
 
-        .btn:hover { opacity: 0.9; }
+/* Specific colours */
+.btn-edit { background-color: #2ecc71; }
+.btn-archive { background-color: #f39c12; }
+.btn-unarchive { background-color: #2793aeff; }
+.btn-delete { background-color: #e74c3c; }
+
+/* Hover effect */
+.btn:hover {
+  opacity: 0.9;
+}
+
         /* Search Form */
 .search-form {
     display: flex;
@@ -201,7 +216,7 @@ if ($search !== '') {
 .search-form input[type="submit"] {
     padding: 10px 16px;
     font-size: 16px;
-    background-color: #0078D7;
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 6px;
@@ -210,7 +225,7 @@ if ($search !== '') {
 }
 
 .search-form input[type="submit"]:hover {
-    background-color: #005bb5;
+    background-color: #2980b9;
 }
 
     </style>

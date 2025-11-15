@@ -51,12 +51,14 @@ $currentURI = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
 <span class="auth-links">
     <a href="/admin/login" 
-       class="btn <?= ($currentPage === 'login') ? 'active' : '' ?>">
+       class="btn <?= ($currentURI === 'admin/login') ? 'active' : '' ?>">
        Login
+    </a>
     <a href="/app/register" 
-       class="btn <?= ($currentPage === 'register') ? 'active' : '' ?>">
+       class="btn <?= ($currentURI === 'app/register') ? 'active' : '' ?>">
        Register
     </a>
 </span>
+
  </nav>
 </header>
