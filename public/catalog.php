@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/logger.php';
-include __DIR__ . '/../admin/header.php';
 
 $search = trim($_GET['search'] ?? '');
 $page = max(1, intval($_GET['page'] ?? 1));
@@ -34,11 +33,12 @@ log_page("Visited Catalog Page | Search: $search | Page: $page");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <head>
     <meta charset="UTF-8">
     <title>Our Catalog</title>
+    <link rel="stylesheet" href="/styles.css">
+
+<?php include __DIR__ . '/../admin/header.php'; ?>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -145,43 +145,67 @@ log_page("Visited Catalog Page | Search: $search | Page: $page");
     width: 100%; /* Ensure buttons take up the full width of the card */
 }
 
-/* Quantity input field */
-.quantity-input {
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* center horizontally */
+    margin-top: 12px;
+    position: relative;
+}
+
+/* Quantity input hidden by default */
+.quantity-top-input {
     width: 50px;
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-right: 15px;
-}
-
-/* Both Buy Now and Add to Cart buttons */
-.buy-now-btn, .add-to-cart-btn {
-    border: none;
-    border-radius: 0; /* Removing rounded corners for rectangular shape */
-    cursor: pointer;
-    width: 75%; /* Ensure buttons share equal space */
+    padding: 8px;
     text-align: center;
-    font-size: 1em;
+    border: 1px solid #d8d4d4ff;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-/* Buy Now button - Green */
+/* Show quantity input when hovering over buttons */
+.buttons-row:hover ~ .quantity-top-input,
+.card-actions:hover .quantity-top-input {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Buttons under quantity, centered */
+.buttons-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* center buttons */
+}
+
+/* Buy Now and Add to Cart buttons */
+.buy-now-btn, .add-to-cart-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: white;
+    font-size: 14px;
+}
+
 .buy-now-btn {
-    background-color: #28a745; /* Green */
-    color: white;
+    background-color: #28a745;
 }
-
 .buy-now-btn:hover {
-    background-color: #218838; /* Darker green for hover */
+    background-color: #218838;
 }
 
-/* Add to Cart button - Blue */
 .add-to-cart-btn {
-    background-color: #007BFF; /* Blue */
-    color: white;
+    background-color: #2980b9;
+;
 }
-
 .add-to-cart-btn:hover {
-    background-color: #0056b3; /* Darker blue for hover */
+    background-color: #2980b9;
 }
 
 /* Card hover effect */
@@ -189,131 +213,6 @@ log_page("Visited Catalog Page | Search: $search | Page: $page");
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px);
 }
-
-/* Header Styles */
-header {
-    background-color: #007BFF;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-}
- 
-.logo img {
-    width: 400px;
-    height: auto;
-}
- 
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    align-items: center;
-}
- 
-/* Navigation Links */
-nav a {
-    display: inline-block;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    color: white;
-    position: relative;
-    transition: color 0.3s ease;
-}
- 
-/* Hover effect: underline only */
-nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0%;
-    height: 3px;
-    background-color: #FFD700; /* underline color (gold/yellow) */
-    transition: width 0.3s ease;
-}
- 
-nav a:hover::after,
-nav a.active::after {
-    width: 100%; /* full underline on hover or active */
-}
- 
-nav a:hover,
-nav a.active {
-    color: #FFD700; /* text color change on hover or active (optional) */
-}
- 
-
-
-/* Back to Top Button */
-/* Back to Top Button */
-#back-to-top {
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    display: none; /* Hidden by default */
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 10px; /* Adjusted padding for a smaller button */
-    border-radius: 30%; /* Round shape */
-    font-size: 20px; /* Increase font size for better visibility */
-    cursor: pointer;
-    z-index: 100;
-    transition: background-color 0.3s ease;
-    text-align: center; /* Center the content inside the button */
-    width: 50px; /* Adjust the width of the button */
-    height: 50px; /* Adjust the height of the button */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center content (the arrow) inside the button */
-}
-
-
-
-/* Change background color when hovered */
-#back-to-top:hover {
-    background-color: #0056b3;
-}
-
-/* Footer Styles */
-footer {
-    background: #333;
-    color: #fff;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;  /* Fixes the footer at the bottom of the screen */
-    left: 0;
-    bottom: 0;  /* Ensures it's always at the bottom */
-    width: 100%;  /* Full width */
-    z-index: 1000;  /* Keeps footer above other content */
-}
-
-footer p {
-    margin: 0;
-    font-size: 14px;
-}
-
-footer p b {
-    font-weight: bold;
-}
-
-.social-icons a {
-    color: #fff;
-    margin-left: 15px;
-    font-size: 16px;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.social-icons a:hover {
-    color: #1da1f2; /* Hover color */
-}
-
     </style>
 </head>
 <body>
@@ -339,19 +238,27 @@ footer p b {
         <p>$<?= number_format($item['price'], 2) ?></p>
     </a>
     
-    <!-- Add Buy Now and Add to Cart buttons -->
-    <div class="buttons">
+   <!-- Quantity + Buttons -->
+<div class="card-actions">
+
+    <!-- Quantity on top -->
+    <input type="number" name="quantity" value="1" min="1" class="quantity-top-input">
+
+    <!-- Buttons under quantity -->
+    <div class="buttons-row">
         <form method="post" action="/checkout" class="buy-now-form">
             <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
-            <input type="number" name="quantity" value="1" min="1" class="quantity-input">
-            <button type="submit" class="buy-now-btn">Buy Now</button>
+            <button type="submit" class="buy-now-btn">🛍️ Buy Now</button>
         </form>
+
         <form method="post" action="/public/cart" class="add-to-cart-form">
             <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
-            <input type="number" name="quantity" value="1" min="1" class="quantity-input">
-            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            <button type="submit" class="add-to-cart-btn">🛒 Add to Cart</button>
         </form>
     </div>
+</div>
+
+
 </div>
 
         <?php endforeach; ?>
@@ -367,7 +274,30 @@ footer p b {
 </div>
 <?php include __DIR__ . '/../admin/footer.php'; ?>
 
-    <button id="back-to-top" title="Back to Top">↑</button>
-    <script src="/include.js"></script>
+<button id="back-to-top" title="Back to Top">↑</button>
+<script src="/include.js"></script>
+<script>
+document.querySelectorAll('.card-actions').forEach(section => {
+    const qty = section.querySelector('.quantity-top-input');
+
+    section.querySelector('.buy-now-form').addEventListener('submit', e => {
+        let hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'quantity';
+        hidden.value = qty.value;
+        section.querySelector('.buy-now-form').appendChild(hidden);
+    });
+
+    section.querySelector('.add-to-cart-form').addEventListener('submit', e => {
+        let hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'quantity';
+        hidden.value = qty.value;
+        section.querySelector('.add-to-cart-form').appendChild(hidden);
+    });
+});
+</script>
+
+
 </body>
 </html>
