@@ -1530,3 +1530,103 @@
 [2025-11-15 16:46:06][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-11-17 09:33:48][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-11-17 12:09:34][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-17 13:24:20][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-17 13:24:39][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-17 13:30:52][INFO] 🛒 Checkout started — Total: 925 USD | IP: ::1
+[2025-11-17 13:30:53][INFO] 🧾 Order 84 created (Ref: B97AB87B7A16, Payment: paypal) | IP: ::1
+[2025-11-17 13:30:53][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-17 13:30:58][INFO] ✅ Redirecting to PayPal approval URL for order 84 | IP: ::1
+[2025-11-18 09:18:30][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-18 09:19:10][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-18 09:41:59][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-18 14:32:40][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-19 10:14:06][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-19 12:47:01][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[19-Nov-2025 15:13:57 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:13:57 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog-item.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:13:58 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog-item.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:13:58 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog-item.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:13:59 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog-item.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:14:00 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog-item.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:14:01 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog-item.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:14:03 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:14:12 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[19-Nov-2025 15:14:21 Asia/Kolkata] PHP Fatal error:  Uncaught TypeError: PDO::__construct(): Argument #2 ($username) must be of type ?string, false given in C:\laragon\www\chandusoft\app\config.php:44
+Stack trace:
+#0 C:\laragon\www\chandusoft\app\config.php(44): PDO->__construct('mysql:host=;dbn...', false, Object(SensitiveParameterValue), Array)
+#1 C:\laragon\www\chandusoft\public\catalog.php(2): require_once('C:\\laragon\\www\\...')
+#2 {main}
+  thrown in C:\laragon\www\chandusoft\app\config.php on line 44
+[2025-11-20 11:13:47][INFO] 🛒 Checkout started — Total: 150 USD | IP: ::1
+[2025-11-20 11:13:47][INFO] 🧾 Order 85 created (Ref: 4972618D69B6, Payment: stripe) | IP: ::1
+[2025-11-20 11:13:47][INFO] 🌐 Using base URL: https://unpunctually-pharmacopoeic-bulah.ngrok-free.dev/public | IP: ::1
+[2025-11-20 11:13:48][INFO] 💳 Creating Stripe session for Order #85 | IP: ::1
+[2025-11-20 11:13:59][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1j9sASUoRdB0Cracl9RJxWsCXQYB6yvF7mjJoVXiA8dvn2CEPUJym7VPw#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-20 11:14:12][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-20 11:14:12][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-20 11:14:12][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-20 11:14:12][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-20 11:14:12][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-20 11:14:12][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-20 11:14:12][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-20 11:14:12][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-20 11:14:12][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-20 11:14:13][INFO] ✅ Order Ref 4972618D69B6 marked PAID — txn: pi_3SVQf7FqmeKxNjQe0lz0Rs69, amount: 150, email: musthafa.shaik000@gmai.com | IP: ::1
+[2025-11-20 11:14:13][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-20 11:14:14][INFO] ✅Payment successful for Order ID: 85. Transaction ID: pi_3SVQf7FqmeKxNjQe0lz0Rs69. Payment Gateway: stripe. | IP: ::1
+[2025-11-20 12:50:54][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-20 14:14:35][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-20 14:15:02][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-20 14:40:57][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1

@@ -106,6 +106,54 @@ a.checkout {
 a.checkout:hover {
     background-color: #218838; /* Darker green for hover */
 }
+/* Empty cart message styling with animated icon */
+.empty-cart {
+    text-align: center;
+    background: #fff3cd; /* light yellow */
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 30px 20px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Animated bouncing cart icon */
+.empty-cart .cart-icon {
+    font-size: 55px;
+    animation: cartBounce 1.5s infinite ease-in-out;
+}
+
+/* Bounce animation */
+@keyframes cartBounce {
+    0%   { transform: translateY(0); }
+    30%  { transform: translateY(-8px); }
+    50%  { transform: translateY(0); }
+    70%  { transform: translateY(-4px); }
+    100% { transform: translateY(0); }
+}
+
+.empty-cart a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.empty-cart a:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
 
 </style>
 </head>
@@ -167,5 +215,11 @@ a.checkout:hover {
 <a href="catalog.php" class="checkout">Back to Catalog</a>
 
 <?php else: ?>
-<p>Your cart is empty. <a href="catalog.php">Go shopping</a>.</p>
+<div class="empty-cart">
+    <div class="cart-icon">🛒</div>
+    <p>Your cart is empty.</p>
+    <a href="catalog.php">Go Shopping</a>
+</div>
+
+
 <?php endif; ?>

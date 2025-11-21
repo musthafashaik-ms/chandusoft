@@ -190,9 +190,9 @@ td.actions {
 /* Specific colours */
 .btn-edit { background-color: #2ecc71; }
 .btn-archive { background-color: #f39c12; }
-.btn-unarchive { background-color: #2793aeff; }
+.btn-unarchive { background-color: #a088f5ff; }
 .btn-delete { background-color: #e74c3c; }
-
+.btn-create{ background-color: #3cbaecff;} /* blue color for 'Create New Page' */
 /* Hover effect */
 .btn:hover {
   opacity: 0.9;
@@ -274,7 +274,7 @@ td.actions {
         </form>
 
         <div>
-            <a class="btn btn-edit" href="create.php">+ Create New Page</a>
+            <a class="btn btn-create" href="create.php">+ Create New Page</a>
         </div>
     </div>
 

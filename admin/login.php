@@ -205,11 +205,12 @@ main.login-page {
 
         <button type="submit">Login</button>
 
+        
         <div class="login-bottom">
-            <p>Don’t have an account?  
-                <a href="/app/register">Create one</a>
-            </p>
-        </div>
+    <p><a href="/app/forgot-password.php">Forgot Password?</a></p>
+    <p>Don’t have an account? <a href="/app/register">Create one</a></p>
+</div>
+
     </form>
 </main>
 

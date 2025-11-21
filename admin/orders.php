@@ -400,7 +400,7 @@ render_page:
         <div id="modalBody">
             <!-- Invoice content will be injected here -->
         </div>
-        <button onclick="window.print()" class="print-btn">Print Invoice</button>
+        <button onclick="window.print()" class="print-btn">🖨️ Print Invoice</button>
     </div>
 </div>
 

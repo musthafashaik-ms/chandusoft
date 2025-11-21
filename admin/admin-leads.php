@@ -267,8 +267,8 @@ $username = htmlspecialchars($user['username'] ?? 'User');
         <?php endwhile; ?>
     <?php else: ?>
         <tr>
-            <td colspan="5" style="text-align:center; padding:15px; color:#d00; font-weight:bold;">
-                🚫 No items found.
+            <td colspan="5" style="text-align:center; padding:15px; color:#ccc; font-weight:bold;">
+                 No items found.
             </td>
         </tr>
     <?php endif; ?>

@@ -58,7 +58,7 @@ nav a::after {
     bottom: 0;
     width: 0%;
     height: 3px;
-    background-color: #FFD700; /* underline color (gold/yellow) */
+    background-color: #fcfbf7; /* underline color (gold/yellow) */
     transition: width 0.3s ease;
 }
  
