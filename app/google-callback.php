@@ -55,5 +55,5 @@ if (!isset($userInfo['email'])) {
 $_SESSION['user_email'] = $userInfo['email'];
 $_SESSION['user_name']  = $userInfo['name'] ?? '';
 
-header("Location: /dashboard.php"); 
+header("Location: /..app/dashboard.php"); 
 exit;

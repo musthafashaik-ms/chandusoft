@@ -3,7 +3,7 @@ session_start();
 
 // Protect page: user must be logged in (adjust if you have a user system)
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php"); // Redirect to your login page
+    header("Location: /../admin/login.php"); // Redirect to your login page
     exit;
 }
 

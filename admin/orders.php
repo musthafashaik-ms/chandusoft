@@ -1,10 +1,23 @@
 
 <?php
 session_start();
+
+// ✅ Protect page: require login
+if (empty($_SESSION['user']) || !is_array($_SESSION['user'])) {
+    // Adjust the path if your login file is in a different location
+    header('Location: /admin/login.php');
+    exit;
+}
+
 $user = $_SESSION['user'];
-$username = htmlspecialchars($user['username'] ?? 'User');
-$role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'));
+
+// Safely get username & role
+$username = htmlspecialchars($user['username'] ?? 'User', ENT_QUOTES, 'UTF-8');
+$roleRaw  = $user['role'] ?? 'Editor';
+$role     = htmlspecialchars(ucfirst($roleRaw), ENT_QUOTES, 'UTF-8');
+
 require_once __DIR__ . '/../app/config.php';
+
 
 
 $statuses = ['pending', 'paid', 'failed', 'refunded', 'cancelled'];

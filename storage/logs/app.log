@@ -1711,3 +1711,10 @@ Stack trace:
 [2025-11-22 10:08:27][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
 [2025-11-22 10:10:03][INFO] ✅Successful login by jafar (jafar@gmail.com) - Role: admin | IP: 127.0.0.1
 [2025-11-22 11:01:36][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-22 11:59:37][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-22 12:00:28][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-22 12:01:04][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-22 12:08:15][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-22 12:11:13][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-22 12:13:27][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-22 12:18:22][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1

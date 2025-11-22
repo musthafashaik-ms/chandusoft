@@ -6,10 +6,16 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$user = $_SESSION['user'] ?? [];
-$username = htmlspecialchars($user['username'] ?? 'User');
-$role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'));
+// 🔒 If no user in session, force login
+if (empty($_SESSION['user']) || !is_array($_SESSION['user'])) {
+    header('Location: /admin/login.php');
+    exit;
+}
 
+$user = $_SESSION['user'];
+
+$username = htmlspecialchars($user['username'] ?? 'User', ENT_QUOTES, 'UTF-8');
+$role     = htmlspecialchars(ucfirst($user['role'] ?? ''), ENT_QUOTES, 'UTF-8');
 
  
 // ✅ Pagination & Filters
