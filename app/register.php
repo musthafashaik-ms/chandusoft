@@ -167,18 +167,18 @@ main.register-page {
         <input type="hidden" name="csrf_token"
             value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
-        <label>Email Address</label>
+       
         <input type="email" name="email" value="<?= htmlspecialchars($old['email']) ?>"
                placeholder="Enter your email" required>
 
-        <label>Username</label>
+       
         <input type="text" name="username" value="<?= htmlspecialchars($old['username']) ?>"
                placeholder="Choose a username" required>
 
-        <label>Password</label>
+        
         <input type="password" name="password" placeholder="Create a password" required>
 
-        <label>Confirm Password</label>
+        
         <input type="password" name="confirm_password" placeholder="Confirm your password" required>
 
         <button type="submit">Register</button>

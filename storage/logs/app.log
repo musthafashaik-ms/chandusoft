@@ -1630,3 +1630,84 @@ Stack trace:
 [2025-11-20 14:14:35][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
 [2025-11-20 14:15:02][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
 [2025-11-20 14:40:57][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-21 10:01:56][WARNING] Failed login attempt for mohammadsaleembasha@gmail.com | IP: 127.0.0.1
+[2025-11-21 10:14:45][WARNING] Failed login attempt for mohammadsaleembasha@gmail.com | IP: 127.0.0.1
+[2025-11-21 10:14:57][WARNING] Failed login attempt for mohammadsaleembasha@gmail.com | IP: 127.0.0.1
+[2025-11-21 10:17:07][WARNING] Failed login attempt for mohammadsaleembasha@gmail.com | IP: ::1
+[2025-11-21 10:17:18][INFO] ✅Successful login by saleem (mohammadsaleembasha@gmail.com) - Role: editor | IP: ::1
+[2025-11-21 10:19:59][INFO] ✅Successful login by Jaisai (jaisai8@gmail.com) - Role: editor | IP: ::1
+[2025-11-21 12:46:22][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: ::1
+[2025-11-21 12:51:09][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 12:51:54][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 12:52:07][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 12:55:10][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 12:55:17][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 12:55:24][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-21 12:56:45][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-21 12:59:31][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-21 13:00:04][WARNING] Failed login attempt for musthafa|@gmail.com | IP: 127.0.0.1
+[2025-11-21 13:02:49][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 13:03:05][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-21 13:03:39][INFO] 🛒 Checkout started — Total: 125 USD | IP: 127.0.0.1
+[2025-11-21 13:03:40][INFO] 🧾 Order 86 created (Ref: 2343285755DA, Payment: stripe) | IP: 127.0.0.1
+[2025-11-21 13:03:40][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-21 13:03:40][INFO] 💳 Creating Stripe session for Order #86 | IP: 127.0.0.1
+[2025-11-21 13:03:52][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1CCc9SunQpg2sc5iLU0KMut2TgMoIyMvkbH6rCjH8gwxGeYhu9bXjs8S0#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-21 13:04:04][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-21 13:04:04][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-21 13:04:04][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-21 13:04:04][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-21 13:04:05][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-21 13:04:05][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-21 13:04:05][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-21 13:04:05][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+
+[2025-11-21 13:04:05][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-21 13:04:05][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-21 13:04:05][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-21 13:04:05][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-21 13:04:05][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-21 13:04:05][INFO] ✅ Order Ref 2343285755DA marked PAID — txn: pi_3SVor0FqmeKxNjQe0gvgHcHz, amount: 125, email: jafar@gmail.com | IP: ::1
+[2025-11-21 13:04:05][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-21 13:04:07][INFO] ✅Payment successful for Order ID: 86. Transaction ID: pi_3SVor0FqmeKxNjQe0gvgHcHz. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-21 13:25:06][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 13:25:32][INFO] 🛒 Checkout started — Total: 50 USD | IP: 127.0.0.1
+[2025-11-21 13:25:32][INFO] 🧾 Order 87 created (Ref: 999049A17599, Payment: stripe) | IP: 127.0.0.1
+[2025-11-21 13:25:32][INFO] 🌐 Using base URL: https://chandusoft.test | IP: 127.0.0.1
+[2025-11-21 13:25:32][INFO] 💳 Creating Stripe session for Order #87 | IP: 127.0.0.1
+[2025-11-21 13:25:34][INFO] ✅ Redirecting to Stripe checkout: https://checkout.stripe.com/c/pay/cs_test_a1kaYo5fD1Z3VAUID42k5OCpEpAFyyFI0zrECyu001LHbJUWgnFl60FGJW#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VlQ2UkhDdGhgTn1Lb1RgTWlsaX9NVjMwS3FtSEl%2FUn9vNnd3RjxwSUBdTm5rSDZXZldOTGlTXXJgMjV3XElfNm10THdgPHNVcF9Dbj1WRmdhZGhSVn9NNTVLclZoR1x3ZicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl | IP: 127.0.0.1
+[2025-11-21 13:25:42][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-21 13:25:42][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-21 13:25:42][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Stripe webhook initialized | IP: ::1 | IP: ::1
+[2025-11-21 13:25:42][INFO] 🌐 Webhook triggered from host: http://unpunctually-pharmacopoeic-bulah.ngrok-free.dev | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-21 13:25:42][INFO] 🔔 Stripe Event Received: payment_intent.succeeded | IP: ::1
+[2025-11-21 13:25:42][INFO] ℹ️ Unhandled event type: payment_intent.succeeded | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Webhook processed successfully — Event: payment_intent.succeeded | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-21 13:25:42][INFO] 🔔 Stripe Event Received: checkout.session.completed | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Stripe signature verified successfully | IP: ::1
+[2025-11-21 13:25:42][INFO] 🔔 Stripe Event Received: payment_intent.created | IP: ::1
+[2025-11-21 13:25:42][INFO] ℹ️ Unhandled event type: payment_intent.created | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Webhook processed successfully — Event: payment_intent.created | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Order Ref 999049A17599 marked PAID — txn: pi_3SVpBwFqmeKxNjQe14U7hYwo, amount: 50, email: Basha@gmail.com | IP: ::1
+[2025-11-21 13:25:42][INFO] ✅ Webhook processed successfully — Event: checkout.session.completed | IP: ::1
+[2025-11-21 13:25:44][INFO] ✅Payment successful for Order ID: 87. Transaction ID: pi_3SVpBwFqmeKxNjQe14U7hYwo. Payment Gateway: stripe. | IP: 127.0.0.1
+[2025-11-21 14:33:48][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 14:38:32][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 14:38:38][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 14:42:18][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 14:42:24][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 15:09:27][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 15:09:41][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: 127.0.0.1
+[2025-11-21 15:58:36][INFO] ✅Successful login by admin (admin@example.com) - Role: admin | IP: ::1
+[2025-11-21 16:10:36][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-21 16:14:06][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-21 16:14:14][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-22 09:30:36][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-22 09:52:05][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-22 09:52:10][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-22 10:08:27][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1
+[2025-11-22 10:10:03][INFO] ✅Successful login by jafar (jafar@gmail.com) - Role: admin | IP: 127.0.0.1
+[2025-11-22 11:01:36][INFO] ✅Successful login by user (user@gmail.com) - Role: editor | IP: 127.0.0.1

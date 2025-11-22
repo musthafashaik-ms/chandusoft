@@ -32,5 +32,7 @@
     <!-- Correct file path to footer.php in the admin folder -->
     <?php include __DIR__ . '/admin/footer.php'; ?>
 
+
+
 </body>
 </html>

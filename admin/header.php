@@ -54,10 +54,6 @@ $currentURI = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
        class="btn <?= ($currentURI === 'admin/login') ? 'active' : '' ?>">
        Login
     </a>
-    <a href="/app/register" 
-       class="btn <?= ($currentURI === 'app/register') ? 'active' : '' ?>">
-       Register
-    </a>
 </span>
 
  </nav>

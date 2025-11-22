@@ -30,7 +30,6 @@ $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusof
       <!-- Include the header.php from the admin folder -->
     <?php include __DIR__ . '/admin/header.php'; ?>
 
-
     <main>
         <?php
         if (isset($_GET['page'])) {
@@ -83,7 +82,11 @@ $metaKeywords = get_setting('meta_keywords') ?: 'IT, BPO, Outsourcing, Chandusof
 
    <?php include __DIR__ . '/admin/footer.php'; ?>
 
-    <button id="back-to-top" title="Back to Top">↑</button>
-    <script src="include.js"></script>
+   <button id="back-to-top" title="Back to Top">↑</button>
+<script src="/include.js"></script>
+
+
+
+
 </body>
 </html>

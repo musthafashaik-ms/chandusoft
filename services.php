@@ -57,7 +57,9 @@
      <?php include __DIR__ . '/admin/footer.php'; ?>
 
 <button id="back-to-top" title="Back to Top">↑</button>
-<script src="include.js"></script>
+<script src="/include.js"></script>
+
+
    
 </body>
 </html>

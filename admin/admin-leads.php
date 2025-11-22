@@ -1,280 +1,237 @@
 <?php
-session_start();
+// ============================================================
+// Chandusoft Admin/User Login Page - Modern UI Version
+// ============================================================
 
-// Simple admin password protection
-define('ADMIN_PASSWORD', 'musthafa');
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_strict_mode', 1);
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
+session_set_cookie_params([
+    'path' => '/',
+    'secure' => isset($_SERVER['HTTPS']),
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
 
-// Handle logout
-if (isset($_GET['logout'])) {
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// CSRF TOKEN
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// Session Timeout
+$timeout_duration = 1800; // 30 mins
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
     session_destroy();
-    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
-    exit;
+    header("Location: /admin/login.php");
+    exit();
 }
+$_SESSION['LAST_ACTIVITY'] = time();
 
-// Handle login submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!empty($_POST['password']) && $_POST['password'] === ADMIN_PASSWORD) {
-        // Set user info in session with role admin
-        $_SESSION['user'] = [
-            'username' => 'Admin',
-            'role' => 'admin'
-        ];
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
-    } else {
-        $error = "❌ Incorrect password.";
-    }
-}
-
-// Redirect to login form if not logged in
-if (!isset($_SESSION['user'])) {
-    // Show simple login form and exit
-    ?>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Admin Login</title>
-        <style>
-            body { font-family: Arial, sans-serif; background: #f7f7f7; display: flex; height: 100vh; justify-content: center; align-items: center; }
-            form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-            input[type="password"] { padding: 10px; width: 250px; font-size: 16px; margin-bottom: 10px; }
-            input[type="submit"] { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #3498db; border: none; color: white; border-radius: 4px; }
-            .error { color: red; margin-bottom: 10px; }
-        </style>
-    </head>
-    <body>
-        <form method="post">
-            <h2>Admin Login</h2>
-            <?php if (!empty($error)): ?>
-                <div class="error"><?= htmlspecialchars($error) ?></div>
-            <?php endif; ?>
-            <input type="password" name="password" placeholder="Enter Admin Password" required autofocus>
-            <br>
-            <input type="submit" value="Login">
-        </form>
-    </body>
-    </html>
-    <?php
-    exit;
-}
-
-// If logged in, continue to show leads page
-
-// Database connection
-$host = 'localhost';
-$dbUser = 'root';
-$dbPass = '';
-$dbName = 'chandusoft';
-
-$conn = new mysqli($host, $dbUser, $dbPass, $dbName);
-if ($conn->connect_error) {
-    die("❌ DB connection failed: " . $conn->connect_error);
-}
-
-// Handle search
-$search = $_GET['search'] ?? '';
-$search = trim($search);
-
-if ($search !== '') {
-    // If the search term is only % or _ (wildcard characters), show no results
-    if (preg_match('/^[%_]+$/', $search)) {
-        // Always false condition — no rows returned
-        $resultLatest = $conn->query("SELECT * FROM leads WHERE 1=0");
-    } else {
-        // Normal search
-        $stmt = $conn->prepare("
-            SELECT * FROM leads 
-            WHERE id LIKE ? OR name LIKE ? OR email LIKE ? OR message LIKE ?
-            ORDER BY id DESC
-        ");
-        $likeSearch = "%$search%";
-        $stmt->bind_param("ssss", $likeSearch, $likeSearch, $likeSearch, $likeSearch);
-        $stmt->execute();
-        $resultLatest = $stmt->get_result();
-    }
-} else {
-    // Show all leads if no search term
-    $resultLatest = $conn->query("SELECT * FROM leads ORDER BY id DESC");
-}
-
-
-// Get user role for navbar display
-$user = $_SESSION['user'];
-$role = htmlspecialchars(ucfirst($user['role'] ?? 'Guest'));
-$username = htmlspecialchars($user['username'] ?? 'User');
+$old_email = $_SESSION['old_email'] ?? '';
+unset($_SESSION['old_email']);
 ?>
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Leads - Admin Panel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
-      
-        /* Navbar Styling */
-        .navbar {
-            background-color: #2c3e50;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandusoft - Login</title>
+  <link rel="stylesheet" href="/styles.css">
 
-        .navbar .links a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-            font-weight: bold;
-        }
+<?php include __DIR__ . '/header.php'; ?>
 
-        .navbar .links a:hover {
-            text-decoration: none;
-        }
+<style>
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef3ff, #e1ecff);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        /* Highlight Active Link */
-        .navbar .links a.active {
-            background-color: #007BFF; /* Blue background when active */
-            color: white;  /* Ensure text color is white */
-            padding: 8px 12px;
-            border-radius: 4px;
-        }
+/* Center Layout */
+main.login-page {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
 
-        /* Content Section */
-        .content {
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-            background: white;
-            margin-top: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+/* Modern Glassy Form */
+.login-form {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.6s ease;
+    box-sizing: border-box;
+}
 
-        h1 {
-            margin-bottom: 20px;
-            color: #007BFF;
-        }
+@keyframes fadeInUp {
+    from { transform: translateY(25px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
-        .search-form {
-            margin-bottom: 20px;
-        }
+.login-form h2 {
+    text-align: center;
+    color: #1E90FF;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
 
-        .search-form input[type="text"] {
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 250px;
-        }
+/* Labels */
+.login-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
 
-        .search-form input[type="submit"] {
-            padding: 8px 12px;
-            font-size: 14px;
-            border: none;
-            background-color: #3498db;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+/* Inputs */
+.login-form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background: rgba(255,255,255,0.9);
+    transition: all 0.3s ease;
+}
 
-        .search-form input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
+.login-form input:focus {
+    border-color: #0078D7;
+    outline: none;
+    box-shadow: 0 0 6px 2px rgba(0,120,215,0.2);
+}
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+/* Button */
+.login-form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #0078D7, #1E90FF);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,120,215,0.2);
+    transition: 0.3s ease;
+}
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
+.login-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,120,215,0.3);
+}
 
-        th {
-            background-color: #2980b9;
-            color: white;
-        }
+/* Bottom Link */
+.login-bottom {
+    text-align: center;
+    margin-top: 15px;
+}
+.login-bottom a {
+    color: #007BFF;
+    text-decoration: none;
+}
+.login-bottom a:hover {
+    text-decoration: underline;
+}
 
-        tr:nth-child(even) {
-            background: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #e6f7ff;
-        }
-    </style>
+/* Toast Messages */
+.alert {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(40px);
+    min-width: 320px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    z-index: 9999;
+    transition: 0.5s ease;
+}
+.alert.success { color: #155724; }
+.alert.error { color: #721c24; }
+.alert.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
 </head>
+
 <body>
-<!-- ✅ Navbar -->
-<div class="navbar">
-    <div><strong>Chandusoft <?= $role ?></strong></div>
-    <div class="links">
-        Welcome <?= $role ?>!
-        <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
-        <?php if ($role === 'Admin'): ?>
-            <a href="/admin/catalog.php">Admin Catalog</a>
-            <a href="/public/catalog.php">Public Catalog</a>
-            <a href="/admin/orders.php">Orders</a>
-        <?php elseif ($role === 'Editor'): ?>
-            <a href="/public/catalog.php">Public Catalog</a>
+
+<main class="login-page">
+    <form class="login-form" action="/app/authenticate.php" method="POST">
+        <h2>Login</h2>
+
+        <!-- PHP Flash Messages Converted to Toast -->
+        <?php if (!empty($_SESSION['login_errors'])): ?>
+            <div class="alert error" id="formMessage">
+                ❌ <?= htmlspecialchars(implode('<br>', $_SESSION['login_errors'])) ?>
+            </div>
+            <?php unset($_SESSION['login_errors']); ?>
         <?php endif; ?>
-        <!-- Leads Link with Active Class Check -->
-        <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
-        <a href="/admin/pages.php">Pages</a>
-        <a href="/admin/logout.php">Logout</a>
-    </div>
+
+        <?php if (!empty($_SESSION['flash_success'])): ?>
+            <div class="alert success" id="formMessage">
+                ✅ <?= htmlspecialchars($_SESSION['flash_success']) ?>
+            </div>
+            <?php unset($_SESSION['flash_success']); ?>
+        <?php endif; ?>
+
+        <label>Email Address</label>
+        <input type="email" name="email" value="<?= htmlspecialchars($old_email) ?>" placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+
+        <button type="submit">Login</button>
+
+        
+        <div class="login-bottom">
+    <p><a href="/app/forgot-password.php">Forgot Password?</a></p>
+    <p>Don’t have an account? <a href="/app/register">Create one</a></p>
 </div>
 
-
-<div class="content">
-    <h1>Leads</h1>
-
-    <!-- 🔍 Search -->
-    <form method="get" class="search-form">
-        <input type="text" name="search" placeholder="Search leads..." value="<?= htmlspecialchars($search) ?>">
-        <input type="submit" value="Search">
     </form>
+</main>
 
-    <table>
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Message</th>
-        <th>Submitted At</th>
-        <th>IP</th>
-    </tr>
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+    const msg = document.getElementById("formMessage");
+    if (msg) {
+        setTimeout(() => msg.classList.add("show"), 150);
+        setTimeout(() => {
+            msg.style.opacity = "0";
+            msg.style.transform = "translateX(-50%) translateY(20px)";
+        }, 4000);
+        setTimeout(() => msg.remove(), 4500);
+    }
+});
+</script>
 
-    <?php if ($resultLatest && $resultLatest->num_rows > 0): ?>
-        <?php while($row = $resultLatest->fetch_assoc()): ?>
-            <tr>
-                <td><?= htmlspecialchars($row['name']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['message']) ?></td>
-                <td><?= htmlspecialchars($row['created_at']) ?></td>
-                <td><?= !empty($row['IP']) ? htmlspecialchars($row['IP']) : '' ?></td>
-            </tr>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <tr>
-            <td colspan="5" style="text-align:center; padding:15px; color:#ccc; font-weight:bold;">
-                 No items found.
-            </td>
-        </tr>
-    <?php endif; ?>
-</table>
+<?php include __DIR__ . '/footer.php'; ?>
 
-</div>
+<button id="back-to-top" title="Back to Top">↑</button>
+<script src="/include.js"></script>
 
 </body>
 </html>
