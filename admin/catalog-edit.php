@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Edit Catalog Item</title>
     <style>
-       body {
+        body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
             margin: 0;
@@ -110,67 +110,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
         }
 
-        .navbar .links a:hover {
-            text-decoration: none;
-        }
-  /* Highlight Active Link */
         .navbar .links a.active {
-            background-color: #007BFF; /* Blue background when active */
-            color: white;  /* Ensure text color is white */
+            background-color: #007BFF;
+            color: white;
             padding: 8px 12px;
             border-radius: 4px;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 30px auto;
             background: #fff;
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
+
         h2 {
             text-align: center;
             color: #007BFF;
+            margin-bottom: 20px;
         }
-        form label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-        input[type=text], input[type=number], textarea, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
+
+        form .form-group {
+            display: flex;
+            align-items: center;
             margin-bottom: 15px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
         }
+
+        form .form-group label {
+            width: 180px;
+            font-weight: bold;
+        }
+
+        form .form-group input,
+        form .form-group textarea,
+        form .form-group select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        form textarea {
+            resize: vertical;
+        }
+
+        form input[type="file"] {
+            padding: 5px;
+        }
+
         button {
             background: #007BFF;
             color: #fff;
-            border: none;
             padding: 10px 20px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
         }
+
         button:hover {
             background: #0056b3;
         }
+
         .preview img {
             max-width: 150px;
             border-radius: 4px;
             margin-top: 5px;
         }
+
         .message {
             text-align: center;
             color: red;
+            margin-bottom: 15px;
+        }
+
+        /* Bottom-right button wrapper */
+        .form-bottom {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        /* Blue Back Button (matching Save button) */
+        .back-button {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
-     
-<!-- ✅ Navbar -->
+
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
@@ -191,51 +232,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="container">
     <h2>Edit Catalog Item</h2>
- 
+
     <?php if ($message): ?>
-        <p class="message"><?= htmlspecialchars($message) ?></p>
+        <div class="message"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
- 
+
     <form method="POST" enctype="multipart/form-data">
-        <label>Title:</label>
-        <input type="text" name="title" value="<?= htmlspecialchars($item['title']) ?>" required>
- 
-        <label>Price:</label>
-        <input type="number" step="0.01" name="price" value="<?= htmlspecialchars($item['price']) ?>" required>
- 
-        <label>Short Description:</label>
-        <textarea name="short_desc" rows="4"><?= htmlspecialchars($item['short_desc']) ?></textarea>
- 
-        <label>Status:</label>
-        <select name="status">
-            <option value="published" <?= $item['status'] === 'published' ? 'selected' : '' ?>>Published</option>
-            <option value="draft" <?= $item['status'] === 'draft' ? 'selected' : '' ?>>Draft</option>
-            <option value="archived" <?= $item['status'] === 'archived' ? 'selected' : '' ?>>Archived</option>
-        </select>
- 
-        <label>Current Image:</label>
-        <div class="preview">
-            <?php if ($item['image']): ?>
-                <img src="../<?= htmlspecialchars($item['image']) ?>" alt="Current Image">
-            <?php else: ?>
-                <p>No image uploaded.</p>
-            <?php endif; ?>
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" value="<?= htmlspecialchars($item['title']) ?>" required>
         </div>
- 
-        <label>Upload New Image:</label>
-        <input type="file" name="image" accept="image/*">
- 
+
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" step="0.01" name="price" value="<?= htmlspecialchars($item['price']) ?>" required>
+        </div>
+
+        <div class="form-group">
+            <label>Short Description</label>
+            <textarea name="short_desc" rows="4"><?= htmlspecialchars($item['short_desc']) ?></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select name="status">
+                <option value="published" <?= $item['status'] === 'published' ? 'selected' : '' ?>>Published</option>
+                <option value="draft" <?= $item['status'] === 'draft' ? 'selected' : '' ?>>Draft</option>
+                <option value="archived" <?= $item['status'] === 'archived' ? 'selected' : '' ?>>Archived</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Current Image</label>
+            <div class="preview">
+                <?php if ($item['image']): ?>
+                    <img src="../<?= htmlspecialchars($item['image']) ?>" alt="Current Image">
+                <?php else: ?>
+                    <p>No image uploaded.</p>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Upload New Image</label>
+            <input type="file" name="image" accept="image/*">
+        </div>
+
         <button type="submit">Update Item</button>
-        <!-- ✅ Back to Catalog button -->
-<div style="max-width:1000px; margin:20px auto; text-align:right;">
-    <a href="/admin/catalog.php" 
-       style="display:inline-block; padding:8px 15px; background:#6c757d; color:white; text-decoration:none; border-radius:5px;">
-        ← Back to Catalog
-    </a>
-</div>
+
+        <div class="form-bottom">
+            <a href="/admin/catalog.php" class="back-button">← Back to Catalog</a>
+        </div>
+
     </form>
 </div>
+
 </body>
 </html>
- 
- 

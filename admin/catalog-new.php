@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Add Catalog - Admin</title>
     <style>
-       body {
+        body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
             margin: 0;
@@ -110,13 +110,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
         }
 
-        .navbar .links a:hover {
-            text-decoration: none;
-        }
-  /* Highlight Active Link */
         .navbar .links a.active {
-            background-color: #007BFF; /* Blue background when active */
-            color: white;  /* Ensure text color is white */
+            background-color: #007BFF;
+            color: white;
             padding: 8px 12px;
             border-radius: 4px;
         }
@@ -129,31 +125,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
-        h1 { text-align: center; color: #007BFF; margin-bottom: 20px; }
-        form label { display: block; margin-bottom: 5px; font-weight: bold; }
-        form input[type="text"], form input[type="number"], form textarea, form select {
-            width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px;
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
         }
-        form input[type="file"] { margin-bottom: 15px; }
+
+        /* Form layout */
+        form .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        form .form-group label {
+            width: 180px;
+            font-weight: bold;
+        }
+
+        form .form-group input,
+        form .form-group textarea,
+        form .form-group select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        form textarea {
+            resize: vertical;
+        }
+
+        form input[type="file"] {
+            padding: 5px;
+        }
+
         button {
-            background: #007BFF; color: #fff; padding: 10px 20px; border: none;
-            border-radius: 5px; cursor: pointer;
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        button:hover { background: #0056b3; }
-        .message { text-align: center; color: red; margin-bottom: 15px; }
-        .back-link {
-            display: inline-block; margin-bottom: 15px; text-decoration: none;
-            color: #007BFF; font-weight: bold;
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .message {
+            text-align: center;
+            color: red;
+            margin-bottom: 15px;
+        }
+
+        /* Bottom-right button wrapper */
+        .form-bottom {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        /* Blue Back Button (matching Save button) */
+        .back-button {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
+
 <body>
- 
+
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
         Welcome <?= $role ?>!
         <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+
         <?php if ($role === 'Admin'): ?>
             <a href="/admin/catalog.php" class="<?= strpos($_SERVER['PHP_SELF'], 'catalog') !== false ? 'active' : '' ?>">Admin Catalog</a>
             <a href="/public/catalog.php">Public Catalog</a>
@@ -161,46 +221,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php elseif ($role === 'Editor'): ?>
             <a href="/public/catalog.php">Public Catalog</a>
         <?php endif; ?>
+
         <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
         <a href="/admin/pages.php" class="<?= basename($_SERVER['PHP_SELF']) === 'pages.php' ? 'active' : '' ?>">Pages</a>
         <a href="/admin/logout.php">Logout</a>
     </div>
 </div>
 
- 
 <div class="container">
-    <a href="catalog.php" class="back-link">← Back to Catalog</a>
+
     <h1>Add New Catalog Item</h1>
- 
+
     <?php if ($message): ?>
         <div class="message"><?= htmlspecialchars($message) ?></div>
     <?php endif; ?>
- 
+
     <form method="post" enctype="multipart/form-data">
-        <label>Title</label>
-        <input type="text" name="title" required>
- 
-        <label>Price</label>
-        <input type="number" step="0.01" name="price" required>
- 
-        <label>Short Description</label>
-        <textarea name="short_desc" rows="4" required></textarea>
- 
-        <label>Status</label>
-        <select name="status">
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
-            <option value="archived">Archived</option>
-        </select>
- 
-        <label>Image</label>
-        <input type="file" name="image" accept="image/*">
- 
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" step="0.01" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label>Short Description</label>
+            <textarea name="short_desc" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select name="status">
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+                <option value="archived">Archived</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="image" accept="image/*">
+        </div>
+
         <button type="submit">Save Catalog Item</button>
+
+        <!-- Bottom-right back button -->
+        <div class="form-bottom">
+            <a href="catalog.php" class="back-button">← Back to Catalog</a>
+        </div>
+
     </form>
 </div>
- 
+
 </body>
 </html>
- 
- 

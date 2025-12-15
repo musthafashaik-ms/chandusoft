@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once '../app/config.php'; // Database connection ($pdo)
 require_once '../app/logger.php'; // Logger functions
 
@@ -18,6 +16,9 @@ $role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'));
 
 $error = '';
 $success = '';
+
+// Initialize the message variable
+$message = ''; // Initialize the message variable to avoid "undefined variable" warning
 
 $id = $_GET['id'] ?? null;
 if (!$id || !is_numeric($id)) {
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content_html = $_POST['content_html'] ?? ''; // Raw HTML allowed
 
     if (empty($title)) {
-        $error = "Title is required.";
+        $message = "Title is required.";
     } else {
         // Auto-generate slug if empty
         if (empty($slug)) {
@@ -74,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: pages.php");
             exit();
         } catch (PDOException $e) {
-            $error = "Database error: " . $e->getMessage();
+            $message = "Database error: " . $e->getMessage();
         }
     }
 }
@@ -85,12 +86,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>Edit Page</title>
     <style>
+        /* Your existing styles remain unchanged */
         body {
             font-family: Arial, sans-serif;
             background: #f4f4f4;
             margin: 0;
             padding: 0;
         }
+
         .navbar {
             background-color: #2c3e50;
             color: white;
@@ -99,141 +102,181 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: space-between;
             align-items: center;
         }
+
         .navbar .links a {
             color: white;
             text-decoration: none;
             margin-left: 15px;
             font-weight: bold;
         }
+
         .navbar .links a:hover {
             text-decoration: none;
         }
+
         /* Highlight Active Link */
         .navbar .links a.active {
-            background-color: #007BFF; /* Blue background when active */
-            color: white;  /* Ensure text color is white */
+            background-color: #007BFF;
+            color: white;
             padding: 8px 12px;
             border-radius: 4px;
         }
+
         .container {
             max-width: 800px;
             margin: 30px auto;
             background: #fff;
-            padding: 30px;
+            padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
+
         h2 {
-            margin-top: 0;
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
         }
-        form label {
-            display: block;
-            margin-bottom: 8px;
+
+        /* Form layout */
+        form .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        form .form-group label {
+            width: 180px;
             font-weight: bold;
         }
-        form input[type="text"],
-        form select,
-        form textarea {
-            width: 100%;
+
+        form .form-group input,
+        form .form-group textarea,
+        form .form-group select {
+            flex: 1;
             padding: 10px;
-            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            max-width: 100%;
+            box-sizing: border-box;
         }
-        form button {
-            background-color: #3498db;
-            color: white;
+
+        form textarea {
+            resize: vertical;
+        }
+
+        form input[type="file"] {
+            padding: 5px;
+        }
+
+        button {
+            background: #007BFF;
+            color: #fff;
             padding: 10px 20px;
             border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        form button:hover {
-            background-color: #2980b9;
-        }
-        .message {
-            margin-bottom: 15px;
-            padding: 10px;
             border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
         }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-         .back-button {
-    position: absolute;        /* Positioning the button absolutely */
-    bottom: -30px;                 /* Distance from the top */
-    left: 900px;                /* Distance from the left */
-    padding: 10px 20px;
-    background-color: #3498db;  /* Blue background */
-    color: white;
-    border-radius: 8px;         /* Rounded corners */
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
-}
 
-.back-button:hover {
-    background-color: #2980b9;  /* Darker blue on hover */
-}
+        button:hover {
+            background: #0056b3;
+        }
 
+        .message {
+            text-align: center;
+            color: red;
+            margin-bottom: 15px;
+        }
+
+        /* Bottom-right button wrapper */
+        .form-bottom {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        /* Blue Back Button (matching Save button) */
+        .back-button {
+            background: #007BFF;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
+
 <body>
 
-<!-- ✅ Navbar -->
 <div class="navbar">
     <div><strong>Chandusoft <?= $role ?></strong></div>
     <div class="links">
         Welcome <?= $role ?>!
         <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+        
         <?php if ($role === 'Admin'): ?>
-            <a href="/admin/catalog.php" class="<?= basename($_SERVER['PHP_SELF']) === 'catalog.php' ? 'active' : '' ?>">Admin Catalog</a>
+            <a href="/admin/catalog.php" class="<?= strpos($_SERVER['PHP_SELF'], 'catalog') !== false ? 'active' : '' ?>">Admin Catalog</a>
             <a href="/public/catalog.php">Public Catalog</a>
             <a href="/admin/orders.php">Orders</a>
         <?php elseif ($role === 'Editor'): ?>
             <a href="/public/catalog.php">Public Catalog</a>
         <?php endif; ?>
+        
         <a href="/admin/admin-leads.php" class="<?= basename($_SERVER['PHP_SELF']) === 'admin-leads.php' ? 'active' : '' ?>">Leads</a>
-<a href="/admin/pages.php" class="<?= in_array(basename($_SERVER['PHP_SELF']), ['pages.php','create.php','edit.php']) ? 'active' : '' ?>">Pages</a>
+
+        <a href="/admin/pages.php" class="<?= in_array(basename($_SERVER['PHP_SELF']), ['pages.php','create.php','edit.php']) ? 'active' : '' ?>">Pages</a>
+
         <a href="/admin/logout.php">Logout</a>
     </div>
 </div>
- 
-<!-- ✅ Edit Form -->
+
 <div class="container">
+
     <h2>Edit Page</h2>
 
+    <?php if ($message): ?>
+        <div class="message"><?= htmlspecialchars($message) ?></div>
+    <?php endif; ?>
 
     <form method="POST">
-        <label for="title">Page Title *</label>
-        <input type="text" name="title" id="title" required value="<?= htmlspecialchars($page['title']) ?>">
+        <div class="form-group">
+            <label for="title">Page Title *</label>
+            <input type="text" name="title" id="title" required value="<?= htmlspecialchars($page['title']) ?>">
+        </div>
 
-        <label for="slug">Slug (optional)</label>
-        <input type="text" name="slug" id="slug" placeholder="auto-generated-if-empty" value="<?= htmlspecialchars($page['slug']) ?>">
+        <div class="form-group">
+            <label for="slug">Slug (optional)</label>
+            <input type="text" name="slug" id="slug" placeholder="auto-generated-if-empty" value="<?= htmlspecialchars($page['slug']) ?>">
+        </div>
 
-        <label for="content_html">Content (HTML allowed)</label>
-        <textarea name="content_html" id="content_html" rows="10"><?= htmlspecialchars($content_html) ?></textarea>
+        <div class="form-group">
+            <label for="content_html">Content (HTML allowed)</label>
+            <textarea name="content_html" id="content_html" rows="10"><?= htmlspecialchars($content_html) ?></textarea>
+        </div>
 
-        <label for="status">Status</label>
-        <select name="status" id="status">
-            <option value="published" <?= $page['status'] === 'published' ? 'selected' : '' ?>>Published</option>
-            <option value="draft" <?= $page['status'] === 'draft' ? 'selected' : '' ?>>Draft</option>
-            <option value="archived" <?= $page['status'] === 'archived' ? 'selected' : '' ?>>Archived</option>
-        </select>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" id="status">
+                <option value="published" <?= $page['status'] === 'published' ? 'selected' : '' ?>>Published</option>
+                <option value="draft" <?= $page['status'] === 'draft' ? 'selected' : '' ?>>Draft</option>
+                <option value="archived" <?= $page['status'] === 'archived' ? 'selected' : '' ?>>Archived</option>
+            </select>
+        </div>
 
         <button type="submit">Update Page</button>
-          <!-- Back to Pages Button -->
-    <a href="pages.php" class="back-button">← Back to Pages</a>
+
+        <!-- Back to Pages Button -->
+        <div class="form-bottom">
+            <a href="pages.php" class="back-button">← Back to Pages</a>
+        </div>
     </form>
 </div>
 
 </body>
 </html>
-

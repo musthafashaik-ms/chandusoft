@@ -1,8 +1,14 @@
 <?php
+define('IS_WEBHOOK', true);
 // =============================================================
-// Chandusoft – Stripe Webhook Receiver (handles order_ref + order_id)
+// Chandusoft – Stripe Webhook Receiver (order_ref + order_id)
 // =============================================================
- 
+// ping mode to debug
+if (isset($_GET['ping']) && $_GET['ping'] === '1') {
+    header('Content-Type: text/plain');
+    echo "webhook is alive";
+    exit;
+}
 require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/logger.php';
 require_once __DIR__ . '/../vendor/autoload.php';

@@ -1,22 +1,81 @@
 <?php
-// app/config.php
 declare(strict_types=1);
 
+/*
+|--------------------------------------------------------------------------
+| 0. FLAGS (used by webhook to disable redirects)
+|--------------------------------------------------------------------------
+| public/webhook.php sets IS_WEBHOOK = true before including this file.
+*/
+if (!defined('IS_WEBHOOK')) {
+    define('IS_WEBHOOK', false);
+}
+if (!defined('DISABLE_REDIRECTS')) {
+    define('DISABLE_REDIRECTS', IS_WEBHOOK);
+}
+
+/*
+|--------------------------------------------------------------------------
+| 1. TRUST NGROK / REVERSE PROXY FOR HTTPS
+|--------------------------------------------------------------------------
+| If we are behind a proxy (like ngrok) it sends X-Forwarded-Proto.
+| We use that to decide if the request is effectively HTTPS.
+*/
+if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+    $_SERVER['HTTPS'] = ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? 'on' : 'off';
+}
+
+$isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+
+/*
+|--------------------------------------------------------------------------
+| 2. SESSION CONFIG (shared for chandusoft.test + ngrok)
+|--------------------------------------------------------------------------
+| - host-only cookie (no fixed domain), works on BOTH hosts
+| - SameSite=Lax -> safe and allows POST -> redirect -> GET (login)
+| - "secure" matches actual HTTPS (ngrok / SSL vhost)
+*/
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path'     => '/',
+    'domain'   => '',           // host-only cookie (best for multi-domain dev)
+    'secure'   => $isHttps,     // true on HTTPS, false on plain HTTP
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
+ini_set('session.cookie_httponly', '1');
+ini_set('session.use_strict_mode', '1');
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/*
+|--------------------------------------------------------------------------
+| 3. BASIC CONFIG: Timezone & Autoload
+|--------------------------------------------------------------------------
+*/
 date_default_timezone_set('Asia/Kolkata');
-
-if (!defined('IS_WEBHOOK')) define('IS_WEBHOOK', false);
-if (!defined('DISABLE_REDIRECTS')) define('DISABLE_REDIRECTS', IS_WEBHOOK);
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
+/*
+|--------------------------------------------------------------------------
+| 4. LOAD ENVIRONMENT VARIABLES (.env)
+|--------------------------------------------------------------------------
+*/
 try {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->safeLoad();
 } catch (Throwable $e) {
-    // error_log('Dotenv load error: ' . $e->getMessage());
+    error_log("Dotenv load error: " . $e->getMessage());
 }
 
-// ------------------ Environment ------------------
+/*
+|--------------------------------------------------------------------------
+| 5. APPLICATION ENVIRONMENT
+|--------------------------------------------------------------------------
+*/
 $environment = $_ENV['APP_ENV'] ?? getenv('APP_ENV') ?: 'production';
 
 if ($environment === 'development') {
@@ -25,12 +84,19 @@ if ($environment === 'development') {
 } else {
     ini_set('display_errors', '0');
     ini_set('log_errors', '1');
+
     $logDir = __DIR__ . '/../storage/logs';
-    if (!is_dir($logDir)) { @mkdir($logDir, 0775, true); }
+    if (!is_dir($logDir)) {
+        @mkdir($logDir, 0775, true);
+    }
     ini_set('error_log', $logDir . '/app.log');
 }
 
-// ------------------ Database ------------------
+/*
+|--------------------------------------------------------------------------
+| 6. DATABASE (PDO)
+|--------------------------------------------------------------------------
+*/
 $dsn = sprintf(
     'mysql:host=%s;dbname=%s;charset=utf8mb4',
     $_ENV['DB_HOST'] ?? getenv('DB_HOST'),
@@ -41,59 +107,81 @@ $dbUser = $_ENV['DB_USER'] ?? getenv('DB_USER');
 $dbPass = $_ENV['DB_PASS'] ?? getenv('DB_PASS');
 
 try {
-    $pdo = new PDO($dsn, $dbUser, $dbPass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-} catch (PDOException $e) {
-    throw $e;
-}
-
-// ------------------ Payment Config ------------------
-define('STRIPE_SECRET_KEY', $_ENV['STRIPE_SECRET_KEY'] ?? getenv('STRIPE_SECRET_KEY'));
-define('STRIPE_PUBLISHABLE_KEY', $_ENV['STRIPE_PUBLISHABLE_KEY'] ?? getenv('STRIPE_PUBLISHABLE_KEY'));
-define('STRIPE_WEBHOOK_SECRET', $_ENV['STRIPE_WEBHOOK_SECRET'] ?? getenv('STRIPE_WEBHOOK_SECRET'));
-define('PAYPAL_CLIENT_ID', $_ENV['PAYPAL_CLIENT_ID'] ?? getenv('PAYPAL_CLIENT_ID'));
-define('PAYPAL_SECRET', $_ENV['PAYPAL_SECRET'] ?? getenv('PAYPAL_SECRET'));
-define('PAYPAL_SANDBOX', filter_var($_ENV['PAYPAL_SANDBOX'] ?? getenv('PAYPAL_SANDBOX'), FILTER_VALIDATE_BOOLEAN));
-
-define('APP_URL', $_ENV['APP_URL'] ?? getenv('APP_URL') ?: '');
-
-// ------------------ Secure Session Setup ------------------
-if (session_status() === PHP_SESSION_NONE) {
-    $cookieParams = session_get_cookie_params();
-
-    session_set_cookie_params([
-        'lifetime' => $cookieParams['lifetime'],
-        'path' => $cookieParams['path'],
-        'domain' => $cookieParams['domain'],
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-
-    session_start();
-}
-
-// ------------------ HTTPS Enforcement (fixed for ngrok + local) ------------------
-$forceHttps = filter_var($_ENV['FORCE_HTTPS'] ?? getenv('FORCE_HTTPS'), FILTER_VALIDATE_BOOLEAN);
-
-if ($forceHttps && !DISABLE_REDIRECTS && !empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['REQUEST_URI'])) {
-    // ✅ Detect HTTPS from Apache, Nginx, or ngrok proxy headers
-    $isSecure = (
-        (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-        || ($_SERVER['SERVER_PORT'] ?? 0) == 443
-        || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
-        || (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on')
+    $pdo = new PDO(
+        $dsn,
+        $dbUser,
+        $dbPass,
+        [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]
     );
-
-    // Prevent infinite redirect loops
-    if (!$isSecure) {
-        $httpsUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        header('HTTP/1.1 301 Moved Permanently');
-        header('Location: ' . $httpsUrl);
-        exit();
-    }
+} catch (PDOException $e) {
+    die("Database connection failed: " . htmlspecialchars($e->getMessage()));
 }
 
-// NOTE: no echoes or HTML output here.
+/*
+|--------------------------------------------------------------------------
+| 7. BASE URL (Ngrok-compatible)
+|--------------------------------------------------------------------------
+| If APP_URL=auto, we build it dynamically from current host.
+| If APP_URL is set (e.g. in production) we respect that value.
+*/
+$host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['HTTP_HOST'] ?? 'localhost');
+$protocol = $isHttps ? 'https://' : 'http://';
+
+if (!empty($_ENV['APP_URL']) && $_ENV['APP_URL'] !== 'auto') {
+    $baseUrl = rtrim($_ENV['APP_URL'], '/');
+} else {
+    $baseUrl = $protocol . $host;
+}
+
+define('BASE_URL', $baseUrl);
+
+/*
+|--------------------------------------------------------------------------
+| 8. HTTPS ENFORCEMENT
+|--------------------------------------------------------------------------
+| You can control this with FORCE_HTTPS in .env
+|   FORCE_HTTPS=true  (default) -> redirects http -> https
+|   FORCE_HTTPS=false -> no redirect (useful during early local dev)
+|
+| Webhooks skip redirects via DISABLE_REDIRECTS.
+*/
+$forceHttps = filter_var(
+    $_ENV['FORCE_HTTPS'] ?? getenv('FORCE_HTTPS') ?? true,
+    FILTER_VALIDATE_BOOLEAN
+);
+
+if (
+    !$isHttps &&
+    $forceHttps &&
+    !DISABLE_REDIRECTS &&
+    !empty($_SERVER['HTTP_HOST']) &&
+    !empty($_SERVER['REQUEST_URI'])
+) {
+    $httpsUrl = 'https://' . $host . $_SERVER['REQUEST_URI'];
+    header('Location: ' . $httpsUrl, true, 301);
+    exit();
+}
+
+/*
+|--------------------------------------------------------------------------
+| 9. PAYMENT CONSTANTS (Stripe + PayPal)
+|--------------------------------------------------------------------------
+*/
+define('STRIPE_SECRET_KEY',      $_ENV['STRIPE_SECRET_KEY']      ?? '');
+define('STRIPE_PUBLISHABLE_KEY', $_ENV['STRIPE_PUBLISHABLE_KEY'] ?? '');
+define('STRIPE_WEBHOOK_SECRET',  $_ENV['STRIPE_WEBHOOK_SECRET']  ?? '');
+
+define('PAYPAL_CLIENT_ID', $_ENV['PAYPAL_CLIENT_ID'] ?? '');
+define('PAYPAL_SECRET',    $_ENV['PAYPAL_SECRET']    ?? '');
+define('PAYPAL_SANDBOX',   filter_var($_ENV['PAYPAL_SANDBOX'] ?? true, FILTER_VALIDATE_BOOLEAN));
+
+/*
+|--------------------------------------------------------------------------
+| 10. CLOUDFLARE TURNSTILE
+|--------------------------------------------------------------------------
+*/
+define('TURNSTILE_SITE',   $_ENV['TURNSTILE_SITE']   ?? '');
+define('TURNSTILE_SECRET', $_ENV['TURNSTILE_SECRET'] ?? '');

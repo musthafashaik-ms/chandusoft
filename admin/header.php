@@ -1,16 +1,23 @@
 <?php
 require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/functions.php';
- 
+
 // Get site name and logo path
 $siteName = get_setting('site_name') ?: 'Chandusoft';
-$logoPath = get_setting('logo_path') ?: 'images/logo.jpg';
- 
-// Fix logo path (uploads/)
-if ($logoPath && strpos($logoPath, 'uploads/') === 0) {
-    $logoPath = 'https://' . $_SERVER['HTTP_HOST'] . '/' . $logoPath;
+$logoPath = get_setting('logo_path') ?: '/images/logo.jpg';  // default logo
+
+// Normalise logo path
+// 1. If it's an absolute URL (http:// or https://), keep only its path part
+if (preg_match('#^https?://#i', $logoPath)) {
+    $path = parse_url($logoPath, PHP_URL_PATH);
+    if ($path) {
+        $logoPath = $path;
+    }
 }
- 
+
+// 2. Ensure it ALWAYS starts with a single leading slash
+$logoPath = '/' . ltrim($logoPath, '/');
+
 // Get current URI (e.g. /index, /about, /services)
 $currentURI = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 // Example results: "index", "about", "services", "slug", "app/register"
@@ -49,12 +56,9 @@ $currentURI = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         }
         ?>
 
-<span class="auth-links">
-    <a href="/admin/login" 
-       class="btn <?= ($currentURI === 'admin/login') ? 'active' : '' ?>">
-       Login
-    </a>
-</span>
-
- </nav>
+<a href="/admin/login" 
+   class="btn <?= ($currentURI === 'admin/login' || $currentURI === 'app/register') ? 'active' : '' ?>">
+   Login
+</a>
+</nav>
 </header>

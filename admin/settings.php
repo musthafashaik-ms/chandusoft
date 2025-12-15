@@ -1,41 +1,57 @@
 <?php
-require_once __DIR__ . '/../app/functions.php'; // Ensure this is included only once
+require_once __DIR__ . '/../app/functions.php'; // Load functions only once
 
-// Fetch site name and logo path from the database
+// Fetch current values from database
 $siteName = get_setting('site_name') ?: '';
 $logoPath = get_setting('logo_path') ?: '';
 $message = '';
 
-// Handle the POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle site name update
-    $newSiteName = trim($_POST['site_name']);
+
+    // ------------------------------
+    // 1. Update Site Name
+    // ------------------------------
+    $newSiteName = trim($_POST['site_name'] ?? '');
+
     if (!empty($newSiteName)) {
-        set_setting('site_name', $newSiteName); // Call function from functions.php
+        set_setting('site_name', $newSiteName);
         $siteName = $newSiteName;
         $message .= "✅ Site name updated.<br>";
     }
 
-    // Handle logo upload
+    // ------------------------------
+    // 2. Upload Logo
+    // ------------------------------
     if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        if (!in_array($_FILES['logo']['type'], $allowedTypes)) {
+        $fileType = $_FILES['logo']['type'];
+
+        if (!in_array($fileType, $allowedTypes)) {
             $message .= "❌ Invalid file type. Only JPG, PNG, or GIF allowed.<br>";
         } else {
             $uploadDir = __DIR__ . '/../uploads/';
+
+            // Create directory if missing
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
             }
 
+            // Generate unique filename
             $ext = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
             $uniqueName = 'logo_' . time() . '.' . $ext;
-            $targetPath = $uploadDir . $uniqueName;
-            $publicPath = 'uploads/' . $uniqueName;
 
+            $targetPath = $uploadDir . $uniqueName;
+
+            // Public path must be RELATIVE
+            // So NGROK will not block it
+            $publicPath = '/uploads/' . $uniqueName;
+
+            // Move the file
             if (move_uploaded_file($_FILES['logo']['tmp_name'], $targetPath)) {
-                // Update the logo path in the database
                 set_setting('logo_path', $publicPath);
-                $logoPath = $publicPath; // Update logo path
+                $logoPath = $publicPath;
+
                 $message .= "✅ Logo uploaded successfully.<br>";
             } else {
                 $message .= "❌ Error uploading logo.<br>";
@@ -43,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
 ?>
 
 

@@ -1,34 +1,45 @@
 <?php
-session_start();
+require_once __DIR__ . '/config.php';   // session + env + $pdo
+require_once __DIR__ . '/logger.php';   // logging helpers
 
-// Protect page: user must be logged in (adjust if you have a user system)
-if (!isset($_SESSION['user'])) {
-    header("Location: /../admin/login.php"); // Redirect to your login page
+// ✅ Do NOT call session_start() again here – config.php already did it
+
+// 🔍 Debug log: what does dashboard see in the session?
+log_login(
+    "DASH session_id=" . session_id() .
+    " user=" . json_encode($_SESSION['user'] ?? null),
+    'INFO'
+);
+
+// Protect page: user must be logged in
+if (empty($_SESSION['user'])) {
+    header('Location: /admin/login');
     exit;
 }
 
 $user = $_SESSION['user'];
-$username = htmlspecialchars($user['username'] ?? 'User');
-$role = htmlspecialchars(ucfirst($user['role'] ?? 'Editor')); // Example: Admin or Editor
+$username = htmlspecialchars($user['username'] ?? 'User', ENT_QUOTES, 'UTF-8');
+$role     = htmlspecialchars(ucfirst($user['role'] ?? 'Editor'), ENT_QUOTES, 'UTF-8');
 
-// DB connection
-$conn = new mysqli('localhost', 'root', '', 'chandusoft');
-if ($conn->connect_error) {
-    die("❌ DB connection failed: " . $conn->connect_error);
-}
+// =============================
+// DB queries using PDO ($pdo)
+// =============================
 
-// Fetch latest 5 leads
-$resultLatest = $conn->query("SELECT * FROM leads ORDER BY id DESC LIMIT 5");
+// Latest 5 leads
+$stmtLatest   = $pdo->query("SELECT * FROM leads ORDER BY id DESC LIMIT 5");
+$latestLeads  = $stmtLatest->fetchAll(PDO::FETCH_ASSOC);
 
-// Query counts for the dashboard stats
-$totalLeadsResult = $conn->query("SELECT COUNT(*) AS count FROM leads");
-$totalLeads = $totalLeadsResult->fetch_assoc()['count'];
+// Total leads
+$stmtTotalLeads = $pdo->query("SELECT COUNT(*) AS count FROM leads");
+$totalLeads     = (int) $stmtTotalLeads->fetchColumn();
 
-$publishedPagesResult = $conn->query("SELECT COUNT(*) AS count FROM pages WHERE status='published'");
-$publishedPages = $publishedPagesResult->fetch_assoc()['count'];
+// Published pages
+$stmtPublished   = $pdo->query("SELECT COUNT(*) AS count FROM pages WHERE status = 'published'");
+$publishedPages  = (int) $stmtPublished->fetchColumn();
 
-$draftPagesResult = $conn->query("SELECT COUNT(*) AS count FROM pages WHERE status='draft'");
-$draftPages = $draftPagesResult->fetch_assoc()['count'];
+// Draft pages
+$stmtDraft   = $pdo->query("SELECT COUNT(*) AS count FROM pages WHERE status = 'draft'");
+$draftPages  = (int) $stmtDraft->fetchColumn();
 ?>
 
 <!DOCTYPE html>
@@ -38,118 +49,104 @@ $draftPages = $draftPagesResult->fetch_assoc()['count'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Chandusoft Admin</title>
     <style>
-       
         /* General Body Styling */
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Navbar Styling */
-.navbar {
-    background-color: #2c3e50;
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        /* Navbar Styling */
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.navbar .links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-    font-weight: bold;
-}
+        .navbar .links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
 
-.navbar .links a:hover {
-    text-decoration: none;
-}
+        .navbar .links a:hover {
+            text-decoration: none;
+        }
 
-/* Active Link Styling */
-.navbar .links a.active {
-    background-color: #0078D7; /* Blue background when active */
-    color: white;  /* Ensure the text is white when active */
-    padding: 8px 12px;
-    border-radius: 4px;
-}
+        /* Active Link Styling */
+        .navbar .links a.active {
+            background-color: #0078D7;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
 
-/* Dashboard Box Styling */
-.dashboard-box {
-    background: #fff;
-    border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    max-width: 1200px;
-    margin: 20px auto;
-}
+        /* Dashboard Box Styling */
+        .dashboard-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+        }
 
- /* Page Heading */
         h2 {
-            color: #007BFF;  /* Blue color for h1 */
+            color: #007BFF;
             margin-bottom: 20px;
             font-size: 28px;
             text-align: left;
         }
 
-ul {
-    list-style: none;
-    padding-left: 0;
-}
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
 
-li {
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 20px;
-}
+        li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
 
-li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #2c3e50;
-    font-weight: bold;
-}
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-}
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
 
-th {
-    background-color: #2980b9;
-    color: white;
-}
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
 
-tr:nth-child(even) {
-    background: #f2f2f2;
-}
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
 
-tr:hover {
-    background-color: #e6f7ff;
-}
-
-    </style>
-</head>
-<body>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard - Chandusoft</title>
-    <style>
-        /* Your CSS code here, as shown above */
+        tr:hover {
+            background-color: #e6f7ff;
+        }
     </style>
 </head>
 <body>
@@ -158,8 +155,10 @@ tr:hover {
         <div><strong>Chandusoft <?= $role ?></strong></div>
         <div class="links">
             Welcome <?= $role ?>!
-            <a href="/app/dashboard.php" class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
-            <!-- Dynamic catalog link based on user role -->
+            <a href="/app/dashboard.php"
+               class="<?= basename($_SERVER['PHP_SELF']) === 'dashboard.php' ? 'active' : '' ?>">
+               Dashboard
+            </a>
             <?php if ($role === 'Admin'): ?>
                 <a href="/admin/catalog.php">Admin Catalog</a>
                 <a href="/public/catalog.php">Public Catalog</a>
@@ -172,45 +171,44 @@ tr:hover {
             <a href="/admin/logout.php">Logout</a>
         </div>
     </div>
-<div class="dashboard-box">
-    <h2>Dashboard</h2>
 
-    <ul>
-        <li><strong>Total leads:</strong> <?= number_format($totalLeads) ?></li>
-        <li><strong>Pages published:</strong> <?= number_format($publishedPages) ?></li>
-        <li><strong>Pages draft:</strong> <?= number_format($draftPages) ?></li>
-    </ul>
+    <div class="dashboard-box">
+        <h2>Dashboard</h2>
 
-    <h3>Last 5 Leads</h3>
+        <ul>
+            <li><strong>Total leads:</strong> <?= number_format($totalLeads) ?></li>
+            <li><strong>Pages published:</strong> <?= number_format($publishedPages) ?></li>
+            <li><strong>Pages draft:</strong> <?= number_format($draftPages) ?></li>
+        </ul>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Message</th>
-                <th>Created</th>
-                <th>IP</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $resultLatest->fetch_assoc()): ?>
+        <h3>Last 5 Leads</h3>
+
+        <table>
+            <thead>
                 <tr>
-                    <td><?= htmlspecialchars($row['name']) ?></td>
-                    <td><?= htmlspecialchars($row['email']) ?></td>
-                    <td><?= htmlspecialchars($row['message']) ?></td>
-                    <td><?= htmlspecialchars($row['created_at']) ?></td>
-                    <td><?= !empty($row['IP']) ? htmlspecialchars($row['IP']) : 'N/A' ?></td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Created</th>
+                    <th>IP</th>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-</div>
-
+            </thead>
+            <tbody>
+                <?php if (!empty($latestLeads)): ?>
+                    <?php foreach ($latestLeads as $row): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['name'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($row['email'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($row['message'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($row['created_at'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($row['IP'] ?? 'N/A', ENT_QUOTES, 'UTF-8') ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr><td colspan="5">No leads found.</td></tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
-
-<?php
-// Close the DB connection
-$conn->close();
-?>

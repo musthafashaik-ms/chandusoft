@@ -8,6 +8,13 @@ RewriteEngine On
 RewriteBase /
 
 # ------------------------------------------------------------
+# 🚨 SPECIAL: DO NOT TOUCH STRIPE WEBHOOK
+# ------------------------------------------------------------
+# For Stripe, we must NOT redirect /public/webhook.php
+# (Stripe treats 3xx as failure)
+RewriteRule ^public/webhook\.php$ - [L]
+
+# ------------------------------------------------------------
 # 🔐 0. ENFORCE HTTPS (Compatible with ngrok + localhost)
 # ------------------------------------------------------------
 # Detect HTTPS via standard + proxy headers
@@ -37,10 +44,11 @@ Options -Indexes
 # ------------------------------------------------------------
 
 # --- 2.1 Redirect direct .php requests to extensionless URL ---
-# Skip critical endpoints like authenticate.php and register_handler.php
+# Skip critical endpoints like authenticate.php, register_handler.php, and webhook.php
 RewriteCond %{REQUEST_URI} !^/app/(authenticate|register_handler)\.php$ [NC]
+RewriteCond %{REQUEST_URI} !^/public/webhook\.php$ [NC]
 RewriteCond %{THE_REQUEST} \s/([^\s?]+)\.php[\s?] [NC]
-RewriteRule ^ %1 [R=301,L]
+RewriteRule ^ %1 [R=302,L]
 
 # --- 2.2 Internally serve .php files for extensionless URLs ---
 RewriteCond %{REQUEST_FILENAME} !-d

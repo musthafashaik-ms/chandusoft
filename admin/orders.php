@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+require_once __DIR__ . '/../app/config.php';
 
 // ✅ Protect page: require login
 if (empty($_SESSION['user']) || !is_array($_SESSION['user'])) {
@@ -16,7 +16,7 @@ $username = htmlspecialchars($user['username'] ?? 'User', ENT_QUOTES, 'UTF-8');
 $roleRaw  = $user['role'] ?? 'Editor';
 $role     = htmlspecialchars(ucfirst($roleRaw), ENT_QUOTES, 'UTF-8');
 
-require_once __DIR__ . '/../app/config.php';
+
 
 
 

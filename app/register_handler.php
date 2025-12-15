@@ -61,5 +61,5 @@ $stmt->execute([$email, $username, $hashedPassword]);
 // log_to_file("Registration successful: {$username} ({$email})", 'INFO');
 
 $_SESSION['flash_success'] = "✅ Registration successful! You can now log in.";
-header("Location: ../admin/login.php");
+header("Location: /../admin/login.php");
 exit();

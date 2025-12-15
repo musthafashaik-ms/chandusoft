@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../app/config.php';
 require_once __DIR__ . '/../app/logger.php';
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -91,10 +90,12 @@ log_to_file("🧾 Order $order_id created (Ref: $order_ref, Payment: $payment_me
 // ============================================================
 $is_test_mode = false;
  
-if (defined('STRIPE_SECRET_KEY') && str_starts_with(STRIPE_SECRET_KEY, 'sk_test_')) {
+if (defined('STRIPE_SECRET_KEY') && str_starts_with(constant('STRIPE_SECRET_KEY'), 'sk_test_')) 
+ {
     $is_test_mode = true;
 }
-if (defined('PAYPAL_SANDBOX') && PAYPAL_SANDBOX === true) {
+if (defined('PAYPAL_SANDBOX') && constant('PAYPAL_SANDBOX') === true) 
+ {
     $is_test_mode = true;
 }
  

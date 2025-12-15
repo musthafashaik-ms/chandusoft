@@ -1,40 +1,52 @@
 <?php
 // ============================================================
-// Chandusoft Admin/User Login Page - Modern UI Version (Dark Mode + Google Button + Mobile Optimized)
+// Chandusoft Admin/User Login Page - Modern UI Version
 // ============================================================
 
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_strict_mode', 1);
-ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
-session_set_cookie_params([
-    'path' => '/',
-    'secure' => isset($_SERVER['HTTPS']),
-    'httponly' => true,
-    'samesite' => 'Strict'
-]);
+require_once __DIR__ . '/../app/config.php';   // session, env, db
+require_once __DIR__ . '/../app/logger.php';   // logging helpers
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// CSRF TOKEN
+// ------------------------------------------------------------
+// 1) CSRF token (used by login form)
+// ------------------------------------------------------------
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Session Timeout
-$timeout_duration = 1800; // 30 mins
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    header("Location: /admin/login.php");
-    exit();
+// ------------------------------------------------------------
+// 2) Session timeout (only if user is logged in)
+// ------------------------------------------------------------
+$timeout_duration = 1800; // 30 minutes
+
+if (!empty($_SESSION['user'])) {
+    // If LAST_ACTIVITY is set and older than timeout → log out
+    if (isset($_SESSION['LAST_ACTIVITY']) &&
+        (time() - (int)$_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+
+        log_login("Session timeout for user " . ($_SESSION['user']['email'] ?? 'unknown'), 'INFO');
+
+        session_unset();
+        session_destroy();
+
+        // Start a fresh session so CSRF etc. still work on login page
+        session_start();
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+        header('Location: /admin/login');
+        exit;
+    }
 }
+
+// Update last activity timestamp for current request
 $_SESSION['LAST_ACTIVITY'] = time();
 
+// ------------------------------------------------------------
+// 3) Old email value (to repopulate the form after errors)
+// ------------------------------------------------------------
 $old_email = $_SESSION['old_email'] ?? '';
 unset($_SESSION['old_email']);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,7 +139,7 @@ body.dark-mode .login-form label {
 
 .login-form input {
     width: 100%;
-    padding: 10px 12px;
+    padding: 10px 0px;
     margin-bottom: 18px;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -148,19 +160,52 @@ body.dark-mode .login-form input {
     box-shadow: 0 0 6px 2px rgba(30,144,255,0.2);
 }
 
-/* ---------------- PASSWORD ---------------- */
-.password-wrapper {
+/* ====== PERFECT ALIGNMENT WITH LOGIN BUTTON ====== */
+
+/* Main wrapper */
+.input-icon-group {
     position: relative;
+    width: 100%;
 }
 
-.password-wrapper i {
+/* Input should match login button alignment */
+.input-icon-group input {
+    width: 100%;
+    padding: 10px 0; /* SAME as your login-btn width alignment */
+    text-indent: 38px; /* text shifts without affecting width */
+}
+
+/* Password text indent (for right icon too) */
+.password-wrapper input {
+    text-indent: 38px;
+}
+
+/* Left icons */
+.field-icon-left {
     position: absolute;
-    top: 30%;
+    top: 35%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #555;
+    pointer-events: none;
+}
+
+/* Right eye icon */
+.field-icon-right {
+    position: absolute;
+    top: 35%;
     right: 12px;
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
     color: #555;
+}
+
+/* Dark mode icon colors */
+body.dark-mode .field-icon-left,
+body.dark-mode .field-icon-right {
+    color: #ccc;
 }
 
 /* Caps Lock */
@@ -203,8 +248,6 @@ body.dark-mode .login-form input {
     font-size: 14px;
     cursor: pointer;
 }
-
-
 
 body.dark-mode .remember-me label {
     color: #ccc;
@@ -311,7 +354,7 @@ body.dark-mode .login-bottom a {
 }
 
 .login-bottom a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* ---------------- TOAST ---------------- */
@@ -364,7 +407,6 @@ body.dark-mode .login-bottom a {
     transition: background 0.3s ease;
 }
 
-
 #darkToggle:hover {
     background: #0078d7;
 }
@@ -401,13 +443,19 @@ body.dark-mode .login-bottom a {
         <?php unset($_SESSION['flash_success']); ?>
     <?php endif; ?>
 
+    <!-- EMAIL WITH ICON -->
     <label>Email Address</label>
-    <input type="email" name="email" value="<?= htmlspecialchars($old_email) ?>" placeholder="Enter your email" required />
+    <div class="input-icon-group">
+        <i class="bi bi-envelope field-icon-left"></i>
+        <input type="email" name="email" value="<?= htmlspecialchars($old_email) ?>" placeholder="Enter your email" required />
+    </div>
 
+    <!-- PASSWORD WITH ICONS -->
     <label>Password</label>
-    <div class="password-wrapper">
+    <div class="input-icon-group password-wrapper">
+        <i class="bi bi-shield-lock-fill field-icon-left"></i>
         <input type="password" id="password" name="password" placeholder="Enter your password" required />
-        <i class="bi bi-eye-slash" id="toggleEye"></i>
+        <i class="bi bi-eye-slash field-icon-right" id="toggleEye"></i>
     </div>
 
     <div id="capsWarning">⚠ Caps Lock is ON</div>

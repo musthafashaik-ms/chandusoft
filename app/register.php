@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -14,6 +13,7 @@ unset($_SESSION['register_old']);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register - Chandusoft</title>
 <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 
 <?php include __DIR__ . '/../admin/header.php'; ?>
 
@@ -64,11 +64,13 @@ main.register-page {
 
 /* Labels */
 .register-form label {
+    text-align: left;
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
     color: #333;
 }
+
 
 /* Inputs */
 .register-form input {
@@ -120,7 +122,7 @@ main.register-page {
     text-decoration: none;
 }
 .link a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* Toast message */
@@ -154,6 +156,53 @@ main.register-page {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
 }
+/* ===== ICON INPUTS (same as login) ===== */
+.input-icon-group {
+    position: relative;
+    width: 100%;
+}
+
+/* Text alignment same as login button */
+.input-icon-group input {
+    width: 100%;
+    padding: 10px 0;
+    text-indent: 38px; /* space for left icon */
+    margin-bottom: 18px;
+}
+
+/* Add space for right icon in password fields */
+.password-wrapper input {
+    padding-right: 38px;
+}
+
+/* Left icons */
+.field-icon-left {
+    position: absolute;
+    top: 35%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #555;
+    pointer-events: none;
+}
+
+/* Right icons (eye toggle) */
+.field-icon-right {
+    position: absolute;
+    top: 35%;
+    right: 12px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Dark mode support */
+body.dark-mode .field-icon-left,
+body.dark-mode .field-icon-right {
+    color: #ccc;
+}
+
 </style>
 </head>
 
@@ -162,32 +211,52 @@ main.register-page {
 <main class="register-page">
     <form class="register-form" action="register_handler.php" method="POST">
 
-        <h2>Create an Account</h2>
+       <h2>Create an Account</h2>
 
-        <input type="hidden" name="csrf_token"
-            value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+<input type="hidden" name="csrf_token"
+    value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
-       
-        <input type="email" name="email" value="<?= htmlspecialchars($old['email']) ?>"
-               placeholder="Enter your email" required>
+<!-- Email -->
+  <label>Email Address</label>
+<div class="input-icon-group">
+    <i class="bi bi-envelope field-icon-left"></i>
+    <input type="email" name="email" value="<?= htmlspecialchars($old['email']) ?>"
+           placeholder="Enter your email" required>
+</div>
 
-       
-        <input type="text" name="username" value="<?= htmlspecialchars($old['username']) ?>"
-               placeholder="Choose a username" required>
+<!-- Username -->
+  <label>User Name</label>
+<div class="input-icon-group">
+    <i class="bi bi-person field-icon-left"></i>
+    <input type="text" name="username" value="<?= htmlspecialchars($old['username']) ?>"
+           placeholder="Choose a username" required>
+</div>
 
-        
-        <input type="password" name="password" placeholder="Create a password" required>
+<!-- Password -->
+  <label>Password</label>
+<div class="input-icon-group password-wrapper">
+    <i class="bi bi-key-fill field-icon-left"></i>
+    <input type="password" id="password" name="password" placeholder="Create a password" required>
+    <i class="bi bi-eye-slash field-icon-right" id="togglePass1"></i>
+</div>
 
-        
-        <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+<!-- Confirm Password -->
+  <label>Confirm Password</label>
+<div class="input-icon-group password-wrapper">
+    <i class="bi bi-shield-lock-fill field-icon-left"></i>
+    <input type="password" id="confirm_password" name="confirm_password"
+           placeholder="Confirm your password" required>
+    <i class="bi bi-eye-slash field-icon-right" id="togglePass2"></i>
+</div>
 
-        <button type="submit">Register</button>
+<button type="submit">Register</button>
 
-        <div class="link">
-            <p>Already have an account?
-                <a href="../admin/login.php">Login here</a>
-            </p>
-        </div>
+<div class="link">
+    <p>Already have an account?
+        <a href="../admin/login.php">Login here</a>
+    </p>
+</div>
+
     </form>
 </main>
 
@@ -213,6 +282,23 @@ window.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => msg.remove(), 4500);
     }
 });
+
+function togglePassword(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+
+    icon.addEventListener("click", () => {
+        const isHidden = input.type === "password";
+        input.type = isHidden ? "text" : "password";
+        icon.classList.toggle("bi-eye");
+        icon.classList.toggle("bi-eye-slash");
+    });
+}
+
+togglePassword("password", "togglePass1");
+togglePassword("confirm_password", "togglePass2");
+
+
 </script>
 
 <?php include __DIR__ . '/../admin/footer.php'; ?>
